@@ -4,7 +4,7 @@
  *
  * Allows admins to set default content to populate the editor for each active post type.
  *
- * @package   Default_Content_Editor_Value
+ * @package   Default Content Editor Value
  * @author    dauidus (dave@dauid.us)
  * @license   GPL-2.0+
  * @link      http://dauid.us
