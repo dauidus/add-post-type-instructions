@@ -77,8 +77,8 @@ class Default_Content_Editor_Value_Admin {
 		$plugin_basename = plugin_basename( plugin_dir_path( realpath( dirname( __FILE__ ) ) ) . 'default-content-editor-value.php' );
 		add_filter( 'plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ) );
 
-		add_filter( 'the_editor_content', array( $this, 'change_editor_content' ) );
 		add_action( 'edit_form_after_title', array( $this, 'add_content_above' ) );
+		add_filter( 'the_editor_content', array( $this, 'change_editor_content' ) );
 
 	}
 
@@ -172,6 +172,26 @@ class Default_Content_Editor_Value_Admin {
 	} // end get_post_type
 
 	/**
+	 * Add instruction text above the content editor
+	 *
+	 * @param  string $content HTML string
+	 * @return string Modified content
+	 *
+	 * @since 1.0
+	 */
+	public function add_content_above() {
+
+		$post_type = $this->get_post_type();
+		$options = get_option( $this->plugin_slug . '_' . $post_type );
+
+		if ( isset( $options['instruction'] ) && ! empty( $options['instruction'] ) ) {
+			$template = $options['instruction'];
+			echo $template;
+		}
+
+	} // end add_content_above
+
+	/**
 	 * Set the default value fot the content editor
 	 *
 	 * @return null
@@ -195,25 +215,5 @@ class Default_Content_Editor_Value_Admin {
 		}
 
 	} // end change_editor_content
-
-	/**
-	 * Add instruction text above the content editor
-	 *
-	 * @param  string $content HTML string
-	 * @return string Modified content
-	 *
-	 * @since 1.0
-	 */
-	public function add_content_above() {
-
-		$post_type = $this->get_post_type();
-		$options = get_option( $this->plugin_slug . '_' . $post_type );
-
-		if ( isset( $options['instruction'] ) && ! empty( $options['instruction'] ) ) {
-			$template = $options['instruction'];
-			echo $template;
-		}
-
-	} // end add_content_above
 
 }

@@ -89,18 +89,18 @@ class Default_Content_Editor_Value_Settings {
 			);
 
 			add_settings_field(
-				'content',
-				__( 'Default Content:', $this->plugin_slug ),
-				array( $this, 'content_callback' ),
+				'instruction',
+				__( '<br /><br /><br /><br /><br />Text Above Editor:', $this->plugin_slug ),
+				array( $this, 'instruction_callback' ),
 				$section,
 				$pt,
 				$args
 			);
 
 			add_settings_field(
-				'instruction',
-				__( 'Text Above Editor', $this->plugin_slug ),
-				array( $this, 'instruction_callback' ),
+				'content',
+				__( '<br /><br /><br /><br /><br /><br />Default Content:', $this->plugin_slug ),
+				array( $this, 'content_callback' ),
 				$section,
 				$pt,
 				$args
@@ -115,6 +115,18 @@ class Default_Content_Editor_Value_Settings {
 
 	} // end admin_init
 
+	public function instruction_callback( $args ) {
+
+		$value  = isset( $args[1]['instruction'] ) ? $args[1]['instruction'] : '';
+
+		$html = wp_editor( $args[1].'[instruction]', 'instruction', $settings = array( 'textarea_rows'=>'5', 'textarea_name'=>$args[0].'[instruction]'));
+
+		$html .= '<p class="description">' . __( 'Enter content to display above the editor, such as special instructions for post type.', $this->plugin_slug ) . '</p>';
+
+		echo $html;
+
+	} // end instruction_callback
+
 	public function content_callback( $args ) {
 
 		$value = isset( $args[1]['content'] ) ? $args[1]['content'] : '';
@@ -128,23 +140,11 @@ class Default_Content_Editor_Value_Settings {
 
 		$html = wp_editor( $output, 'content', $settings );
 
-		$html .= '<p class="description">' . __( 'Enter default content to be displayed within the WYSIWYG editor.', $this->plugin_slug ) . '</p>';
+		$html .= '<p class="description">' . __( 'Enter default content to be displayed within the WYSIWYG editor, such as "delete this, then start writing".', $this->plugin_slug ) . '</p><br />';
 
 		echo $html;
 
 	} // end content_callback
-
-	public function instruction_callback( $args ) {
-
-		$value  = isset( $args[1]['instruction'] ) ? $args[1]['instruction'] : '';
-
-		$html = wp_editor( $args[1].'[instruction]', 'instruction', $settings = array( 'textarea_rows'=>'5', 'textarea_name'=>$args[0].'[instruction]'));
-
-		$html .= '<p class="description">' . __( 'Enter content to display above the editor.', $this->plugin_slug ) . '</p>';
-
-		echo $html;
-
-	} // end instruction_callback
 
 	/**
 	 * Validate inputs

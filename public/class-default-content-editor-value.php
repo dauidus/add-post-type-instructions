@@ -86,8 +86,13 @@ class Default_Content_Editor_Value {
 		$results = array();
 
 		foreach ( $post_types as $pt ) {
-			if ( post_type_supports( $pt, 'thumbnail' ) ) {
-				$results[] = $pt;
+			if ( ($pt !== 'nav_menu_item' )  // default unused post types
+			  && ($pt !== 'revision' ) 
+			  && ($pt !== 'attachment' ) 
+			  && !(strpos($pt, 'wp-types-') !== false) )  // added by 'types' plugin
+			{
+
+				$results[] = $pt;			
 			}
 		}
 
