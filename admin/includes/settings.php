@@ -90,7 +90,7 @@ class Default_Content_Editor_Value_Settings {
 
 			add_settings_field(
 				'instruction',
-				__( '<br /><br /><br /><br /><br />Text Above Editor:', $this->plugin_slug ),
+				__( '<br /><br /><br /><br /><br />Set Instructional Content:', $this->plugin_slug ),
 				array( $this, 'instruction_callback' ),
 				$section,
 				$pt,
@@ -101,7 +101,7 @@ class Default_Content_Editor_Value_Settings {
 
 				add_settings_field(
 					'content',
-					__( '<br /><br /><br /><br /><br /><br />Default Content:', $this->plugin_slug ),
+					__( '<br /><br /><br /><br /><br /><br />Set Default Content:', $this->plugin_slug ),
 					array( $this, 'content_callback' ),
 					$section,
 					$pt,
@@ -136,7 +136,7 @@ class Default_Content_Editor_Value_Settings {
 
 		$html = wp_editor( $args[1].'[instruction]', 'instruction', $settings = array( 'textarea_rows'=>'5', 'textarea_name'=>$args[0].'[instruction]'));
 
-		$html .= '<p class="description">' . __( 'Enter content to display above the editor, such as special instructions for post type.', $this->plugin_slug ) . '</p>';
+		$html .= '<p class="description">' . __( 'Enter content to display below the title field, such as special instructions for this post type.', $this->plugin_slug ) . '</p>';
 
 		echo $html;
 
