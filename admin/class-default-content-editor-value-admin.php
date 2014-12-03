@@ -115,8 +115,8 @@ class Default_Content_Editor_Value_Admin {
 		 *
 		 */
 		$this->plugin_screen_hook_suffix = add_options_page(
-			__( 'Default Content', $this->plugin_slug ),
-			__( 'Default Content', $this->plugin_slug ),
+			__( 'Set Default Content', $this->plugin_slug ),
+			__( 'Set Default Content', $this->plugin_slug ),
 			'manage_options',
 			$this->plugin_slug,
 			array( $this, 'display_plugin_admin_page' )
@@ -176,7 +176,7 @@ class Default_Content_Editor_Value_Admin {
 	 *
 	 * @return null
 	 *
-	 * @since 0.8.0
+	 * @since 1.0
 	 */
 	public function change_editor_content( $content ) {
 
@@ -187,16 +187,11 @@ class Default_Content_Editor_Value_Admin {
 
 			//add our content
 			if ( empty( $content ) ) {
-        		$template  = 'Hey! Don\'t forget to...' . "\n\n";
-        		$template .= '<ul><li>Come up with good tags for the post,</li><li>Set the publish time to 08:00 tomorrow morning,</li><li>Change the slug to a SEO-friendly slug,</li><li>And delete this text, hehe.</li></ul>' . "\n\n";
-        			$template .= 'Bye!';
+        		$template = $options['content'];
         		return $template;
     		} else
         		return $content;
 
-        	// test for functionality
-        	// integrate below code
-			// $options['title']
 		}
 
 	} // end change_editor_content
@@ -207,7 +202,7 @@ class Default_Content_Editor_Value_Admin {
 	 * @param  string $content HTML string
 	 * @return string Modified content
 	 *
-	 * @since 0.8.0
+	 * @since 1.0
 	 */
 	public function add_content_above() {
 
@@ -215,7 +210,8 @@ class Default_Content_Editor_Value_Admin {
 		$options = get_option( $this->plugin_slug . '_' . $post_type );
 
 		if ( isset( $options['instruction'] ) && ! empty( $options['instruction'] ) ) {
-			echo '<h2>This is edit_form_after_title!</h2>';
+			$template = $options['instruction'];
+			echo $template;
 		}
 
 	} // end add_content_above

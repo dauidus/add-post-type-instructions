@@ -119,19 +119,21 @@ class Default_Content_Editor_Value_Settings {
 
 		$value  = isset( $args[1]['content'] ) ? $args[1]['content'] : '';
 
-		$html = '<input type="textarea" id="content" name="' . $args[0] . '[content]" value="' . $value . '" class="regular-text" />';
-		$html .= '<p class="description">' . __( 'Enter the default content to be displayed within the editor (may include html).', $this->plugin_slug ) . '</p>';
+		$html = wp_editor( $args[1].'[content]', 'content', $settings = array( 'textarea_rows'=>'7', 'textarea_name'=>$args[0].'[content]'));
+
+		$html .= '<p class="description">' . __( 'Enter default content to be displayed within the WYSIWYG editor.', $this->plugin_slug ) . '</p>';
 
 		echo $html;
 
-	} // end title_callback
+	} // end content_callback
 
 	public function instruction_callback( $args ) {
 
 		$value  = isset( $args[1]['instruction'] ) ? $args[1]['instruction'] : '';
 
-		$html = '<input type="textarea" id="instruction" name="' . $args[0] . '[instruction]" value="' . $value . '" class="regular-text" />';
-		$html .= '<p class="description">' . __( 'Enter text to display above the editor (may include text and html links only).', $this->plugin_slug ) . '</p>';
+		$html = wp_editor( $args[1].'[instruction]', 'instruction', $settings = array( 'textarea_rows'=>'4', 'textarea_name'=>$args[0].'[instruction]'));
+
+		$html .= '<p class="description">' . __( 'Enter content to display above the editor.', $this->plugin_slug ) . '</p>';
 
 		echo $html;
 
@@ -149,7 +151,7 @@ class Default_Content_Editor_Value_Settings {
 		$outputs = array();
 
 		foreach( $inputs as $key => $value ) {
-			$outputs[$key] = sanitize_text_field( $value );
+			$outputs[$key] = $value;
 		}
 
 		return apply_filters( 'dcev_validate_inputs', $outputs, $inputs );

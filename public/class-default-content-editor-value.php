@@ -86,7 +86,7 @@ class Default_Content_Editor_Value {
 		$results = array();
 
 		foreach ( $post_types as $pt ) {
-			if ( post_type_supports( $pt, 'editor' ) ) {
+			if ( post_type_supports( $pt, 'thumbnail' ) ) {
 				$results[] = $pt;
 			}
 		}
