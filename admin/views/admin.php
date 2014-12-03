@@ -1,15 +1,14 @@
 <?php
 /**
- * Represents the view for the administration dashboard.
+ * Default Content Editor Value.
  *
- * This includes the header, options, and other information that should provide
- * The User Interface to the end user.
+ * Allows admins to set default content to populate the editor for each active post type.
  *
- * @package   Custom Featured Image Metabox
- * @author    1fixdotio <1fixdotio@gmail.com>
+ * @package   Default_Content_Editor_Value
+ * @author    dauidus (dave@dauid.us)
  * @license   GPL-2.0+
- * @link      http://1fix.io
- * @copyright 2014 1Fix
+ * @link      http://dauid.us
+ * @copyright 2014 dauid.us
  */
 ?>
 
@@ -21,7 +20,7 @@
 	<?php // settings_errors(); ?>
 
 	<?php
-		$plugin = Custom_Featured_Image_Metabox::get_instance();
+		$plugin = Default_Content_Editor_Value::get_instance();
 		$post_types = $plugin->supported_post_types();
 
 		if ( isset( $_GET['tab'] ) ) {

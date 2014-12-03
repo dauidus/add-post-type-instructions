@@ -1,6 +1,6 @@
 <?php
 
-class Custom_Featured_Image_Metabox_Settings {
+class Default_Content_Editor_Value_Settings {
 
 	/**
 	 * Unique identifier for your plugin.
@@ -8,7 +8,7 @@ class Custom_Featured_Image_Metabox_Settings {
 	 *
 	 * Call $plugin_slug from public plugin class later.
 	 *
-	 * @since    0.5.0
+	 * @since    1.0
 	 *
 	 * @var      string
 	 */
@@ -17,7 +17,7 @@ class Custom_Featured_Image_Metabox_Settings {
 	/**
 	 * Instance of this class.
 	 *
-	 * @since    0.5.0
+	 * @since    1.0
 	 *
 	 * @var      object
 	 */
@@ -27,11 +27,11 @@ class Custom_Featured_Image_Metabox_Settings {
 	 * Initialize the plugin by setting localization and loading public scripts
 	 * and styles.
 	 *
-	 * @since     0.5.0
+	 * @since     1.0
 	 */
 	private function __construct() {
 
-		$plugin = Custom_Featured_Image_Metabox::get_instance();
+		$plugin = Default_Content_Editor_Value::get_instance();
 		$this->plugin_slug = $plugin->get_plugin_slug();
 
 		// Add settings page
@@ -42,7 +42,7 @@ class Custom_Featured_Image_Metabox_Settings {
 	/**
 	 * Return an instance of this class.
 	 *
-	 * @since     0.5.0
+	 * @since     1.0
 	 *
 	 * @return    object    A single instance of this class.
 	 */
@@ -63,14 +63,12 @@ class Custom_Featured_Image_Metabox_Settings {
 	 */
 	public function admin_init() {
 
-		$plugin = Custom_Featured_Image_Metabox::get_instance();
+		$plugin = Default_Content_Editor_Value::get_instance();
 		$post_types = $plugin->supported_post_types();
 
 		$defaults = array(
-				'title' => '',
+				'content' => '',
 				'instruction' => '',
-				'set_text' => '',
-				'remove_text' => '',
 			);
 
 		foreach ( $post_types as $pt ) {
@@ -85,15 +83,15 @@ class Custom_Featured_Image_Metabox_Settings {
 
 			add_settings_section(
 				$pt,
-				sprintf( __( 'Featured Image Metabox in %s', $this->plugin_slug ), $post_object->labels->name ),
+				sprintf( __( 'Set options for %s', $this->plugin_slug ), $post_object->labels->name ),
 				'',
 				$section
 			);
 
 			add_settings_field(
-				'title',
-				__( 'Title Text', $this->plugin_slug ),
-				array( $this, 'title_callback' ),
+				'content',
+				__( 'Default Content:', $this->plugin_slug ),
+				array( $this, 'content_callback' ),
 				$section,
 				$pt,
 				$args
@@ -101,26 +99,8 @@ class Custom_Featured_Image_Metabox_Settings {
 
 			add_settings_field(
 				'instruction',
-				__( 'Instruction', $this->plugin_slug ),
+				__( 'Text Above Editor', $this->plugin_slug ),
 				array( $this, 'instruction_callback' ),
-				$section,
-				$pt,
-				$args
-			);
-
-			add_settings_field(
-				'set_text',
-				__( 'Set Text', $this->plugin_slug ),
-				array( $this, 'set_text_callback' ),
-				$section,
-				$pt,
-				$args
-			);
-
-			add_settings_field(
-				'remove_text',
-				__( 'Remove Text', $this->plugin_slug ),
-				array( $this, 'remove_text_callback' ),
 				$section,
 				$pt,
 				$args
@@ -135,12 +115,12 @@ class Custom_Featured_Image_Metabox_Settings {
 
 	} // end admin_init
 
-	public function title_callback( $args ) {
+	public function content_callback( $args ) {
 
-		$value  = isset( $args[1]['title'] ) ? $args[1]['title'] : '';
+		$value  = isset( $args[1]['content'] ) ? $args[1]['content'] : '';
 
-		$html = '<input type="text" id="title" name="' . $args[0] . '[title]" value="' . $value . '" class="regular-text" />';
-		$html .= '<p class="description">' . __( 'Enter your custom title for Featured Image Metabox.', $this->plugin_slug ) . '</p>';
+		$html = '<input type="textarea" id="content" name="' . $args[0] . '[content]" value="' . $value . '" class="regular-text" />';
+		$html .= '<p class="description">' . __( 'Enter the default content to be displayed within the editor (may include html).', $this->plugin_slug ) . '</p>';
 
 		echo $html;
 
@@ -150,41 +130,19 @@ class Custom_Featured_Image_Metabox_Settings {
 
 		$value  = isset( $args[1]['instruction'] ) ? $args[1]['instruction'] : '';
 
-		$html = '<input type="text" id="instruction" name="' . $args[0] . '[instruction]" value="' . $value . '" class="regular-text" />';
-		$html .= '<p class="description">' . __( 'Enter the instructions for Featured Image, like image dimensions.', $this->plugin_slug ) . '</p>';
+		$html = '<input type="textarea" id="instruction" name="' . $args[0] . '[instruction]" value="' . $value . '" class="regular-text" />';
+		$html .= '<p class="description">' . __( 'Enter text to display above the editor (may include text and html links only).', $this->plugin_slug ) . '</p>';
 
 		echo $html;
 
 	} // end instruction_callback
-
-	public function set_text_callback( $args ) {
-
-		$value  = isset( $args[1]['set_text'] ) ? $args[1]['set_text'] : '';
-
-		$html = '<input type="text" id="set_text" name="' . $args[0] . '[set_text]" value="' . $value . '" class="regular-text" />';
-		$html .= '<p class="description">' . sprintf( __( 'Enter the custom text to replace the default "%s".', $this->plugin_slug ), __( 'Set featured image' ) ) . '</p>';
-
-		echo $html;
-
-	} // end set_text_callback
-
-	public function remove_text_callback( $args ) {
-
-		$value  = isset( $args[1]['remove_text'] ) ? $args[1]['remove_text'] : '';
-
-		$html = '<input type="text" id="remove_text" name="' . $args[0] . '[remove_text]" value="' . $value . '" class="regular-text" />';
-		$html .= '<p class="description">' . sprintf( __( 'Enter the custom text to replace the default "%s".', $this->plugin_slug ), __( 'Remove featured image' ) ) . '</p>';
-
-		echo $html;
-
-	} // end remove_text_callback
 
 	/**
 	 * Validate inputs
 	 *
 	 * @return array Sanitized data
 	 *
-	 * @since 0.7.0
+	 * @since 1.0
 	 */
 	public function validate_inputs( $inputs ) {
 
@@ -194,9 +152,9 @@ class Custom_Featured_Image_Metabox_Settings {
 			$outputs[$key] = sanitize_text_field( $value );
 		}
 
-		return apply_filters( 'cfim_validate_inputs', $outputs, $inputs );
+		return apply_filters( 'dcev_validate_inputs', $outputs, $inputs );
 
 	} // end validate_inputs
 }
 
-Custom_Featured_Image_Metabox_Settings::get_instance();
+Default_Content_Editor_Value_Settings::get_instance();

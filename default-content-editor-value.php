@@ -4,7 +4,7 @@
  *
  * Allows admins to set default content to populate the editor for each active post type.
  *
- * @package   Default Content Editor Value
+ * @package   Default_Content_Editor_Value
  * @author    dauidus (dave@dauid.us)
  * @license   GPL-2.0+
  * @link      http://dauid.us
@@ -14,12 +14,11 @@
  * Plugin Name:       Default Content Editor Value
  * Plugin URI:        http://dauid.us
  * Description:       Allows admins to set default content to populate the editor for each active post type.
- * Version:           1.0.0
+ * Version:           1.0
  * Author:            dauidus
  * Author URI:        http://dauid.us
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Domain Path:       /languages
  * GitHub Plugin URI: https://github.com/dauidus/default-content-editor-value
  */
 

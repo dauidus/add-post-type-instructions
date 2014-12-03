@@ -1,0 +1,80 @@
+# Copyright (C) 2013 TODO
+# This file is distributed under the same license as the TODO package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Custom Featured Image Metabox\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/plugins/plugin-name\n"
+"POT-Creation-Date: 2014-06-01 15:44+0800\n"
+"PO-Revision-Date: 2014-06-01 15:44+0800\n"
+"Last-Translator: Yoren Chang <yorenchang@gmail.com>\n"
+"Language-Team: 1Fix.io <1fixdotio@gmail.com>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.5\n"
+"X-Poedit-KeywordsList: __;_e;_n;_x;esc_html_e;esc_html__;esc_attr_e;"
+"esc_attr__;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_x:1,2c;_n:1,2\n"
+"X-Poedit-Basepath: ../\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: admin/class-custom-featured-image-metabox-admin.php:118
+#: admin/class-custom-featured-image-metabox-admin.php:119
+msgid "Custom Featured Image Metabox"
+msgstr ""
+
+#: admin/class-custom-featured-image-metabox-admin.php:145
+msgid "Settings"
+msgstr ""
+
+#: admin/class-custom-featured-image-metabox-admin.php:216
+#: admin/includes/settings.php:165
+msgid "Set featured image"
+msgstr ""
+
+#: admin/class-custom-featured-image-metabox-admin.php:220
+#: admin/includes/settings.php:176
+msgid "Remove featured image"
+msgstr ""
+
+#: admin/includes/settings.php:88
+#, php-format
+msgid "Featured Image Metabox in %s"
+msgstr ""
+
+#: admin/includes/settings.php:95
+msgid "Title Text"
+msgstr ""
+
+#: admin/includes/settings.php:104
+msgid "Instruction"
+msgstr ""
+
+#: admin/includes/settings.php:113
+msgid "Set Text"
+msgstr ""
+
+#: admin/includes/settings.php:122
+msgid "Remove Text"
+msgstr ""
+
+#: admin/includes/settings.php:143
+msgid "Enter your custom title for Featured Image Metabox."
+msgstr ""
+
+#: admin/includes/settings.php:154
+msgid "Enter the instructions for Featured Image, like image dimensions."
+msgstr ""
+
+#: admin/includes/settings.php:165 admin/includes/settings.php:176
+#, php-format
+msgid "Enter the custom text to replace the default \"%s\"."
+msgstr ""
+
+#: public/class-custom-featured-image-metabox.php:258
+#, php-format
+msgid ""
+"Custom the Featured Image Metabox at <strong><a href=\"%s\">Settings</a></"
+"strong> page."
+msgstr ""

@@ -1,12 +1,14 @@
 <?php
 /**
- * Custom Featured Image Metabox.
+ * Default Content Editor Value.
  *
- * @package   Custom_Featured_Image_Metabox_Admin
- * @author    1fixdotio <1fixdotio@gmail.com>
+ * Allows admins to set default content to populate the editor for each active post type.
+ *
+ * @package   Default_Content_Editor_Value
+ * @author    dauidus (dave@dauid.us)
  * @license   GPL-2.0+
- * @link      http://1fix.io
- * @copyright 2014 1Fix.io
+ * @link      http://dauid.us
+ * @copyright 2014 dauid.us
  */
 
 /**
@@ -16,10 +18,9 @@
  * If you're interested in introducing public-facing
  * functionality, then refer to `class-custom-featured-image-metabox.php`
  *
- * @package Custom_Featured_Image_Metabox_Admin
- * @author  1fixdotio <1fixdotio>
+ * @package Default_Content_Editor_Value_Admin
  */
-class Custom_Featured_Image_Metabox_Admin {
+class Default_Content_Editor_Value_Admin {
 
 	/**
 	 * Unique identifier for your plugin.
@@ -27,7 +28,7 @@ class Custom_Featured_Image_Metabox_Admin {
 	 *
 	 * Call $plugin_slug from public plugin class later.
 	 *
-	 * @since    0.8.0
+	 * @since    1.0
 	 *
 	 * @var      string
 	 */
@@ -36,7 +37,7 @@ class Custom_Featured_Image_Metabox_Admin {
 	/**
 	 * Instance of this class.
 	 *
-	 * @since    0.1.0
+	 * @since    1.0
 	 *
 	 * @var      object
 	 */
@@ -45,7 +46,7 @@ class Custom_Featured_Image_Metabox_Admin {
 	/**
 	 * Slug of the plugin screen.
 	 *
-	 * @since    0.1.0
+	 * @since    1.0
 	 *
 	 * @var      string
 	 */
@@ -55,7 +56,7 @@ class Custom_Featured_Image_Metabox_Admin {
 	 * Initialize the plugin by loading admin scripts & styles and adding a
 	 * settings page and menu.
 	 *
-	 * @since     0.1.0
+	 * @since     1.0
 	 */
 	private function __construct() {
 
@@ -63,7 +64,7 @@ class Custom_Featured_Image_Metabox_Admin {
 		 * Call $plugin_slug from public plugin class.
 		 *
 		 */
-		$plugin = Custom_Featured_Image_Metabox::get_instance();
+		$plugin = Default_Content_Editor_Value::get_instance();
 		$this->plugin_slug = $plugin->get_plugin_slug();
 
 		// Add the options page and menu item.
@@ -73,19 +74,18 @@ class Custom_Featured_Image_Metabox_Admin {
 		add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
 
 		// Add an action link pointing to the options page.
-		$plugin_basename = plugin_basename( plugin_dir_path( realpath( dirname( __FILE__ ) ) ) . 'custom-featured-image-metabox.php' );
+		$plugin_basename = plugin_basename( plugin_dir_path( realpath( dirname( __FILE__ ) ) ) . 'default-content-editor-value.php' );
 		add_filter( 'plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ) );
 
-		add_action( 'add_meta_boxes', array( $this, 'change_metabox_title' ) );
-		add_filter( 'admin_post_thumbnail_html', array( $this, 'change_metabox_content' ) );
-		add_filter( 'media_view_strings', array( $this, 'change_media_strings' ), 10, 2 );
+		add_filter( 'the_editor_content', array( $this, 'change_editor_content' ) );
+		add_action( 'edit_form_after_title', array( $this, 'add_content_above' ) );
 
 	}
 
 	/**
 	 * Return an instance of this class.
 	 *
-	 * @since     0.1.0
+	 * @since     1.0
 	 *
 	 * @return    object    A single instance of this class.
 	 */
@@ -102,7 +102,7 @@ class Custom_Featured_Image_Metabox_Admin {
 	/**
 	 * Register the administration menu for this plugin into the WordPress Dashboard menu.
 	 *
-	 * @since    0.1.0
+	 * @since    1.0
 	 */
 	public function add_plugin_admin_menu() {
 
@@ -115,8 +115,8 @@ class Custom_Featured_Image_Metabox_Admin {
 		 *
 		 */
 		$this->plugin_screen_hook_suffix = add_options_page(
-			__( 'Custom Featured Image Metabox', $this->plugin_slug ),
-			__( 'Custom Featured Image Metabox', $this->plugin_slug ),
+			__( 'Default Content', $this->plugin_slug ),
+			__( 'Default Content', $this->plugin_slug ),
 			'manage_options',
 			$this->plugin_slug,
 			array( $this, 'display_plugin_admin_page' )
@@ -127,7 +127,7 @@ class Custom_Featured_Image_Metabox_Admin {
 	/**
 	 * Render the settings page for this plugin.
 	 *
-	 * @since    0.1.0
+	 * @since    1.0
 	 */
 	public function display_plugin_admin_page() {
 		include_once( 'views/admin.php' );
@@ -136,7 +136,7 @@ class Custom_Featured_Image_Metabox_Admin {
 	/**
 	 * Add settings action link to the plugins page.
 	 *
-	 * @since    0.1.0
+	 * @since    1.0
 	 */
 	public function add_action_links( $links ) {
 
@@ -154,7 +154,7 @@ class Custom_Featured_Image_Metabox_Admin {
 	 *
 	 * @return string Post type
 	 *
-	 * @since 0.9.5
+	 * @since 1.0
 	 */
 	public function get_post_type() {
 
@@ -172,82 +172,52 @@ class Custom_Featured_Image_Metabox_Admin {
 	} // end get_post_type
 
 	/**
-	 * Change the title of Featured Image Metabox
+	 * Set the default value fot the content editor
 	 *
 	 * @return null
 	 *
 	 * @since 0.8.0
 	 */
-	public function change_metabox_title() {
+	public function change_editor_content( $content ) {
 
 		$post_type = $this->get_post_type();
 		$options = get_option( $this->plugin_slug . '_' . $post_type );
 
-		if ( isset( $options['title'] ) && ! empty( $options['title'] ) ) {
-			//remove original featured image metabox
-			remove_meta_box( 'postimagediv', $post_type, 'side' );
+		if ( isset( $options['content'] ) && ! empty( $options['content'] ) ) {
 
-			//add our customized metabox
-			add_meta_box( 'postimagediv', $options['title'], 'post_thumbnail_meta_box', $post_type, 'side', 'low' );
+			//add our content
+			if ( empty( $content ) ) {
+        		$template  = 'Hey! Don\'t forget to...' . "\n\n";
+        		$template .= '<ul><li>Come up with good tags for the post,</li><li>Set the publish time to 08:00 tomorrow morning,</li><li>Change the slug to a SEO-friendly slug,</li><li>And delete this text, hehe.</li></ul>' . "\n\n";
+        			$template .= 'Bye!';
+        		return $template;
+    		} else
+        		return $content;
+
+        	// test for functionality
+        	// integrate below code
+			// $options['title']
 		}
 
-	} // end change_metabox_title
+	} // end change_editor_content
 
 	/**
-	 * Change metabox content
+	 * Add instruction text above the content editor
 	 *
 	 * @param  string $content HTML string
 	 * @return string Modified content
 	 *
 	 * @since 0.8.0
 	 */
-	public function change_metabox_content( $content ) {
+	public function add_content_above() {
 
 		$post_type = $this->get_post_type();
 		$options = get_option( $this->plugin_slug . '_' . $post_type );
 
 		if ( isset( $options['instruction'] ) && ! empty( $options['instruction'] ) ) {
-			$instruction = '<p class="cfim-instruction">' . $options['instruction'] . '</p>';
-
-			$content = $instruction . $content;
+			echo '<h2>This is edit_form_after_title!</h2>';
 		}
 
-		if ( isset( $options['set_text'] ) && ! empty( $options['set_text'] ) ) {
-			$content = str_replace( __( 'Set featured image' ), $options['set_text'], $content );
-		}
-
-		if ( isset( $options['remove_text'] ) && ! empty( $options['remove_text'] ) ) {
-			$content = str_replace( __( 'Remove featured image' ), $options['remove_text'], $content );
-		}
-
-		return $content;
-
-	} // end change_metabox_content
-
-	/**
-	 * Change the strings in media manager
-	 *
-	 * @param  array $strings Strings array
-	 * @param  object $post   Post object
-	 * @return array          Modified strings array
-	 *
-	 * @since 0.8.0
-	 */
-	public function change_media_strings( $strings, $post ) {
-
-		if ( is_object( $post ) && ! empty( $post ) ) {
-			$post_type = $post->post_type;
-			$options = get_option( $this->plugin_slug . '_' . $post_type );
-
-			if ( isset( $options['set_text'] ) && ! empty( $options['set_text'] ) ) {
-				$strings['setFeaturedImage']      = $options['set_text'];
-				$strings['setFeaturedImageTitle'] = $options['set_text'];
-			}
-
-		}
-
-		return $strings;
-
-	} // end change_media_strings
+	} // end add_content_above
 
 }

@@ -1,34 +1,26 @@
 <?php
 /**
- * Custom Featured Image Metabox.
+ * Default Content Editor Value.
  *
- * @package   Custom_Featured_Image_Metabox
- * @author    1fixdotio <1fixdotio@gmail.com>
+ * Allows admins to set default content to populate the editor for each active post type.
+ *
+ * @package   Default_Content_Editor_Value
+ * @author    dauidus (dave@dauid.us)
  * @license   GPL-2.0+
- * @link      http://1fix.io
- * @copyright 2014 1Fix.io
+ * @link      http://dauid.us
+ * @copyright 2014 dauid.us
  */
 
-/**
- * Plugin class. This class should ideally be used to work with the
- * public-facing side of the WordPress site.
- *
- * If you're interested in introducing administrative or dashboard
- * functionality, then refer to `class-custom-featured-image-metabox-admin.php`
- *
- * @package Custom_Featured_Image_Metabox
- * @author  1fixdotio <1fixdotio@gmail.com>
- */
-class Custom_Featured_Image_Metabox {
+class Default_Content_Editor_Value {
 
 	/**
 	 * Plugin version, used for cache-busting of style and script file references.
 	 *
-	 * @since   0.1.0
+	 * @since   1.0
 	 *
 	 * @var     string
 	 */
-	const VERSION = '1.0.1';
+	const VERSION = '1.0';
 
 	/**
 	 * Unique identifier for your plugin.
@@ -38,16 +30,16 @@ class Custom_Featured_Image_Metabox {
 	 * of text. Its value should match the Text Domain file header in the main
 	 * plugin file.
 	 *
-	 * @since    0.1.0
+	 * @since    1.0
 	 *
 	 * @var      string
 	 */
-	protected $plugin_slug = 'cfim';
+	protected $plugin_slug = 'dcev';
 
 	/**
 	 * Instance of this class.
 	 *
-	 * @since    0.1.0
+	 * @since    1.0
 	 *
 	 * @var      object
 	 */
@@ -57,7 +49,7 @@ class Custom_Featured_Image_Metabox {
 	 * Initialize the plugin by setting localization and loading public scripts
 	 * and styles.
 	 *
-	 * @since     0.1.0
+	 * @since     1.0
 	 */
 	private function __construct() {
 
@@ -72,7 +64,7 @@ class Custom_Featured_Image_Metabox {
 	/**
 	 * Return the plugin slug.
 	 *
-	 * @since    0.1.0
+	 * @since    1.0
 	 *
 	 * @return    Plugin slug variable.
 	 */
@@ -82,11 +74,11 @@ class Custom_Featured_Image_Metabox {
 	}
 
 	/**
-	 * Get post types with thumbnail support
+	 * Get post types with editor support
 	 *
 	 * @return array supported post types
 	 *
-	 * @since 0.6.0
+	 * @since 1.0
 	 */
 	public function supported_post_types() {
 
@@ -94,7 +86,7 @@ class Custom_Featured_Image_Metabox {
 		$results = array();
 
 		foreach ( $post_types as $pt ) {
-			if ( post_type_supports( $pt, 'thumbnail' ) ) {
+			if ( post_type_supports( $pt, 'editor' ) ) {
 				$results[] = $pt;
 			}
 		}
@@ -106,7 +98,7 @@ class Custom_Featured_Image_Metabox {
 	/**
 	 * Return an instance of this class.
 	 *
-	 * @since     0.1.0
+	 * @since     1.0
 	 *
 	 * @return    object    A single instance of this class.
 	 */
@@ -123,7 +115,7 @@ class Custom_Featured_Image_Metabox {
 	/**
 	 * Fired when the plugin is activated.
 	 *
-	 * @since    0.1.0
+	 * @since    1.0
 	 *
 	 * @param    boolean    $network_wide    True if WPMU superadmin uses
 	 *                                       "Network Activate" action, false if
@@ -160,7 +152,7 @@ class Custom_Featured_Image_Metabox {
 	/**
 	 * Fired when the plugin is deactivated.
 	 *
-	 * @since    0.1.0
+	 * @since    1.0
 	 *
 	 * @param    boolean    $network_wide    True if WPMU superadmin uses
 	 *                                       "Network Deactivate" action, false if
@@ -201,7 +193,7 @@ class Custom_Featured_Image_Metabox {
 	 * - not spam
 	 * - not deleted
 	 *
-	 * @since    0.1.0
+	 * @since    1.0
 	 *
 	 * @return   array|false    The blog ids, false if no matches.
 	 */
@@ -221,47 +213,47 @@ class Custom_Featured_Image_Metabox {
 	/**
 	 * Fired for each blog when the plugin is activated.
 	 *
-	 * @since    0.4.0
+	 * @since    1.0
 	 */
 	private static function single_activate() {
 
-		if ( false == get_option( 'cfim-display-activation-message' ) ) {
-			add_option( 'cfim-display-activation-message', true );
+		if ( false == get_option( 'dcev-display-activation-message' ) ) {
+			add_option( 'dcev-display-activation-message', true );
 		}
 	}
 
 	/**
 	 * Fired for each blog when the plugin is deactivated.
 	 *
-	 * @since    0.4.0
+	 * @since    1.0
 	 */
 	private static function single_deactivate() {
 
-		delete_option( 'cfim-display-activation-message' );
+		delete_option( 'dcev-display-activation-message' );
 
 	}
 
 	/**
 	 * Display notice message when activating the plugin.
 	 *
-	 * @since 0.4.0
+	 * @since 1.0
 	 */
 	public function admin_notice_activation() {
 
 		$screen = get_current_screen();
 
-		if ( true == get_option( 'cfim-display-activation-message' ) && 'plugins' == $screen->id ) {
+		if ( true == get_option( 'dcev-display-activation-message' ) && 'plugins' == $screen->id ) {
 			$plugin = self::get_instance();
 
 			$html  = '<div class="updated">';
 			$html .= '<p>';
-				$html .= sprintf( __( 'Custom the Featured Image Metabox at <strong><a href="%s">Settings</a></strong> page.', $plugin->get_plugin_slug() ), admin_url( 'options-general.php?page=' . $plugin->get_plugin_slug() ) );
+				$html .= sprintf( __( 'Set the default content for your site <strong><a href="%s">here</a></strong>.', $plugin->get_plugin_slug() ), admin_url( 'options-general.php?page=' . $plugin->get_plugin_slug() ) );
 			$html .= '</p>';
 			$html .= '</div><!-- /.updated -->';
 
 			echo $html;
 
-			delete_option( 'cfim-display-activation-message' );
+			delete_option( 'dcev-display-activation-message' );
 
 		}
 	}
@@ -269,14 +261,14 @@ class Custom_Featured_Image_Metabox {
 	/**
 	 * Load the plugin text domain for translation.
 	 *
-	 * @since    0.1.0
+	 * @since    1.0
 	 */
 	public function load_plugin_textdomain() {
 
 		$domain = $this->plugin_slug;
 		$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
 
-		load_textdomain( $domain, trailingslashit( WP_PLUGIN_DIR ) . 'custom-featured-image-metabox/languages/' . $locale . '.mo' );
+		load_textdomain( $domain, trailingslashit( WP_PLUGIN_DIR ) . 'default-content-editor-value/languages/' . $locale . '.mo' );
 
 	}
 
