@@ -117,9 +117,16 @@ class Default_Content_Editor_Value_Settings {
 
 	public function content_callback( $args ) {
 
-		$value  = isset( $args[1]['content'] ) ? $args[1]['content'] : '';
+		$value = isset( $args[1]['content'] ) ? $args[1]['content'] : '';
 
-		$html = wp_editor( $args[1].'[content]', 'content', $settings = array( 'textarea_rows'=>'7', 'textarea_name'=>$args[0].'[content]'));
+		$output = $args[0].'[content]';
+
+		$settings = array( 
+			'textarea_name' => $output,
+			'textarea_rows' => '5'
+		);
+
+		$html = wp_editor( $output, 'content', $settings );
 
 		$html .= '<p class="description">' . __( 'Enter default content to be displayed within the WYSIWYG editor.', $this->plugin_slug ) . '</p>';
 
@@ -131,7 +138,7 @@ class Default_Content_Editor_Value_Settings {
 
 		$value  = isset( $args[1]['instruction'] ) ? $args[1]['instruction'] : '';
 
-		$html = wp_editor( $args[1].'[instruction]', 'instruction', $settings = array( 'textarea_rows'=>'4', 'textarea_name'=>$args[0].'[instruction]'));
+		$html = wp_editor( $args[1].'[instruction]', 'instruction', $settings = array( 'textarea_rows'=>'5', 'textarea_name'=>$args[0].'[instruction]'));
 
 		$html .= '<p class="description">' . __( 'Enter content to display above the editor.', $this->plugin_slug ) . '</p>';
 
