@@ -97,14 +97,29 @@ class Default_Content_Editor_Value_Settings {
 				$args
 			);
 
-			add_settings_field(
-				'content',
-				__( '<br /><br /><br /><br /><br /><br />Default Content:', $this->plugin_slug ),
-				array( $this, 'content_callback' ),
-				$section,
-				$pt,
-				$args
-			);
+			if ( post_type_supports( $pt, 'editor' )) {
+
+				add_settings_field(
+					'content',
+					__( '<br /><br /><br /><br /><br /><br />Default Content:', $this->plugin_slug ),
+					array( $this, 'content_callback' ),
+					$section,
+					$pt,
+					$args
+				);
+
+			} else { 
+
+				add_settings_field(
+					'error',
+					__( '', $this->plugin_slug ),
+					array( $this, 'error_callback' ),
+					$section,
+					$pt,
+					$args
+				);
+
+			}
 
 			register_setting(
 				$section,
@@ -145,6 +160,16 @@ class Default_Content_Editor_Value_Settings {
 		echo $html;
 
 	} // end content_callback
+
+	public function error_callback( $args ) {
+
+		$section = $this->plugin_slug . '_' . $pt;
+
+		$html = '<br><br>This post type does not include support for \'editor\' feature.';
+
+		echo $html;
+
+	} // end error_callback
 
 	/**
 	 * Validate inputs
