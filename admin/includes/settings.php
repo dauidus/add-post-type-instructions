@@ -67,8 +67,8 @@ class Default_Content_Editor_Value_Settings {
 		$post_types = $plugin->supported_post_types();
 
 		$defaults = array(
-				'content' => '',
 				'instruction' => '',
+				'content' => ''
 			);
 
 		foreach ( $post_types as $pt ) {
@@ -123,8 +123,7 @@ class Default_Content_Editor_Value_Settings {
 
 			register_setting(
 				$section,
-				$section,
-				array( $this, 'validate_inputs' )
+				$section
 			);
 		}
 
@@ -132,10 +131,16 @@ class Default_Content_Editor_Value_Settings {
 
 	public function instruction_callback( $args ) {
 
-		$value  = isset( $args[1]['instruction'] ) ? $args[1]['instruction'] : '';
-		if( strlen( stripslashes($content)) == 0) $content = $value;
+		$output = $args[0].'[instruction]';
 
-		$html = wp_editor( stripslashes($content), 'instruction'.$pt, $settings = array( 'textarea_rows'=>'5', 'textarea_name'=>$args[0].'[instruction]'));
+		$settings = array( 
+			'textarea_name' => $output,
+			'textarea_rows' => '5'
+		);
+
+		$html = '<textarea id="instruction" name="' .$output. '" rows="7" cols="150" type="textarea">' .$output. '</textarea>';
+
+		$html = wp_editor( $output, 'instruction', $settings );
 
 		$html .= '<p class="description">' . __( 'Enter content to display below the title field, such as special instructions for this post type.', $this->plugin_slug ) . '</p>';
 
@@ -145,8 +150,6 @@ class Default_Content_Editor_Value_Settings {
 
 	public function content_callback( $args ) {
 
-		$value = isset( $args[1]['content'] ) ? $args[1]['content'] : '';
-
 		$output = $args[0].'[content]';
 
 		$settings = array( 
@@ -154,7 +157,9 @@ class Default_Content_Editor_Value_Settings {
 			'textarea_rows' => '5'
 		);
 
-		$html = wp_editor( $output, 'content'.$pt, $settings );
+		$html = '<textarea id="content" name="content" rows="7" cols="150" type="textarea">' .$output. '</textarea>';
+
+		$html = wp_editor( $output, 'content', $settings );
 
 		$html .= '<p class="description">' . __( 'Enter default content to be displayed within the WYSIWYG editor, such as "delete this, then start writing".', $this->plugin_slug ) . '</p><br />';
 
@@ -166,30 +171,13 @@ class Default_Content_Editor_Value_Settings {
 
 		$section = $this->plugin_slug . '_' . $pt;
 
-		$html = '<br><br>This post type does not include support for \'editor\' feature.';
+		$html = '<br><br>This post type does not include support for the \'editor\' feature.';
 
 		echo $html;
 
 	} // end error_callback
 
-	/**
-	 * Validate inputs
-	 *
-	 * @return array Sanitized data
-	 *
-	 * @since 1.0
-	 */
-	public function validate_inputs( $inputs ) {
 
-		$outputs = array();
-
-		foreach( $inputs as $key => $value ) {
-			$outputs[$key] = $value;
-		}
-
-		return apply_filters( 'dcev_validate_inputs', $outputs, $inputs );
-
-	} // end validate_inputs
 }
 
 Default_Content_Editor_Value_Settings::get_instance();
