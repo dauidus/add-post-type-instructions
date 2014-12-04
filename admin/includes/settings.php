@@ -133,8 +133,9 @@ class Default_Content_Editor_Value_Settings {
 	public function instruction_callback( $args ) {
 
 		$value  = isset( $args[1]['instruction'] ) ? $args[1]['instruction'] : '';
+		if( strlen( stripslashes($content)) == 0) $content = $value;
 
-		$html = wp_editor( $args[1].'[instruction]', 'instruction', $settings = array( 'textarea_rows'=>'5', 'textarea_name'=>$args[0].'[instruction]'));
+		$html = wp_editor( stripslashes($content), 'instruction'.$pt, $settings = array( 'textarea_rows'=>'5', 'textarea_name'=>$args[0].'[instruction]'));
 
 		$html .= '<p class="description">' . __( 'Enter content to display below the title field, such as special instructions for this post type.', $this->plugin_slug ) . '</p>';
 
@@ -153,7 +154,7 @@ class Default_Content_Editor_Value_Settings {
 			'textarea_rows' => '5'
 		);
 
-		$html = wp_editor( $output, 'content', $settings );
+		$html = wp_editor( $output, 'content'.$pt, $settings );
 
 		$html .= '<p class="description">' . __( 'Enter default content to be displayed within the WYSIWYG editor, such as "delete this, then start writing".', $this->plugin_slug ) . '</p><br />';
 

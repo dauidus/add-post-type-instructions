@@ -186,7 +186,7 @@ class Default_Content_Editor_Value_Admin {
 
 		if ( isset( $options['instruction'] ) && ! empty( $options['instruction'] ) ) {
 			$template = $options['instruction'];
-			echo $template;
+			echo '<br /><hr /><div id="instructional_content">' . $template . '</div><hr />';
 		}
 
 	} // end add_content_above
