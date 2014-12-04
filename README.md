@@ -13,3 +13,5 @@ add help tab on settings page
     provides directions for how to fix it via wp-codex link
 
 clean up conditional logic for supported_post_types
+
+provide appropriate language definitions
