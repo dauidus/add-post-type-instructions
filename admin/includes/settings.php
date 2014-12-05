@@ -153,11 +153,11 @@ class Default_Content_Editor_Value_Settings {
 		$output = $args[0].'[content]';
 
 		$settings = array( 
-			'textarea_name' => $output,
+			'textarea_name' => $output, 
 			'textarea_rows' => '5'
 		);
 
-		$html = '<textarea id="content" name="content" rows="7" cols="150" type="textarea">' .$output. '</textarea>';
+		$html = '<textarea id="content" name="' .$output. '" rows="7" cols="150" type="textarea">' .$output. '</textarea>';
 
 		$html = wp_editor( $output, 'content', $settings );
 
