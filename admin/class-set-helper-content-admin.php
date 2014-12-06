@@ -1,10 +1,10 @@
 <?php
 /**
- * Default Content Editor Value.
+ * Set Helper Content.
  *
- * Allows admins to set default content to populate the editor for each active post type.
+ * For A Better UX
  *
- * @package   Default_Content_Editor_Value
+ * @package   Set_Helper_Content
  * @author    dauidus (dave@dauid.us)
  * @license   GPL-2.0+
  * @link      http://dauid.us
@@ -18,9 +18,9 @@
  * If you're interested in introducing public-facing
  * functionality, then refer to `class-custom-featured-image-metabox.php`
  *
- * @package Default_Content_Editor_Value_Admin
+ * @package Set_Helper_Content_Admin
  */
-class Default_Content_Editor_Value_Admin {
+class Set_Helper_Content_Admin {
 
 	/**
 	 * Unique identifier for your plugin.
@@ -64,7 +64,7 @@ class Default_Content_Editor_Value_Admin {
 		 * Call $plugin_slug from public plugin class.
 		 *
 		 */
-		$plugin = Default_Content_Editor_Value::get_instance();
+		$plugin = Set_Helper_Content::get_instance();
 		$this->plugin_slug = $plugin->get_plugin_slug();
 
 		// Add the options page and menu item.
@@ -74,7 +74,7 @@ class Default_Content_Editor_Value_Admin {
 		add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
 
 		// Add an action link pointing to the options page.
-		$plugin_basename = plugin_basename( plugin_dir_path( realpath( dirname( __FILE__ ) ) ) . 'default-content-editor-value.php' );
+		$plugin_basename = plugin_basename( plugin_dir_path( realpath( dirname( __FILE__ ) ) ) . 'set-helper-content.php' );
 		add_filter( 'plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ) );
 
 		add_action( 'edit_form_after_title', array( $this, 'add_content_above' ) );

@@ -1,6 +1,6 @@
 <?php
 
-class Default_Content_Editor_Value_Settings {
+class Set_Helper_Content_Settings {
 
 	/**
 	 * Unique identifier for your plugin.
@@ -31,7 +31,7 @@ class Default_Content_Editor_Value_Settings {
 	 */
 	private function __construct() {
 
-		$plugin = Default_Content_Editor_Value::get_instance();
+		$plugin = Set_Helper_Content::get_instance();
 		$this->plugin_slug = $plugin->get_plugin_slug();
 
 		// Add settings page
@@ -63,7 +63,7 @@ class Default_Content_Editor_Value_Settings {
 	 */
 	public function admin_init() {
 
-		$plugin = Default_Content_Editor_Value::get_instance();
+		$plugin = Set_Helper_Content::get_instance();
 		$post_types = $plugin->supported_post_types();
 
 		$defaults = array(
@@ -178,4 +178,4 @@ class Default_Content_Editor_Value_Settings {
 
 }
 
-Default_Content_Editor_Value_Settings::get_instance();
+Set_Helper_Content_Settings::get_instance();

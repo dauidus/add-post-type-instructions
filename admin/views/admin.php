@@ -1,10 +1,10 @@
 <?php
 /**
- * Default Content Editor Value.
+ * Set Helper Content.
  *
- * Allows admins to set default content to populate the editor for each active post type.
+ * For A Better UX
  *
- * @package   Default_Content_Editor_Value
+ * @package   Set_Helper_Content
  * @author    dauidus (dave@dauid.us)
  * @license   GPL-2.0+
  * @link      http://dauid.us
@@ -20,7 +20,7 @@
 	<?php // settings_errors(); ?>
 
 	<?php
-		$plugin = Default_Content_Editor_Value::get_instance();
+		$plugin = Set_Helper_Content::get_instance();
 		$post_types = $plugin->supported_post_types();
 
 		if ( isset( $_GET['tab'] ) ) {

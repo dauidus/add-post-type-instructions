@@ -1,17 +1,17 @@
 <?php
 /**
- * Default Content Editor Value.
+ * Set Helper Content.
  *
- * Allows admins to set default content to populate the editor for each active post type.
+ * For A Better UX
  *
- * @package   Default_Content_Editor_Value
+ * @package   Set_Helper_Content
  * @author    dauidus (dave@dauid.us)
  * @license   GPL-2.0+
  * @link      http://dauid.us
  * @copyright 2014 dauid.us
  */
 
-class Default_Content_Editor_Value {
+class Set_Helper_Content {
 
 	/**
 	 * Plugin version, used for cache-busting of style and script file references.
@@ -34,7 +34,7 @@ class Default_Content_Editor_Value {
 	 *
 	 * @var      string
 	 */
-	protected $plugin_slug = 'dcev';
+	protected $plugin_slug = 'shc';
 
 	/**
 	 * Instance of this class.
@@ -225,8 +225,8 @@ class Default_Content_Editor_Value {
 	 */
 	private static function single_activate() {
 
-		if ( false == get_option( 'dcev-display-activation-message' ) ) {
-			add_option( 'dcev-display-activation-message', true );
+		if ( false == get_option( 'shc-display-activation-message' ) ) {
+			add_option( 'shc-display-activation-message', true );
 		}
 	}
 
@@ -237,7 +237,7 @@ class Default_Content_Editor_Value {
 	 */
 	private static function single_deactivate() {
 
-		delete_option( 'dcev-display-activation-message' );
+		delete_option( 'shc-display-activation-message' );
 
 	}
 
@@ -250,7 +250,7 @@ class Default_Content_Editor_Value {
 
 		$screen = get_current_screen();
 
-		if ( true == get_option( 'dcev-display-activation-message' ) && 'plugins' == $screen->id ) {
+		if ( true == get_option( 'shc-display-activation-message' ) && 'plugins' == $screen->id ) {
 			$plugin = self::get_instance();
 
 			$html  = '<div class="updated">';
@@ -261,7 +261,7 @@ class Default_Content_Editor_Value {
 
 			echo $html;
 
-			delete_option( 'dcev-display-activation-message' );
+			delete_option( 'shc-display-activation-message' );
 
 		}
 	}
@@ -276,7 +276,7 @@ class Default_Content_Editor_Value {
 		$domain = $this->plugin_slug;
 		$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
 
-		load_textdomain( $domain, trailingslashit( WP_PLUGIN_DIR ) . 'default-content-editor-value/languages/' . $locale . '.mo' );
+		load_textdomain( $domain, trailingslashit( WP_PLUGIN_DIR ) . 'set-helper-content/languages/' . $locale . '.mo' );
 
 	}
 
