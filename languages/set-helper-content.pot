@@ -1,0 +1,60 @@
+# Copyright (C) 2013 TODO
+# This file is distributed under the same license as the TODO package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Set Helper Content\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/plugins/plugin-name\n"
+"POT-Creation-Date: 2014-06-01 15:44+0800\n"
+"PO-Revision-Date: 2014-06-01 15:44+0800\n"
+"Last-Translator: Dave Winter <dave@dauid.us>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.5\n"
+"X-Poedit-KeywordsList: __;_e;_n;_x;esc_html_e;esc_html__;esc_attr_e;"
+"esc_attr__;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_x:1,2c;_n:1,2\n"
+"X-Poedit-Basepath: ../\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: admin/class-set-helper-content-admin.php:118
+#: admin/class-set-helper-content-admin.php:119
+msgid "Set Default Content"
+msgstr ""
+
+
+#: admin/class-set-helper-content-admin.php:145
+msgid "Settings"
+msgstr ""
+
+#: admin/includes/settings.php:69
+#, php-format
+msgid "Set helper options for %s"
+msgstr ""
+
+#: admin/includes/settings.php:75
+msgid "Set Instructional Content:"
+msgstr ""
+
+#: admin/includes/settings.php:84
+msgid "Set Default Content:"
+msgstr ""
+
+#: admin/includes/settings.php:114
+msgid "Enter content to display below the title field, such as special instructions for this post type. HTML allowed."
+msgstr ""
+
+#: admin/includes/settings.php:127
+msgid "Enter default content to be displayed within the WYSIWYG editor, such as "delete this, then start writing". HTML and shortcodes allowed."
+msgstr ""
+
+#: admin/includes/settings.php:131
+msgid "This post type does not include support for the WYSIWYG editor feature."
+msgstr ""
+
+#: public/class-set-helper-content.php:258
+#, php-format
+msgid ""
+"Plugin activated! Set instructional and default content for your site <strong><a href="%s">here</a></strong>."
+msgstr ""
