@@ -255,7 +255,7 @@ class Default_Content_Editor_Value {
 
 			$html  = '<div class="updated">';
 			$html .= '<p>';
-				$html .= sprintf( __( 'Set the default content for your site <strong><a href="%s">here</a></strong>.', $plugin->get_plugin_slug() ), admin_url( 'options-general.php?page=' . $plugin->get_plugin_slug() ) );
+				$html .= sprintf( __( 'Plugin activated! Set instructional and default content for your site <strong><a href="%s">here</a></strong>.', $plugin->get_plugin_slug() ), admin_url( 'options-general.php?page=' . $plugin->get_plugin_slug() ) );
 			$html .= '</p>';
 			$html .= '</div><!-- /.updated -->';
 

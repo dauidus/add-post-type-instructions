@@ -90,7 +90,7 @@ class Default_Content_Editor_Value_Settings {
 
 			add_settings_field(
 				'instruction',
-				__( '<br /><br /><br /><br /><br />Set Instructional Content:', $this->plugin_slug ),
+				__( '<br />Set Instructional Content:', $this->plugin_slug ),
 				array( $this, 'instruction_callback' ),
 				$section,
 				$pt,
@@ -101,7 +101,7 @@ class Default_Content_Editor_Value_Settings {
 
 				add_settings_field(
 					'content',
-					__( '<br /><br /><br /><br /><br /><br />Set Default Content:', $this->plugin_slug ),
+					__( '<br />Set Default Content:', $this->plugin_slug ),
 					array( $this, 'content_callback' ),
 					$section,
 					$pt,
@@ -132,36 +132,37 @@ class Default_Content_Editor_Value_Settings {
 	public function instruction_callback( $args ) {
 
 		$output = $args[0].'[instruction]';
+		$value  = isset( $args[1]['instruction'] ) ? $args[1]['instruction'] : '';
 
-		$settings = array( 
+	/*	$settings = array( 
 			'textarea_name' => $output,
 			'textarea_rows' => '5'
-		);
+		);	*/
 
-		$html = '<textarea id="instruction" name="' .$output. '" rows="7" cols="150" type="textarea">' .$output. '</textarea>';
+		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="4" style="width: 90%; padding: 10px;" type="textarea">' .$value. '</textarea>';
 
-		$html = wp_editor( $output, 'instruction', $settings );
+		$html .= '<p class="description">' . __( 'Enter content to display below the title field, such as special instructions for this post type.<br />HTML allowed.', $this->plugin_slug ) . '</p>';
 
-		$html .= '<p class="description">' . __( 'Enter content to display below the title field, such as special instructions for this post type.', $this->plugin_slug ) . '</p>';
-
-		echo $html;
+		echo $html . '<br />';
 
 	} // end instruction_callback
 
 	public function content_callback( $args ) {
 
 		$output = $args[0].'[content]';
+		$value  = isset( $args[1]['content'] ) ? $args[1]['content'] : '';
 
+	/*	$id = $args[0].'_content';
 		$settings = array( 
 			'textarea_name' => $output, 
 			'textarea_rows' => '5'
-		);
+		);	*/
 
-		$html = '<textarea id="content" name="' .$output. '" rows="7" cols="150" type="textarea">' .$output. '</textarea>';
+		//wp_editor( $value, $id, $settings );
 
-		$html = wp_editor( $output, 'content', $settings );
+		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="6" style="width: 90%; padding: 10px;" type="textarea">' .$value. '</textarea>';
 
-		$html .= '<p class="description">' . __( 'Enter default content to be displayed within the WYSIWYG editor, such as "delete this, then start writing".', $this->plugin_slug ) . '</p><br />';
+		$html .= '<p class="description">' . __( 'Enter default content to be displayed within the WYSIWYG editor, such as "delete this, then start writing".<br />HTML and shortcodes allowed.', $this->plugin_slug ) . '</p><br />';
 
 		echo $html;
 
@@ -169,14 +170,11 @@ class Default_Content_Editor_Value_Settings {
 
 	public function error_callback( $args ) {
 
-		$section = $this->plugin_slug . '_' . $pt;
-
 		$html = '<br><br>This post type does not include support for the \'editor\' feature.';
 
 		echo $html;
 
 	} // end error_callback
-
 
 }
 
