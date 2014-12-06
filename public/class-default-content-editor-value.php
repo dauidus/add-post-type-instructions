@@ -74,7 +74,7 @@ class Default_Content_Editor_Value {
 	}
 
 	/**
-	 * Get post types with editor support
+	 * Get post types with show_ui support and exclude media
 	 *
 	 * @return array supported post types
 	 *
@@ -82,18 +82,21 @@ class Default_Content_Editor_Value {
 	 */
 	public function supported_post_types() {
 
-		$post_types = get_post_types();
+		$args = array(
+		   'show_ui' => true,
+		);
+
+		$output = 'names'; // names or objects, note names is the default
+		$operator = 'and'; // 'and' or 'or'
+
+		$post_types = get_post_types( $args, $output, $operator );
+		unset( $post_types['attachment'] );
+
 		$results = array();
 
 		foreach ( $post_types as $pt ) {
-			if ( ($pt !== 'nav_menu_item' )  // default unused post types
-			  && ($pt !== 'revision' ) 
-			  && ($pt !== 'attachment' ) 
-			  && !(strpos($pt, 'wp-types-') !== false) )  // added by 'types' plugin
-			{
 
-				$results[] = $pt;			
-			}
+			$results[] = $pt;			
 		}
 
 		return $results;
