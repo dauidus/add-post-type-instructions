@@ -1,17 +1,17 @@
 <?php
 /**
- * Set Helper Content.
+ * Add Post Type Instructions.
  *
  * For A Better UX
  *
- * @package   Set_Helper_Content
+ * @package   add_post_type_instructions
  * @author    dauidus (dave@dauid.us)
  * @license   GPL-2.0+
  * @link      http://dauid.us
  * @copyright 2014 dauid.us
  */
 
-class Set_Helper_Content {
+class add_post_type_instructions {
 
 	/**
 	 * Plugin version, used for cache-busting of style and script file references.

@@ -24,7 +24,6 @@ foreach ( $post_types as $pt ) {
 	delete_option( $plugin->get_plugin_slug() . '_' . $pt );
 }
 
-// TODO:
 delete_option( 'shc-display-activation-message' );
 /**
  * @todo Delete options in whole network

@@ -1,10 +1,10 @@
 <?php
 /**
- * Set Helper Content.
+ * Add Post Type Instructions.
  *
  * For A Better UX
  *
- * @package   Set_Helper_Content
+ * @package   add_post_type_instructions
  * @author    dauidus (dave@dauid.us)
  * @license   GPL-2.0+
  * @link      http://dauid.us
@@ -20,7 +20,7 @@
 	<?php // settings_errors(); ?>
 
 	<?php
-		$plugin = Set_Helper_Content::get_instance();
+		$plugin = add_post_type_instructions::get_instance();
 		$post_types = $plugin->supported_post_types();
 
 		if ( isset( $_GET['tab'] ) ) {

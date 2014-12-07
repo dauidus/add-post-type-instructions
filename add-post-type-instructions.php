@@ -1,19 +1,19 @@
 <?php
 /**
- * Set Helper Content.
+ * Add Post Type Instructions.
  *
  * For A Better UX
  *
- * @package   Set_Helper_Content
+ * @package   Add_Post_Type_Instructions
  * @author    dauidus (dave@dauid.us)
  * @license   GPL-2.0+
  * @link      http://dauid.us
  * @copyright 2014 dauid.us
  *
  * @wordpress-plugin
- * Plugin Name:       Set Helper Content
+ * Plugin Name:       Add Post Type Instructions
  * Plugin URI:        http://dauid.us
- * Description:       Allows admins to easily set instructional text per post type.  Currently supports text below the title field and within the WYSIWYG editor.
+ * Description:       Allows admins to easily set instructional text per post type.  Currently supports text below the title field, content within the WYSIWYG editor and text within the Featured Image metabox.
  * Version:           1.0
  * Author:            dauidus
  * Author URI:        http://dauid.us
@@ -31,17 +31,17 @@ if ( ! defined( 'WPINC' ) ) {
  * Public-Facing Functionality
  *----------------------------------------------------------------------------*/
 
-require_once( plugin_dir_path( __FILE__ ) . 'public/class-set-helper-content.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'public/class-add-post-type-instructions.php' );
 
 /*
  * Register hooks that are fired when the plugin is activated or deactivated.
  * When the plugin is deleted, the uninstall.php file is loaded.
  *
  */
-register_activation_hook( __FILE__, array( 'Set_Helper_Content', 'activate' ) );
-register_deactivation_hook( __FILE__, array( 'Set_Helper_Content', 'deactivate' ) );
+register_activation_hook( __FILE__, array( 'Add_Post_Type_Instructions', 'activate' ) );
+register_deactivation_hook( __FILE__, array( 'Add_Post_Type_Instructions', 'deactivate' ) );
 
-add_action( 'plugins_loaded', array( 'Set_Helper_Content', 'get_instance' ) );
+add_action( 'plugins_loaded', array( 'Add_Post_Type_Instructions', 'get_instance' ) );
 
 /*----------------------------------------------------------------------------*
  * Dashboard and Administrative Functionality
@@ -53,8 +53,8 @@ add_action( 'plugins_loaded', array( 'Set_Helper_Content', 'get_instance' ) );
  */
 if ( is_admin() ) {
 
-	require_once( plugin_dir_path( __FILE__ ) . 'admin/class-set-helper-content-admin.php' );
-	add_action( 'plugins_loaded', array( 'Set_Helper_Content_Admin', 'get_instance' ) );
+	require_once( plugin_dir_path( __FILE__ ) . 'admin/class-add-post-type-instructions-admin.php' );
+	add_action( 'plugins_loaded', array( 'Add_Post_Type_Instructions_Admin', 'get_instance' ) );
 
 }
 
