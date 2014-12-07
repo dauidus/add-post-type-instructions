@@ -12,6 +12,4 @@ add help tab on settings page
     explains why you're seeing error messages in the settings page
     provides directions for how to fix it via wp-codex link
 
-clean up conditional logic for supported_post_types
-
 provide appropriate language definitions
