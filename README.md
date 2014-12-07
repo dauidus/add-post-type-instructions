@@ -1,4 +1,4 @@
-default-content-editor-value
+Add Post Type Instructions
 ============================
 
 Allows admins to set instructional text (appears below title) and default content (populates WYSIWYG editor) for any post type.
