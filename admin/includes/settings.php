@@ -77,7 +77,7 @@ class add_post_type_instructions_Settings {
 
 			add_settings_field(
 				'instruction',
-				__( '<br />Display Below Title:', $this->plugin_slug ),
+				__( '<br />Display Below Title Field:', $this->plugin_slug ),
 				array( $this, 'instruction_callback' ),
 				$section,
 				$pt,
@@ -87,7 +87,7 @@ class add_post_type_instructions_Settings {
 			if ( post_type_supports( $pt, 'editor' )) {
 				add_settings_field(
 					'content',
-					__( '<br />WYSIWYG Content:', $this->plugin_slug ),
+					__( '<br />Set WYSIWYG Content:', $this->plugin_slug ),
 					array( $this, 'content_callback' ),
 					$section,
 					$pt,
@@ -98,7 +98,7 @@ class add_post_type_instructions_Settings {
 			if ( post_type_supports( $pt, 'thumbnail' )) {
 				add_settings_field(
 					'thumbnail',
-					__( '<br />Featured Image Text:', $this->plugin_slug ),
+					__( '<br />Featured Image Metabox:', $this->plugin_slug ),
 					array( $this, 'thumbnail_callback' ),
 					$section,
 					$pt,
@@ -110,7 +110,7 @@ class add_post_type_instructions_Settings {
 				if ( post_type_supports( $pt, 'post-formats' )) {
 					add_settings_field(
 						'postformats',
-						__( '<br />Post Format Text:', $this->plugin_slug ),
+						__( '<br />Post Format Metabox:', $this->plugin_slug ),
 						array( $this, 'postformats_callback' ),
 						$section,
 						$pt,
@@ -122,7 +122,7 @@ class add_post_type_instructions_Settings {
 			if ( post_type_supports( $pt, 'page-attributes' )) {
 				add_settings_field(
 					'pageattributes',
-					__( '<br />Page Attributes Text:', $this->plugin_slug ),
+					__( '<br />Page Attributes Metabox:', $this->plugin_slug ),
 					array( $this, 'pageattributes_callback' ),
 					$section,
 					$pt,
@@ -133,7 +133,7 @@ class add_post_type_instructions_Settings {
 			if ( post_type_supports( $pt, 'author' )) {
 				add_settings_field(
 					'author',
-					__( '<br />Author Text:', $this->plugin_slug ),
+					__( '<br />Author Metabox:', $this->plugin_slug ),
 					array( $this, 'author_callback' ),
 					$section,
 					$pt,
@@ -177,7 +177,7 @@ class add_post_type_instructions_Settings {
 		$html = '<textarea id="textarea_one" name="' .$output. '" rows="6" style="width: 90%; padding: 10px;" type="textarea">' .$value. '</textarea>';
 		//wp_editor( $value, $id, $settings );
 
-		$html .= '<p class="description">' . __( 'Enter default content to be displayed within the WYSIWYG editor, such as "delete this, then start writing". HTML and shortcodes allowed.', $this->plugin_slug ) . '</p>';
+		$html .= '<p class="description">' . __( 'Enter default content to be displayed within the WYSIWYG editor, such as "delete this, then start writing".  This will be displayed only when no other content has been entered. HTML and shortcodes allowed.', $this->plugin_slug ) . '</p>';
 		echo $html;
 
 	} // end content_callback
