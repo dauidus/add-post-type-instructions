@@ -55,7 +55,11 @@ class add_post_type_instructions_Settings {
 		$post_types = $plugin->supported_post_types();
 		$defaults = array(
 				'instruction' => '',
-				'content' => ''
+				'content' => '',
+				'thumbnail' => '',
+				'postformats' => '',
+				'pageattributes' => '',
+				'author' => ''
 			);
 		foreach ( $post_types as $pt ) {
 			$post_object = get_post_type_object( $pt );
@@ -66,10 +70,11 @@ class add_post_type_instructions_Settings {
 			$args = array( $section, get_option( $section ) );
 			add_settings_section(
 				$pt,
-				sprintf( __( 'Set options for %s', $this->plugin_slug ), $post_object->labels->name ),
+				sprintf( __( 'Set instructions for %s', $this->plugin_slug ), $post_object->labels->name ),
 				'',
 				$section
 			);
+
 			add_settings_field(
 				'instruction',
 				__( '<br />Display Below Title:', $this->plugin_slug ),
@@ -78,6 +83,7 @@ class add_post_type_instructions_Settings {
 				$pt,
 				$args
 			);
+
 			if ( post_type_supports( $pt, 'editor' )) {
 				add_settings_field(
 					'content',
@@ -87,16 +93,8 @@ class add_post_type_instructions_Settings {
 					$pt,
 					$args
 				);
-			} else { 
-				add_settings_field(
-					'error_editor',
-					__( '', $this->plugin_slug ),
-					array( $this, 'error_editor_callback' ),
-					$section,
-					$pt,
-					$args
-				);
 			}
+
 			if ( post_type_supports( $pt, 'thumbnail' )) {
 				add_settings_field(
 					'thumbnail',
@@ -106,16 +104,43 @@ class add_post_type_instructions_Settings {
 					$pt,
 					$args
 				);
-			} else { 
+			}
+
+			if ( !($pt == 'page') ) {
+				if ( post_type_supports( $pt, 'post-formats' )) {
+					add_settings_field(
+						'postformats',
+						__( '<br />Post Format Text:', $this->plugin_slug ),
+						array( $this, 'postformats_callback' ),
+						$section,
+						$pt,
+						$args
+					);
+				}
+			}
+
+			if ( post_type_supports( $pt, 'page-attributes' )) {
 				add_settings_field(
-					'error_thumbnail',
-					__( '', $this->plugin_slug ),
-					array( $this, 'error_thumbnail_callback' ),
+					'pageattributes',
+					__( '<br />Page Attributes Text:', $this->plugin_slug ),
+					array( $this, 'pageattributes_callback' ),
 					$section,
 					$pt,
 					$args
 				);
 			}
+
+			if ( post_type_supports( $pt, 'author' )) {
+				add_settings_field(
+					'author',
+					__( '<br />Author Text:', $this->plugin_slug ),
+					array( $this, 'author_callback' ),
+					$section,
+					$pt,
+					$args
+				);
+			}
+
 			register_setting(
 				$section,
 				$section
@@ -135,7 +160,7 @@ class add_post_type_instructions_Settings {
 
 		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="4" style="width: 90%; padding: 10px;" type="textarea">' .$value. '</textarea>';
 		$html .= '<p class="description">' . __( 'Enter content to display below the title field, such as special instructions for this post type. HTML allowed.', $this->plugin_slug ) . '</p>';
-		echo $html . '<br />';
+		echo $html;
 
 	} // end instruction_callback
 
@@ -156,12 +181,6 @@ class add_post_type_instructions_Settings {
 		echo $html;
 
 	} // end content_callback
-	public function error_editor_callback( $args ) {
-
-		$html = '<p>' . __( 'This post type does not support the editor.', $this->plugin_slug ) . '</p><br>';
-		echo $html;
-
-	} // end error_editor_callback
 
 	public function thumbnail_callback( $args ) {
 		
@@ -169,15 +188,42 @@ class add_post_type_instructions_Settings {
 		$value  = isset( $args[1]['thumbnail'] ) ? $args[1]['thumbnail'] : '';
 
 		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" style="width: 90%; padding: 10px;" type="textarea">' .$value. '</textarea>';
-		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the featured image editor. HTML allowed.', $this->plugin_slug ) . '</p><br />';
+		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the featured image metabox. HTML allowed.', $this->plugin_slug ) . '</p>';
 		echo $html;
 
 	} // end thumbnail_callback
-	public function error_thumbnail_callback( $args ) {
 
-		$html = '<p><br>' . __( 'This post type does not support featured images.', $this->plugin_slug ) . '</p>';
+	public function postformats_callback( $args ) {
+		
+		$output = $args[0].'[postformats]';
+		$value  = isset( $args[1]['postformats'] ) ? $args[1]['postformats'] : '';
+
+		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" style="width: 90%; padding: 10px;" type="textarea">' .$value. '</textarea>';
+		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the post format metabox. HTML allowed.', $this->plugin_slug ) . '</p>';
 		echo $html;
 
-	} // end error_thumbnail_callback
+	} // end thumbnail_callback
+
+	public function pageattributes_callback( $args ) {
+		
+		$output = $args[0].'[pageattributes]';
+		$value  = isset( $args[1]['pageattributes'] ) ? $args[1]['pageattributes'] : '';
+
+		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" style="width: 90%; padding: 10px;" type="textarea">' .$value. '</textarea>';
+		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the page attributes metabox. HTML allowed.', $this->plugin_slug ) . '</p>';
+		echo $html;
+
+	} // end thumbnail_callback
+
+	public function author_callback( $args ) {
+		
+		$output = $args[0].'[author]';
+		$value  = isset( $args[1]['author'] ) ? $args[1]['author'] : '';
+
+		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" style="width: 90%; padding: 10px;" type="textarea">' .$value. '</textarea>';
+		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the authormetabox. HTML allowed.', $this->plugin_slug ) . '</p>';
+		echo $html;
+
+	} // end author_callback
 }
 add_post_type_instructions_Settings::get_instance();
