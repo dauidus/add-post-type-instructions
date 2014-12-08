@@ -187,7 +187,7 @@ class Add_Post_Type_Instructions_Admin {
 	 *
 	 * @param  string $content HTML string
 	 *
-	 * @since 1.2
+	 * @since 1.0.2
 	 */
 	public function is_edit_page($new_edit = null){
 
@@ -250,7 +250,7 @@ class Add_Post_Type_Instructions_Admin {
 	 *
 	 * @param  string $content HTML string
 	 *
-	 * @since 1.1
+	 * @since 1.0.1
 	 */
 	public function change_author_metabox_content() {
 
@@ -299,7 +299,7 @@ class Add_Post_Type_Instructions_Admin {
 	 *
 	 * @param  string $content HTML string
 	 *
-	 * @since 1.2
+	 * @since 1.0.2
 	 */
 	public function change_excerpt_metabox_content() {
 
@@ -326,7 +326,7 @@ class Add_Post_Type_Instructions_Admin {
 	 *
 	 * @param  string $content HTML string
 	 *
-	 * @since 1.2
+	 * @since 1.0.2
 	 */
 	public function change_trackbacks_metabox_content() {
 
@@ -353,7 +353,7 @@ class Add_Post_Type_Instructions_Admin {
 	 *
 	 * @param  string $content HTML string
 	 *
-	 * @since 1.1
+	 * @since 1.0.1
 	 */
 	public function change_customfields_metabox_content() {
 
@@ -380,7 +380,7 @@ class Add_Post_Type_Instructions_Admin {
 	 *
 	 * @param  string $content HTML string
 	 *
-	 * @since 1.2
+	 * @since 1.0.2
 	 */
 /*	public function change_comments_metabox_content() {
 
@@ -409,7 +409,7 @@ class Add_Post_Type_Instructions_Admin {
 	 *
 	 * @param  string $content HTML string
 	 *
-	 * @since 1.1
+	 * @since 1.0.1
 	 */
 	public function change_pageattributes_metabox_content() {
 
@@ -436,7 +436,7 @@ class Add_Post_Type_Instructions_Admin {
 	 *
 	 * @param  string $content HTML string
 	 *
-	 * @since 1.1
+	 * @since 1.0.1
 	 */
 	public function change_postformats_metabox_content() {
 
