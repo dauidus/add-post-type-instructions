@@ -1,0 +1,16 @@
+
+p.apti-text {
+	font-style: italic; 
+	padding: 2px 2px 2px 25px;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	background: url('../images/info.gif') 5px center no-repeat #FFFFE6;
+}
+
+#apti-below-title {
+	font-style: italic !important;
+	padding: 0px 6px 0px 15px;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	background: url('../images/info.gif') 6px center no-repeat #FFFFE8;
+}
