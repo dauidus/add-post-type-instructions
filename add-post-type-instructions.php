@@ -13,7 +13,7 @@
  * @wordpress-plugin
  * Plugin Name:       Add Post Type Instructions
  * Plugin URI:        http://dauid.us
- * Description:       Allows admins to easily set instructional text per post type.  Currently supports inserting text below the title field, setting content within the WYSIWYG editor and adding instructional text inside the following metaboxes: author, featured image, excerpt, trackbacks, custom fields, page attributes, post format.
+ * Description:       Allows admins to easily set instructional text per post type.  Currently supports inserting text below the title field, setting content within the WYSIWYG editor and adding instructional text inside the following metaboxes: author, featured image, excerpt, trackbacks, custom fields, page attributes, post format.  Only adds options for the metaboxes supported for each post type.
  * Version:           1.0.2
  * Author:            dauidus
  * Author URI:        http://dauid.us

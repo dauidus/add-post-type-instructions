@@ -123,7 +123,7 @@ class add_post_type_instructions {
 	/**
 	 * Fired when the plugin is activated.
 	 *
-	 * @since    1.0
+	 * @since    1.0.1
 	 *
 	 * @param    boolean    $network_wide    True if WPMU superadmin uses
 	 *                                       "Network Activate" action, false if
@@ -160,7 +160,7 @@ class add_post_type_instructions {
 	/**
 	 * Fired when the plugin is deactivated.
 	 *
-	 * @since    1.0
+	 * @since    1.0.1
 	 *
 	 * @param    boolean    $network_wide    True if WPMU superadmin uses
 	 *                                       "Network Deactivate" action, false if
@@ -201,7 +201,7 @@ class add_post_type_instructions {
 	 * - not spam
 	 * - not deleted
 	 *
-	 * @since    1.0
+	 * @since    1.0.1
 	 *
 	 * @return   array|false    The blog ids, false if no matches.
 	 */
@@ -221,7 +221,7 @@ class add_post_type_instructions {
 	/**
 	 * Fired for each blog when the plugin is activated.
 	 *
-	 * @since    1.0
+	 * @since    1.0.1
 	 */
 	private static function single_activate() {
 
@@ -233,7 +233,7 @@ class add_post_type_instructions {
 	/**
 	 * Fired for each blog when the plugin is deactivated.
 	 *
-	 * @since    1.0
+	 * @since    1.0.1
 	 */
 	private static function single_deactivate() {
 
@@ -244,7 +244,7 @@ class add_post_type_instructions {
 	/**
 	 * Display notice message when activating the plugin.
 	 *
-	 * @since 1.0
+	 * @since 1.0.1
 	 */
 	public function admin_notice_activation() {
 

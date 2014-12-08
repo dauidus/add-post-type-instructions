@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the TODO package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Set Helper Content\n"
+"Project-Id-Version: Add Post Type Instructions\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/plugins/plugin-name\n"
 "POT-Creation-Date: 2014-06-01 15:44+0800\n"
 "PO-Revision-Date: 2014-06-01 15:44+0800\n"
@@ -18,42 +18,98 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: admin/class-set-helper-content-admin.php:118
-#: admin/class-set-helper-content-admin.php:119
-msgid "Set Default Content"
+#: admin/class-add-post-type-instructions-admin.php:129
+#: admin/class-add-post-type-instructions-admin.php:130
+msgid "Post Type Instructions"
 msgstr ""
 
 
-#: admin/class-set-helper-content-admin.php:145
+#: admin/class-add-post-type-instructions-admin.php:156
 msgid "Settings"
 msgstr ""
 
-#: admin/includes/settings.php:69
+#: admin/includes/settings.php:76
 #, php-format
-msgid "Set helper options for %s"
+msgid "Set Instructions for %s"
 msgstr ""
 
-#: admin/includes/settings.php:75
-msgid "Set Instructional Content:"
+#: admin/includes/settings.php:83
+msgid "<br />Display Below Title Field:"
 msgstr ""
 
-#: admin/includes/settings.php:84
-msgid "Set Default Content:"
+#: admin/includes/settings.php:93
+msgid "<br />Set WYSIWYG Editor Content:"
 msgstr ""
 
-#: admin/includes/settings.php:114
+#: admin/includes/settings.php:104
+msgid "<br />Author Metabox:"
+msgstr ""
+
+#: admin/includes/settings.php:115
+msgid "<br />Featured Image Metabox:"
+msgstr ""
+
+#: admin/includes/settings.php:126
+msgid "<br />Excerpt Metabox:"
+msgstr ""
+
+#: admin/includes/settings.php:137
+msgid "<br />Trackbacks Metabox:"
+msgstr ""
+
+#: admin/includes/settings.php:148
+msgid "<br />Custom Fields Metabox:"
+msgstr ""
+
+#: admin/includes/settings.php:170
+msgid "<br />Page Attributes Metabox:"
+msgstr ""
+
+#: admin/includes/settings.php:182
+msgid "<br />Post Format Metabox:"
+msgstr ""
+
+#: admin/includes/settings.php:209
 msgid "Enter content to display below the title field, such as special instructions for this post type. HTML allowed."
 msgstr ""
 
-#: admin/includes/settings.php:127
-msgid "Enter default content to be displayed within the WYSIWYG editor, such as "delete this, then start writing". HTML and shortcodes allowed."
+#: admin/includes/settings.php:227
+msgid "Enter default content to be displayed within the WYSIWYG editor, such as "delete this, then start writing".  This will be displayed only when no other content has been entered. HTML allowed."
 msgstr ""
 
-#: admin/includes/settings.php:131
-msgid "This post type does not include support for the WYSIWYG editor feature."
+#: admin/includes/settings.php:238
+msgid "Enter assistive text to be displayed within the author metabox. HTML allowed."
 msgstr ""
 
-#: public/class-set-helper-content.php:258
+#: admin/includes/settings.php:249
+msgid "Enter assistive text to be displayed within the featured image metabox. HTML allowed."
+msgstr ""
+
+#: admin/includes/settings.php:260
+msgid "Enter assistive text to be displayed within the excerpt metabox. HTML allowed."
+msgstr ""
+
+#: admin/includes/settings.php:271
+msgid "Enter assistive text to be displayed within the trackbacks metabox. HTML allowed."
+msgstr ""
+
+#: admin/includes/settings.php:282
+msgid "Enter assistive text to be displayed within the custom fields metabox. HTML allowed."
+msgstr ""
+
+#: admin/includes/settings.php:293
+msgid "Enter assistive text to be displayed within the comments metabox. HTML allowed."
+msgstr ""
+
+#: admin/includes/settings.php:304
+msgid "Enter assistive text to be displayed within the page attributes metabox. HTML allowed."
+msgstr ""
+
+#: admin/includes/settings.php:315
+msgid "Enter assistive text to be displayed within the post format metabox. HTML allowed."
+msgstr ""
+
+#: public/class-add-post-type-instructions.php:258
 #, php-format
 msgid ""
 "Plugin activated! Set instructional and default content for your site <strong><a href="%s">here</a></strong>."
