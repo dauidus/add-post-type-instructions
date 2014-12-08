@@ -1,10 +1,20 @@
 Add Post Type Instructions
 ============================
 
-Allows admins to easily set instructional text per post type.  Currently supports inserting text below the title field, setting content within the WYSIWYG editor and adding instructional text inside the following metaboxes: featured image, post format, page attributes, author.
+Allows admins to easily set instructional text per post type.  Currently supports inserting text below the title field, setting content within the WYSIWYG editor and adding instructional text inside the following metaboxes: featured image, post format, page attributes, author, custom fields.
 
-Keywords:
+TAGS:
 instructions, assistive, post type, help, metabox, insert text, wysiwyg, features, format, attributes, author
+
+COMPATIBLE UP TO:
+4.0.1
+
+WORKS WITH MULTISITE:
+yes
+
+FAQ:
+Who is this for?
+    This plugin was written for site admins, but aims to take the guesswork out of publishing content for site managers.
 
 TODO:
 - check for administrator user role
