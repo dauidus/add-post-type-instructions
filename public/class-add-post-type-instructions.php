@@ -34,7 +34,7 @@ class add_post_type_instructions {
 	 *
 	 * @var      string
 	 */
-	protected $plugin_slug = 'shc';
+	protected $plugin_slug = 'apti';
 
 	/**
 	 * Instance of this class.
@@ -225,8 +225,8 @@ class add_post_type_instructions {
 	 */
 	private static function single_activate() {
 
-		if ( false == get_option( 'shc-display-activation-message' ) ) {
-			add_option( 'shc-display-activation-message', true );
+		if ( false == get_option( 'apti-display-activation-message' ) ) {
+			add_option( 'apti-display-activation-message', true );
 		}
 	}
 
@@ -237,7 +237,7 @@ class add_post_type_instructions {
 	 */
 	private static function single_deactivate() {
 
-		delete_option( 'shc-display-activation-message' );
+		delete_option( 'apti-display-activation-message' );
 
 	}
 
@@ -250,7 +250,7 @@ class add_post_type_instructions {
 
 		$screen = get_current_screen();
 
-		if ( true == get_option( 'shc-display-activation-message' ) && 'plugins' == $screen->id ) {
+		if ( true == get_option( 'apti-display-activation-message' ) && 'plugins' == $screen->id ) {
 			$plugin = self::get_instance();
 
 			$html  = '<div class="updated">';
@@ -261,7 +261,7 @@ class add_post_type_instructions {
 
 			echo $html;
 
-			delete_option( 'shc-display-activation-message' );
+			delete_option( 'apti-display-activation-message' );
 
 		}
 	}

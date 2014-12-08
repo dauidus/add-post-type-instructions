@@ -60,6 +60,7 @@ Simply delete this plugin to remove all data associated with it.  Deactivating t
 * add support for trackbacks and excerpt
 * add more advanced styles to appropriate admin pages
 * better organize plugin code for readability
+* change plugin_slug to better reflect plugin name
 
 = 1.0.1 =
 * add support for page attributes, custom fields, author, post formats
@@ -68,4 +69,12 @@ Simply delete this plugin to remove all data associated with it.  Deactivating t
 
 = 1.0 =
 * initial development release
+
+== Upgrade Notice ==
+
+= 1.0.2 =
+This version adds better styles, features and defines a more appropriate plugin_slug.
+
+= 1.0.1 =
+This version adds multisite support and deactivation/uninstall actions.
 
