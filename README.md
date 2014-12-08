@@ -17,12 +17,12 @@ Who is this for?
     This plugin was written for site admins, but aims to take the guesswork out of publishing content for site managers.
     
 CHANGELOG:
-- 1.2
+- 1.0.2
     add support for trackbacks and excerpt
     add more advanced styles to admin pages
     better organize plugin code for readability
 
-- 1.1
+- 1.0.1
     add support for page attributes, custom fields, author, post formats
     optimize code for scalability
     add multisite support
