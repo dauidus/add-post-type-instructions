@@ -1,31 +1,41 @@
-=== Plugin Name ===
+=== Add Post Type Instructions ===
 Contributors: dauidus
-Donate link: http://dauid.us/
-Tags: instructions, assistive, post type, help, metabox, insert text, wysiwyg, content, features, format, attributes, author, trackbacks, excerpt
+Author URI: http://dauid.us
+Tags: instructions, instruction, assist, direct, direction, directions, assistive, post type, help, metabox, insert text, wysiwyg, content, features, format, attributes, author, trackbacks, excerpt
 Requires at least: 3.1
 Tested up to: 4.0.1
-Stable tag: 1.0.2
+Stable tag: 1.0.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Allows admins to easily set instructional text for pages, posts or custom post types.
+Allows admins to easily set instructional context for metaboxes and more on pages, posts or custom post types.
 
 == Description ==
 
-Allows admins to easily set instructional text for pages, posts or custom post types.  Currently it supports adding instructional text below the title field, setting default content within the WYSIWYG editor and adding instructional text inside the following metaboxes: 
-	author
-	featured image
-	excerpt
-	trackbacks
-	custom fields
-	page attributes
-	post format
+Allows admins to easily set instructional context for metaboxes and more on pages, posts or custom post types.  Currently it supports adding instructional text below the title field, setting default content within the WYSIWYG editor and adding instructional text inside the following metaboxes: 
+** **
+* author
+* featured image
+* excerpt
+* trackbacks
+* custom fields
+* page attributes
+* post format
 
 This plugin uses OOP standards to add options only for those metaboxes which are supported for each post type and to execute code only on those pages where it is needed.  This helps to not only keep load response time quick, but also to alleviate user frustration by hiding unnecessary options.  It works especially well for sites with many custom post types that require content to be entered in a specific way (ie. when a post type requires a specific page template or when the absence of a featured image will break the intended look of a post).
 
 To be clear, this plugin does absolutely nothing to the front-end of your site.  It simply adds instructional context to the add/edit page/post admin screen.
 
 Add Post Type Instructions works with multisite networks and allows users to define settings on a per-site basis.
+
+= Coming soon =
+* Ability to choose minimum user role for settings pages
+* Support for Categories and Tags metaboxes (per post type)
+* Help tab on settings page about unsupport features and how to support them
+* Translations
+
+= Suggestions are welcome =
+* email the author at dave@dauid.us
 
 == Installation ==
 
