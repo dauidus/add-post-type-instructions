@@ -61,9 +61,10 @@ class add_post_type_instructions_Settings {
 				'custom-fields' => '',
 				// 'comments' => '',
 				// 'revisions' => '',
-				'pageattributes' => '',
-				'postformats' => '',
+				'page-attributes' => '',
+				'post-formats' => '',
 			);
+
 		foreach ( $post_types as $pt ) {
 			$post_object = get_post_type_object( $pt );
 			$section = $this->plugin_slug . '_' . $pt;
@@ -176,6 +177,7 @@ class add_post_type_instructions_Settings {
 			}
 
 			if ( !($pt == 'page') ) {
+
 				if ( post_type_supports( $pt, 'post-formats' )) {
 					add_settings_field(
 						'postformats',
@@ -186,6 +188,29 @@ class add_post_type_instructions_Settings {
 						$args
 					);
 				}
+
+				if ( taxonomy_exists( 'category' )) {
+					add_settings_field(
+						'categories',
+						__( '<br />Categories Metabox:', $this->plugin_slug ),
+						array( $this, 'categories_callback' ),
+						$section,
+						$pt,
+						$args
+					);
+				}
+
+				if ( taxonomy_exists( 'post_tag' )) {
+					add_settings_field(
+						'tags',
+						__( '<br />Tags Metabox:', $this->plugin_slug ),
+						array( $this, 'tags_callback' ),
+						$section,
+						$pt,
+						$args
+					);
+				}
+
 			}
 
 			register_setting(
@@ -316,6 +341,29 @@ class add_post_type_instructions_Settings {
 		echo $html;
 
 	} // end postformats_callback
+
+	public function categories_callback( $args ) {
+		
+		$output = $args[0].'[categories]';
+		$value  = isset( $args[1]['categories'] ) ? $args[1]['categories'] : '';
+
+		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" style="width: 90%; padding: 10px;" type="textarea">' .$value. '</textarea>';
+		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the post format metabox. HTML allowed.', $this->plugin_slug ) . '</p>';
+		echo $html;
+
+	} // end categories_callback
+
+	public function tags_callback( $args ) {
+		
+		$output = $args[0].'[tags]';
+		$value  = isset( $args[1]['tags'] ) ? $args[1]['tags'] : '';
+
+		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" style="width: 90%; padding: 10px;" type="textarea">' .$value. '</textarea>';
+		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the post format metabox. HTML allowed.', $this->plugin_slug ) . '</p>';
+		echo $html;
+
+	} // end tags_callback
+
 
 }
 add_post_type_instructions_Settings::get_instance();
