@@ -188,7 +188,7 @@ class add_post_type_instructions_Settings {
 						$args
 					);
 				}
-
+/*
 				if ( taxonomy_exists( 'category' )) {
 					add_settings_field(
 						'categories',
@@ -210,7 +210,8 @@ class add_post_type_instructions_Settings {
 						$args
 					);
 				}
-
+*/
+				
 			}
 
 			register_setting(

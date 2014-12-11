@@ -4,7 +4,7 @@ Author URI: http://dauid.us
 Tags: instructions, instruction, assist, direct, direction, directions, assistive, post type, help, metabox, insert text, wysiwyg, content, features, format, attributes, author, trackbacks, excerpt
 Requires at least: 3.1
 Tested up to: 4.0.1
-Stable tag: 1.0.3
+Stable tag: 1.0.3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,8 +21,6 @@ Allows admins to easily set instructional context for metaboxes and more on page
 * custom fields
 * page attributes
 * post format
-* categories
-* tags
 
 This plugin uses OOP standards to add options only for those metaboxes which are supported for each post type and to execute code only on those pages where it is needed.  This helps to not only keep load response time quick, but also to alleviate user frustration by hiding unnecessary options.  It works especially well for sites with many custom post types that require content to be entered in a specific way (ie. when a post type requires a specific page template or when the absence of a featured image will break the intended look of a post).  Think of any theme or plugin that supports an image slider powered by a required featured image, and you can surely see where this plugin can come in handy.
 
@@ -31,6 +29,7 @@ To be clear, this plugin does absolutely nothing to the front-end of your site. 
 Add Post Type Instructions works with multisite networks and allows users to define settings on a per-site basis.
 
 = Coming soon =
+* add support for categories and tags
 * Help tab on settings page about unsupport features and how to support them
 * Translations
 
@@ -81,9 +80,14 @@ Simply delete this plugin to remove all data associated with it.  Deactivating t
 
 == Changelog ==
 
+= 1.0.3.2 =
+* remove faulty code until fixed
+
+= 1.0.3.1 =
+* bugfixes
+
 = 1.0.3 =
 * restrict settings page to users with manage_options capability
-* add support for categories and tags
 
 = 1.0.2 =
 * initial public release

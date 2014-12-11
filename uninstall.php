@@ -16,15 +16,15 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
 
-require_once( plugin_dir_path( __FILE__ ) . 'public/class-set-helper-content.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'public/class-add-post-type-instructions.php' );
 
-$plugin = Set_Helper_Content::get_instance();
+$plugin = Add_Post_Type_Instructions::get_instance();
 $post_types = $plugin->supported_post_types();
 foreach ( $post_types as $pt ) {
 	delete_option( $plugin->get_plugin_slug() . '_' . $pt );
 }
 
-delete_option( 'shc-display-activation-message' );
+delete_option( 'apti-display-activation-message' );
 /**
  * @todo Delete options in whole network
  */
