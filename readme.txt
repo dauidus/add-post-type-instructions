@@ -4,7 +4,7 @@ Author URI: http://dauid.us
 Tags: instructions, instruction, assist, direct, direction, directions, assistive, post type, help, metabox, insert text, wysiwyg, content, features, format, attributes, author, trackbacks, excerpt
 Requires at least: 3.1
 Tested up to: 4.0.1
-Stable tag: 1.0.3.2
+Stable tag: 1.0.3.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -79,6 +79,9 @@ Simply delete this plugin to remove all data associated with it.  Deactivating t
 2. Non-intrusive instructive text can be easily added to multiple locations for any post type.
 
 == Changelog ==
+
+= 1.0.3.3 =
+* update language file
 
 = 1.0.3.2 =
 * remove faulty code until fixed
