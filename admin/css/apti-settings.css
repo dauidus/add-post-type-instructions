@@ -1,0 +1,11 @@
+
+.settings_page_apti textarea {
+	width: 95%; 
+	padding: 10px; 
+	display: block; 
+	margin-top:8px;
+}
+
+.settings_page_apti p.description {
+	margin-bottom: 10px;
+}

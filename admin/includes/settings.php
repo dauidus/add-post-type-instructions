@@ -28,6 +28,7 @@ class add_post_type_instructions_Settings {
 		$this->plugin_slug = $plugin->get_plugin_slug();
 		// Add settings page
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
+		add_action( 'admin_print_styles', array( $this, 'is_settings_page' ) );
 	}
 	/**
 	 * Return an instance of this class.
@@ -42,6 +43,18 @@ class add_post_type_instructions_Settings {
 		}
 		return self::$instance;
 	}
+	/**
+	 * enqueue styles
+	 *
+	 * @param  string $content HTML string
+	 *
+	 * @since 1.1
+	 */
+	public function is_settings_page(){
+
+		wp_enqueue_style('apti-settings-style', plugins_url( '../css/apti-settings.css', __FILE__ ) );
+
+	} // end is_settings_page
 	/**
 	 * Registering the Sections, Fields, and Settings.
 	 *
@@ -81,7 +94,7 @@ class add_post_type_instructions_Settings {
 
 			add_settings_field(
 				'instruction',
-				__( '<br />Display Below Title Field:', $this->plugin_slug ),
+				__( 'Below Title Field:', $this->plugin_slug ),
 				array( $this, 'instruction_callback' ),
 				$section,
 				$pt,
@@ -91,7 +104,7 @@ class add_post_type_instructions_Settings {
 			if ( post_type_supports( $pt, 'editor' )) {
 				add_settings_field(
 					'editor',
-					__( '<br />Set WYSIWYG Editor Content:', $this->plugin_slug ),
+					__( 'WYSIWYG Editor Content:', $this->plugin_slug ),
 					array( $this, 'editor_callback' ),
 					$section,
 					$pt,
@@ -102,7 +115,7 @@ class add_post_type_instructions_Settings {
 			if ( post_type_supports( $pt, 'author' )) {
 				add_settings_field(
 					'author',
-					__( '<br />Author Metabox:', $this->plugin_slug ),
+					__( 'Author Metabox:', $this->plugin_slug ),
 					array( $this, 'author_callback' ),
 					$section,
 					$pt,
@@ -113,7 +126,7 @@ class add_post_type_instructions_Settings {
 			if ( post_type_supports( $pt, 'thumbnail' )) {
 				add_settings_field(
 					'thumbnail',
-					__( '<br />Featured Image Metabox:', $this->plugin_slug ),
+					__( 'Featured Image Metabox:', $this->plugin_slug ),
 					array( $this, 'thumbnail_callback' ),
 					$section,
 					$pt,
@@ -124,7 +137,7 @@ class add_post_type_instructions_Settings {
 			if ( post_type_supports( $pt, 'excerpt' )) {
 				add_settings_field(
 					'excerpt',
-					__( '<br />Excerpt Metabox:', $this->plugin_slug ),
+					__( 'Excerpt Metabox:', $this->plugin_slug ),
 					array( $this, 'excerpt_callback' ),
 					$section,
 					$pt,
@@ -135,7 +148,7 @@ class add_post_type_instructions_Settings {
 			if ( post_type_supports( $pt, 'trackbacks' )) {
 				add_settings_field(
 					'trackbacks',
-					__( '<br />Trackbacks Metabox:', $this->plugin_slug ),
+					__( 'Trackbacks Metabox:', $this->plugin_slug ),
 					array( $this, 'trackbacks_callback' ),
 					$section,
 					$pt,
@@ -146,7 +159,7 @@ class add_post_type_instructions_Settings {
 			if ( post_type_supports( $pt, 'custom-fields' )) {
 				add_settings_field(
 					'customfields',
-					__( '<br />Custom Fields Metabox:', $this->plugin_slug ),
+					__( 'Custom Fields Metabox:', $this->plugin_slug ),
 					array( $this, 'customfields_callback' ),
 					$section,
 					$pt,
@@ -168,7 +181,7 @@ class add_post_type_instructions_Settings {
 			if ( post_type_supports( $pt, 'page-attributes' )) {
 				add_settings_field(
 					'pageattributes',
-					__( '<br />Page Attributes Metabox:', $this->plugin_slug ),
+					__( 'Page Attributes Metabox:', $this->plugin_slug ),
 					array( $this, 'pageattributes_callback' ),
 					$section,
 					$pt,
@@ -181,7 +194,7 @@ class add_post_type_instructions_Settings {
 				if ( post_type_supports( $pt, 'post-formats' )) {
 					add_settings_field(
 						'postformats',
-						__( '<br />Post Format Metabox:', $this->plugin_slug ),
+						__( 'Post Format Metabox:', $this->plugin_slug ),
 						array( $this, 'postformats_callback' ),
 						$section,
 						$pt,
@@ -223,16 +236,20 @@ class add_post_type_instructions_Settings {
 
 	public function instruction_callback( $args ) {
 
-		$output = $args[0].'[instruction]';
+		$options = get_option( 'instruction_input' );
+	     
+	    $checkhtml = '<input type="checkbox" id="instruction_check" name="instruction_input[instruction]" />';
+	    $checkhtml .= '<label for="instruction_check"> check to enable</label>';
+
+	    echo $checkhtml;
+
+	    $output = $args[0].'[instruction]';
 		$value  = isset( $args[1]['instruction'] ) ? $args[1]['instruction'] : '';
 
-	/*	$settings = array( 
-			'textarea_name' => $output,
-			'textarea_rows' => '5'
-		);	*/
+		$textareahtml = '<textarea id="instruction" name="' .$output. '" rows="4" type="textarea">' .$value. '</textarea>';
+		echo $textareahtml;
 
-		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="4" style="width: 90%; padding: 10px;" type="textarea">' .$value. '</textarea>';
-		$html .= '<p class="description">' . __( 'Enter content to display below the title field, such as special instructions for this post type. HTML allowed.', $this->plugin_slug ) . '</p>';
+		$html = '<p class="description">' . __( 'Enter content to display below the title field, such as special instructions for this post type. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
 		echo $html;
 
 	} // end instruction_callback
@@ -241,16 +258,15 @@ class add_post_type_instructions_Settings {
 		
 		$output = $args[0].'[editor]';
 		$value  = isset( $args[1]['editor'] ) ? $args[1]['editor'] : '';
-		$id = 'textarea_one';
-		$settings = array( 
+		// $id = 'textarea_one';
+		/* $settings = array( 
 			'textarea_name' => $output, 
 			'textarea_rows' => '5'
-		);	
+		);	*/
 
-		$html = '<textarea id="textarea_one" name="' .$output. '" rows="6" style="width: 90%; padding: 10px;" type="textarea">' .$value. '</textarea>';
+		$html = '<textarea id="textarea_one" name="' .$output. '" rows="6" type="textarea">' .$value. '</textarea>';
 		//wp_editor( $value, $id, $settings );
-
-		$html .= '<p class="description">' . __( 'Enter default content to be displayed within the WYSIWYG editor, such as "delete this, then start writing".  This will be displayed only when no other content has been entered. HTML allowed.', $this->plugin_slug ) . '</p>';
+		$html .= '<p class="description">' . __( 'Enter default content to be displayed within the WYSIWYG editor, such as "delete this, then start writing".  This will be displayed only when no other content has been entered. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
 		echo $html;
 
 	} // end editor_callback
@@ -260,8 +276,8 @@ class add_post_type_instructions_Settings {
 		$output = $args[0].'[author]';
 		$value  = isset( $args[1]['author'] ) ? $args[1]['author'] : '';
 
-		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" style="width: 90%; padding: 10px;" type="textarea">' .$value. '</textarea>';
-		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the author metabox. HTML allowed.', $this->plugin_slug ) . '</p>';
+		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
+		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the author metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
 		echo $html;
 
 	} // end author_callback
@@ -271,8 +287,8 @@ class add_post_type_instructions_Settings {
 		$output = $args[0].'[thumbnail]';
 		$value  = isset( $args[1]['thumbnail'] ) ? $args[1]['thumbnail'] : '';
 
-		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" style="width: 90%; padding: 10px;" type="textarea">' .$value. '</textarea>';
-		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the featured image metabox. HTML allowed.', $this->plugin_slug ) . '</p>';
+		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
+		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the featured image metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
 		echo $html;
 
 	} // end thumbnail_callback
@@ -282,8 +298,8 @@ class add_post_type_instructions_Settings {
 		$output = $args[0].'[excerpt]';
 		$value  = isset( $args[1]['excerpt'] ) ? $args[1]['excerpt'] : '';
 
-		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" style="width: 90%; padding: 10px;" type="textarea">' .$value. '</textarea>';
-		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the excerpt metabox. HTML allowed.', $this->plugin_slug ) . '</p>';
+		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
+		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the excerpt metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
 		echo $html;
 
 	} // end excerpt_callback
@@ -293,8 +309,8 @@ class add_post_type_instructions_Settings {
 		$output = $args[0].'[trackbacks]';
 		$value  = isset( $args[1]['trackbacks'] ) ? $args[1]['trackbacks'] : '';
 
-		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" style="width: 90%; padding: 10px;" type="textarea">' .$value. '</textarea>';
-		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the trackbacks metabox. HTML allowed.', $this->plugin_slug ) . '</p>';
+		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
+		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the trackbacks metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
 		echo $html;
 
 	} // end trackbacks_callback
@@ -304,8 +320,8 @@ class add_post_type_instructions_Settings {
 		$output = $args[0].'[customfields]';
 		$value  = isset( $args[1]['customfields'] ) ? $args[1]['customfields'] : '';
 
-		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" style="width: 90%; padding: 10px;" type="textarea">' .$value. '</textarea>';
-		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the custom fields metabox. HTML allowed.', $this->plugin_slug ) . '</p>';
+		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
+		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the custom fields metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
 		echo $html;
 
 	} // end customfields_callback
@@ -315,8 +331,8 @@ class add_post_type_instructions_Settings {
 		$output = $args[0].'[comments]';
 		$value  = isset( $args[1]['comments'] ) ? $args[1]['comments'] : '';
 
-		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" style="width: 90%; padding: 10px;" type="textarea">' .$value. '</textarea>';
-		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the comments metabox. HTML allowed.', $this->plugin_slug ) . '</p>';
+		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
+		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the comments metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
 		echo $html;
 
 	} // end comments_callback
@@ -326,8 +342,8 @@ class add_post_type_instructions_Settings {
 		$output = $args[0].'[pageattributes]';
 		$value  = isset( $args[1]['pageattributes'] ) ? $args[1]['pageattributes'] : '';
 
-		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" style="width: 90%; padding: 10px;" type="textarea">' .$value. '</textarea>';
-		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the page attributes metabox. HTML allowed.', $this->plugin_slug ) . '</p>';
+		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
+		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the page attributes metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
 		echo $html;
 
 	} // end pageattributes_callback
@@ -337,8 +353,8 @@ class add_post_type_instructions_Settings {
 		$output = $args[0].'[postformats]';
 		$value  = isset( $args[1]['postformats'] ) ? $args[1]['postformats'] : '';
 
-		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" style="width: 90%; padding: 10px;" type="textarea">' .$value. '</textarea>';
-		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the post format metabox. HTML allowed.', $this->plugin_slug ) . '</p>';
+		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
+		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the post format metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
 		echo $html;
 
 	} // end postformats_callback
@@ -348,8 +364,8 @@ class add_post_type_instructions_Settings {
 		$output = $args[0].'[categories]';
 		$value  = isset( $args[1]['categories'] ) ? $args[1]['categories'] : '';
 
-		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" style="width: 90%; padding: 10px;" type="textarea">' .$value. '</textarea>';
-		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the post format metabox. HTML allowed.', $this->plugin_slug ) . '</p>';
+		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
+		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the post format metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
 		echo $html;
 
 	} // end categories_callback
@@ -359,8 +375,8 @@ class add_post_type_instructions_Settings {
 		$output = $args[0].'[tags]';
 		$value  = isset( $args[1]['tags'] ) ? $args[1]['tags'] : '';
 
-		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" style="width: 90%; padding: 10px;" type="textarea">' .$value. '</textarea>';
-		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the post format metabox. HTML allowed.', $this->plugin_slug ) . '</p>';
+		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
+		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the post format metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
 		echo $html;
 
 	} // end tags_callback

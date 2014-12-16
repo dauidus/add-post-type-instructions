@@ -78,20 +78,20 @@ class Add_Post_Type_Instructions_Admin {
 		add_filter( 'plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ) );
 
 		// Fire functions
-		add_action( 'admin_print_styles', array( $this, 'is_edit_page' ) );
-		add_action( 'edit_form_after_title', array( $this, 'add_content_above' ) );
-		add_filter( 'the_editor_content', array( $this, 'change_editor_content' ) );
-		add_action( 'admin_head', array( $this, 'change_author_metabox_content' ) );
-		add_filter( 'admin_post_thumbnail_html', array( $this, 'change_thumbnail_metabox_content' ) );
-		add_action( 'admin_head', array( $this, 'change_excerpt_metabox_content' ) );
-		add_action( 'admin_head', array( $this, 'change_trackbacks_metabox_content' ) );
-		add_action( 'admin_head', array( $this, 'change_customfields_metabox_content' ) );
-		// add_action( 'admin_head', array( $this, 'change_comments_metabox_content' ) );
-		// revisions
-		add_action( 'admin_head', array( $this, 'change_pageattributes_metabox_content' ) );
-		add_action( 'admin_head', array( $this, 'change_postformats_metabox_content' ) );
-		add_action( 'admin_head', array( $this, 'change_categories_metabox_content' ) );
-		add_action( 'admin_head', array( $this, 'change_tags_metabox_content' ) );
+			add_action( 'admin_print_styles', array( $this, 'is_edit_page' ) );
+			add_action( 'edit_form_after_title', array( $this, 'add_content_above' ) );
+			add_filter( 'the_editor_content', array( $this, 'change_editor_content' ) );
+			add_action( 'admin_head', array( $this, 'change_author_metabox_content' ) );
+			add_filter( 'admin_post_thumbnail_html', array( $this, 'change_thumbnail_metabox_content' ) );
+			add_action( 'admin_head', array( $this, 'change_excerpt_metabox_content' ) );
+			add_action( 'admin_head', array( $this, 'change_trackbacks_metabox_content' ) );
+			add_action( 'admin_head', array( $this, 'change_customfields_metabox_content' ) );
+			// add_action( 'admin_head', array( $this, 'change_comments_metabox_content' ) );
+			// revisions
+			add_action( 'admin_head', array( $this, 'change_pageattributes_metabox_content' ) );
+			add_action( 'admin_head', array( $this, 'change_postformats_metabox_content' ) );
+			add_action( 'admin_head', array( $this, 'change_categories_metabox_content' ) );
+			add_action( 'admin_head', array( $this, 'change_tags_metabox_content' ) );
 
 	}
 
