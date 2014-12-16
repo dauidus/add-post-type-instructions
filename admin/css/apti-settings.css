@@ -3,9 +3,19 @@
 	width: 95%; 
 	padding: 10px; 
 	display: block; 
-	margin-top:8px;
+	margin:8px 0;
 }
 
 .settings_page_apti p.description {
 	margin-bottom: 10px;
+}
+
+.settings_page_apti .form-table tr:first-child th,
+.settings_page_apti .form-table tr:first-child td {
+	padding-bottom: 0px !important;
+}
+
+.settings_page_apti .form-table tr:nth-of-type(2n+0) th,
+.settings_page_apti .form-table tr:nth-of-type(2n+0) td {
+	padding-top: 0px !important;
 }

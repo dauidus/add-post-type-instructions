@@ -55,6 +55,7 @@ class add_post_type_instructions_Settings {
 		wp_enqueue_style('apti-settings-style', plugins_url( '../css/apti-settings.css', __FILE__ ) );
 
 	} // end is_settings_page
+
 	/**
 	 * Registering the Sections, Fields, and Settings.
 	 *
@@ -93,8 +94,16 @@ class add_post_type_instructions_Settings {
 			);
 
 			add_settings_field(
-				'instruction',
+				'instruction_input',
 				__( 'Below Title Field:', $this->plugin_slug ),
+				array( $this, 'instruction_input_callback' ),
+				$section,
+				$pt,
+				$args
+			);
+			add_settings_field(
+				'instruction',
+				__( '', $this->plugin_slug ),
 				array( $this, 'instruction_callback' ),
 				$section,
 				$pt,
@@ -234,25 +243,31 @@ class add_post_type_instructions_Settings {
 		}
 	} // end admin_init
 
-	public function instruction_callback( $args ) {
+	public function instruction_input_callback( $args ) {
 
-		$options = get_option( 'instruction_input' );
-	     
-	    $checkhtml = '<input type="checkbox" id="instruction_check" name="instruction_input[instruction]" />';
-	    $checkhtml .= '<label for="instruction_check"> check to enable</label>';
+		$checkhtml = '<input type="checkbox" id="instruction_check" name="instruction_input" value="1" />';
+		$checkhtml .= '<label for="instruction_check"> check to enable</label>';
+		
+		echo $checkhtml;
 
-	    echo $checkhtml;
+	} // end instruction_input_callback
 
-	    $output = $args[0].'[instruction]';
-		$value  = isset( $args[1]['instruction'] ) ? $args[1]['instruction'] : '';
+		public function instruction_callback( $args ) {
 
-		$textareahtml = '<textarea id="instruction" name="' .$output. '" rows="4" type="textarea">' .$value. '</textarea>';
-		echo $textareahtml;
+		    $output = $args[0].'[instruction]';
+			$value  = isset( $args[1]['instruction'] ) ? $args[1]['instruction'] : '';
 
-		$html = '<p class="description">' . __( 'Enter content to display below the title field, such as special instructions for this post type. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
-		echo $html;
+			$textareahtml = '<textarea id="instruction" name="' .$output. '" rows="4" type="textarea">' .$value. '</textarea>';
 
-	} // end instruction_callback
+			$html = '<p class="description">' . __( 'Enter content to display below the title field, such as special instructions for this post type. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
+
+			echo $textareahtml, $html;
+
+		} // end instruction_callback
+
+		
+
+	
 
 	public function editor_callback( $args ) {
 		
