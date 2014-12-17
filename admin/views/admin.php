@@ -41,6 +41,7 @@
 			$section = $plugin->get_plugin_slug() . '_' . $active_tab;
 
 			settings_fields( $section );
+			settings_fields( $section . '_input' );
 			do_settings_sections( $section );
 
 			submit_button();
