@@ -214,12 +214,12 @@ class Add_Post_Type_Instructions_Admin {
 		$post_type = $this->get_post_type();
 		$options = get_option( $this->plugin_slug . '_' . $post_type );
 
-		if ( isset( $options['instruction_input'] ) && ! empty( $options['instruction_input'] ) ) {
+		// if ( isset( $options['instruction_input'] ) && ! empty( $options['instruction_input'] ) ) {
 			if ( isset( $options['instruction'] ) && ! empty( $options['instruction'] ) ) {
 				$template = $options['instruction'];
 				echo '<br /><div id="apti-below-title"><h3>' . $template . '</h3></div>';
 			}
-		}
+		// }
 
 	} // end add_content_above
 
