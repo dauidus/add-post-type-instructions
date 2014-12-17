@@ -1,5 +1,5 @@
 <?php
-class add_post_type_instructions_Settings {
+class add_post_type_instructions_settings {
 	/**
 	 * Unique identifier for your plugin.
 	 *
@@ -247,7 +247,7 @@ class add_post_type_instructions_Settings {
 
 		$checkhtml = '<input type="checkbox" id="instruction_check" name="instruction_input" value="1" />';
 		$checkhtml .= '<label for="instruction_check"> check to enable</label>';
-		
+
 		echo $checkhtml;
 
 	} // end instruction_input_callback
@@ -398,4 +398,4 @@ class add_post_type_instructions_Settings {
 
 
 }
-add_post_type_instructions_Settings::get_instance();
+add_post_type_instructions_settings::get_instance();
