@@ -24,7 +24,28 @@ foreach ( $post_types as $pt ) {
 	delete_option( $plugin->get_plugin_slug() . '_' . $pt );
 }
 
+// @todo create uninstallation message
 delete_option( 'apti-display-activation-message' );
-/**
- * @todo Delete options in whole network
- */
+
+	if ( function_exists( 'is_multisite' ) && is_multisite() ) {
+
+		if ( $network_wide ) {
+
+			// Get all blog ids
+			$blog_ids = self::get_blog_ids();
+
+			foreach ( $blog_ids as $blog_id ) {
+
+				delete_option( $plugin->get_plugin_slug() . '_' . $pt );
+
+			}
+
+			restore_current_blog();
+
+		} else {
+			delete_option( $plugin->get_plugin_slug() . '_' . $pt );
+		}
+
+	} else {
+		delete_option( $plugin->get_plugin_slug() . '_' . $pt );
+	}
