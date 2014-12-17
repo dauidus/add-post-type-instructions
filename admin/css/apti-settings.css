@@ -10,8 +10,8 @@
 	margin-bottom: 10px;
 }
 
-.settings_page_apti .form-table tr:first-child th,
-.settings_page_apti .form-table tr:first-child td {
+.settings_page_apti .form-table tr th,
+.settings_page_apti .form-table tr td {
 	padding-bottom: 0px !important;
 }
 

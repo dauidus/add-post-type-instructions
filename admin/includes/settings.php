@@ -112,8 +112,16 @@ class add_post_type_instructions_settings {
 
 			if ( post_type_supports( $pt, 'editor' )) {
 				add_settings_field(
-					'editor',
+					'editor_input',
 					__( 'WYSIWYG Editor Content:', $this->plugin_slug ),
+					array( $this, 'editor_input_callback' ),
+					$section,
+					$pt,
+					$args
+				);
+				add_settings_field(
+					'editor',
+					__( '', $this->plugin_slug ),
 					array( $this, 'editor_callback' ),
 					$section,
 					$pt,
@@ -123,8 +131,16 @@ class add_post_type_instructions_settings {
 
 			if ( post_type_supports( $pt, 'author' )) {
 				add_settings_field(
-					'author',
+					'author_input',
 					__( 'Author Metabox:', $this->plugin_slug ),
+					array( $this, 'author_input_callback' ),
+					$section,
+					$pt,
+					$args
+				);
+				add_settings_field(
+					'author',
+					__( '', $this->plugin_slug ),
 					array( $this, 'author_callback' ),
 					$section,
 					$pt,
@@ -133,6 +149,14 @@ class add_post_type_instructions_settings {
 			}
 
 			if ( post_type_supports( $pt, 'thumbnail' )) {
+				add_settings_field(
+					'thumbnail_input',
+					__( 'Featured Image Metabox:', $this->plugin_slug ),
+					array( $this, 'thumbnail_input_callback' ),
+					$section,
+					$pt,
+					$args
+				);
 				add_settings_field(
 					'thumbnail',
 					__( 'Featured Image Metabox:', $this->plugin_slug ),
@@ -144,6 +168,14 @@ class add_post_type_instructions_settings {
 			}
 
 			if ( post_type_supports( $pt, 'excerpt' )) {
+				add_settings_field(
+					'excerpt_input',
+					__( '', $this->plugin_slug ),
+					array( $this, 'excerpt_input_callback' ),
+					$section,
+					$pt,
+					$args
+				);
 				add_settings_field(
 					'excerpt',
 					__( 'Excerpt Metabox:', $this->plugin_slug ),
@@ -265,48 +297,80 @@ class add_post_type_instructions_settings {
 
 		} // end instruction_callback
 
-		
+	public function editor_input_callback( $args ) {
 
-	
+		$checkhtml = '<input type="checkbox" id="editor_check" name="editor_input" value="1" />';
+		$checkhtml .= '<label for="editor_check"> check to enable</label>';
 
-	public function editor_callback( $args ) {
-		
-		$output = $args[0].'[editor]';
-		$value  = isset( $args[1]['editor'] ) ? $args[1]['editor'] : '';
-		// $id = 'textarea_one';
-		/* $settings = array( 
-			'textarea_name' => $output, 
-			'textarea_rows' => '5'
-		);	*/
+		echo $checkhtml;
 
-		$html = '<textarea id="textarea_one" name="' .$output. '" rows="6" type="textarea">' .$value. '</textarea>';
-		//wp_editor( $value, $id, $settings );
-		$html .= '<p class="description">' . __( 'Enter default content to be displayed within the WYSIWYG editor, such as "delete this, then start writing".  This will be displayed only when no other content has been entered. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
-		echo $html;
+	} // end editor_input_callback
 
-	} // end editor_callback
+		public function editor_callback( $args ) {
+			
+			$output = $args[0].'[editor]';
+			$value  = isset( $args[1]['editor'] ) ? $args[1]['editor'] : '';
+			// $id = 'textarea_one';
+			/* $settings = array( 
+				'textarea_name' => $output, 
+				'textarea_rows' => '5'
+			);	*/
 
-	public function author_callback( $args ) {
-		
-		$output = $args[0].'[author]';
-		$value  = isset( $args[1]['author'] ) ? $args[1]['author'] : '';
+			$html = '<textarea id="textarea_one" name="' .$output. '" rows="6" type="textarea">' .$value. '</textarea>';
+			//wp_editor( $value, $id, $settings );
+			$html .= '<p class="description">' . __( 'Enter default content to be displayed within the WYSIWYG editor, such as "delete this, then start writing".  This will be displayed only when no other content has been entered. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
+			echo $html;
 
-		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
-		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the author metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
-		echo $html;
+		} // end editor_callback
 
-	} // end author_callback
+	public function author_input_callback( $args ) {
 
-	public function thumbnail_callback( $args ) {
-		
-		$output = $args[0].'[thumbnail]';
-		$value  = isset( $args[1]['thumbnail'] ) ? $args[1]['thumbnail'] : '';
+		$checkhtml = '<input type="checkbox" id="author_check" name="author_input" value="1" />';
+		$checkhtml .= '<label for="author_check"> check to enable</label>';
 
-		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
-		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the featured image metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
-		echo $html;
+		echo $checkhtml;
 
-	} // end thumbnail_callback
+	} // end author_input_callback
+
+		public function author_callback( $args ) {
+			
+			$output = $args[0].'[author]';
+			$value  = isset( $args[1]['author'] ) ? $args[1]['author'] : '';
+
+			$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
+			$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the author metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
+			echo $html;
+
+		} // end author_callback
+
+	public function thumbnail_input_callback( $args ) {
+
+		$checkhtml = '<input type="checkbox" id="thumbnail_check" name="thumbnail_input" value="1" />';
+		$checkhtml .= '<label for="thumbnail_check"> check to enable</label>';
+
+		echo $checkhtml;
+
+	} // end thumbnail_input_callback
+
+		public function thumbnail_callback( $args ) {
+			
+			$output = $args[0].'[thumbnail]';
+			$value  = isset( $args[1]['thumbnail'] ) ? $args[1]['thumbnail'] : '';
+
+			$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
+			$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the featured image metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
+			echo $html;
+
+		} // end thumbnail_callback
+
+	public function excerpt_input_callback( $args ) {
+
+		$checkhtml = '<input type="checkbox" id="excerpt_check" name="excerpt_input" value="1" />';
+		$checkhtml .= '<label for="excerpt_check"> check to enable</label>';
+
+		echo $checkhtml;
+
+	} // end excerpt_input_callback
 
 	public function excerpt_callback( $args ) {
 		

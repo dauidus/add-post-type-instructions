@@ -25,7 +25,7 @@ foreach ( $post_types as $pt ) {
 }
 
 // @todo create uninstallation message
-delete_option( 'apti-display-activation-message' );
+delete_option( 'apti-display-uninstallation-message' );
 
 	if ( function_exists( 'is_multisite' ) && is_multisite() ) {
 
