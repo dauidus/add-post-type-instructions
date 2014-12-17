@@ -188,8 +188,16 @@ class add_post_type_instructions_settings {
 
 			if ( post_type_supports( $pt, 'trackbacks' )) {
 				add_settings_field(
-					'trackbacks',
+					'trackbacks_input',
 					__( 'Trackbacks Metabox:', $this->plugin_slug ),
+					array( $this, 'trackbacks_input_callback' ),
+					$section,
+					$pt,
+					$args
+				);
+				add_settings_field(
+					'trackbacks',
+					__( '', $this->plugin_slug ),
 					array( $this, 'trackbacks_callback' ),
 					$section,
 					$pt,
@@ -199,8 +207,16 @@ class add_post_type_instructions_settings {
 
 			if ( post_type_supports( $pt, 'custom-fields' )) {
 				add_settings_field(
-					'customfields',
+					'customfields_input',
 					__( 'Custom Fields Metabox:', $this->plugin_slug ),
+					array( $this, 'customfields_input_callback' ),
+					$section,
+					$pt,
+					$args
+				);
+				add_settings_field(
+					'customfields',
+					__( '', $this->plugin_slug ),
 					array( $this, 'customfields_callback' ),
 					$section,
 					$pt,
@@ -221,8 +237,16 @@ class add_post_type_instructions_settings {
 
 			if ( post_type_supports( $pt, 'page-attributes' )) {
 				add_settings_field(
-					'pageattributes',
+					'pageattributes_input',
 					__( 'Page Attributes Metabox:', $this->plugin_slug ),
+					array( $this, 'pageattributes_input_callback' ),
+					$section,
+					$pt,
+					$args
+				);
+				add_settings_field(
+					'pageattributes',
+					__( '', $this->plugin_slug ),
 					array( $this, 'pageattributes_callback' ),
 					$section,
 					$pt,
@@ -234,8 +258,16 @@ class add_post_type_instructions_settings {
 
 				if ( post_type_supports( $pt, 'post-formats' )) {
 					add_settings_field(
-						'postformats',
+						'postformats_input',
 						__( 'Post Format Metabox:', $this->plugin_slug ),
+						array( $this, 'postformats_input_callback' ),
+						$section,
+						$pt,
+						$args
+					);
+					add_settings_field(
+						'postformats',
+						__( '', $this->plugin_slug ),
 						array( $this, 'postformats_callback' ),
 						$section,
 						$pt,
@@ -372,40 +404,58 @@ class add_post_type_instructions_settings {
 
 	} // end excerpt_input_callback
 
-	public function excerpt_callback( $args ) {
-		
-		$output = $args[0].'[excerpt]';
-		$value  = isset( $args[1]['excerpt'] ) ? $args[1]['excerpt'] : '';
+		public function excerpt_callback( $args ) {
+			
+			$output = $args[0].'[excerpt]';
+			$value  = isset( $args[1]['excerpt'] ) ? $args[1]['excerpt'] : '';
 
-		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
-		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the excerpt metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
-		echo $html;
+			$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
+			$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the excerpt metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
+			echo $html;
 
-	} // end excerpt_callback
+		} // end excerpt_callback
 
-	public function trackbacks_callback( $args ) {
-		
-		$output = $args[0].'[trackbacks]';
-		$value  = isset( $args[1]['trackbacks'] ) ? $args[1]['trackbacks'] : '';
+	public function trackbacks_input_callback( $args ) {
 
-		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
-		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the trackbacks metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
-		echo $html;
+		$checkhtml = '<input type="checkbox" id="trackbacks_check" name="trackbacks_input" value="1" />';
+		$checkhtml .= '<label for="trackbacks_check"> check to enable</label>';
 
-	} // end trackbacks_callback
+		echo $checkhtml;
 
-	public function customfields_callback( $args ) {
-		
-		$output = $args[0].'[customfields]';
-		$value  = isset( $args[1]['customfields'] ) ? $args[1]['customfields'] : '';
+	} // end trackbacks_input_callback
 
-		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
-		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the custom fields metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
-		echo $html;
+		public function trackbacks_callback( $args ) {
+			
+			$output = $args[0].'[trackbacks]';
+			$value  = isset( $args[1]['trackbacks'] ) ? $args[1]['trackbacks'] : '';
 
-	} // end customfields_callback
+			$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
+			$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the trackbacks metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
+			echo $html;
 
-	public function comments_callback( $args ) {
+		} // end trackbacks_callback
+
+	public function customfields_input_callback( $args ) {
+
+		$checkhtml = '<input type="checkbox" id="customfields_check" name="customfields_input" value="1" />';
+		$checkhtml .= '<label for="customfields_check"> check to enable</label>';
+
+		echo $checkhtml;
+
+	} // end customfields_input_callback
+
+		public function customfields_callback( $args ) {
+			
+			$output = $args[0].'[customfields]';
+			$value  = isset( $args[1]['customfields'] ) ? $args[1]['customfields'] : '';
+
+			$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
+			$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the custom fields metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
+			echo $html;
+
+		} // end customfields_callback
+
+/*	public function comments_callback( $args ) {
 		
 		$output = $args[0].'[comments]';
 		$value  = isset( $args[1]['comments'] ) ? $args[1]['comments'] : '';
@@ -415,30 +465,49 @@ class add_post_type_instructions_settings {
 		echo $html;
 
 	} // end comments_callback
+*/
 
-	public function pageattributes_callback( $args ) {
-		
-		$output = $args[0].'[pageattributes]';
-		$value  = isset( $args[1]['pageattributes'] ) ? $args[1]['pageattributes'] : '';
+	public function pageattributes_input_callback( $args ) {
 
-		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
-		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the page attributes metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
-		echo $html;
+		$checkhtml = '<input type="checkbox" id="pageattributes_check" name="pageattributes_input" value="1" />';
+		$checkhtml .= '<label for="pageattributes_check"> check to enable</label>';
 
-	} // end pageattributes_callback
+		echo $checkhtml;
 
-	public function postformats_callback( $args ) {
-		
-		$output = $args[0].'[postformats]';
-		$value  = isset( $args[1]['postformats'] ) ? $args[1]['postformats'] : '';
+	} // end pageattributes_input_callback
 
-		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
-		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the post format metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
-		echo $html;
+		public function pageattributes_callback( $args ) {
+			
+			$output = $args[0].'[pageattributes]';
+			$value  = isset( $args[1]['pageattributes'] ) ? $args[1]['pageattributes'] : '';
 
-	} // end postformats_callback
+			$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
+			$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the page attributes metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
+			echo $html;
 
-	public function categories_callback( $args ) {
+		} // end pageattributes_callback
+
+	public function postformats_input_callback( $args ) {
+
+		$checkhtml = '<input type="checkbox" id="postformats_check" name="postformats_input" value="1" />';
+		$checkhtml .= '<label for="postformats_check"> check to enable</label>';
+
+		echo $checkhtml;
+
+	} // end postformats_input_callback
+
+		public function postformats_callback( $args ) {
+			
+			$output = $args[0].'[postformats]';
+			$value  = isset( $args[1]['postformats'] ) ? $args[1]['postformats'] : '';
+
+			$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
+			$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the post format metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
+			echo $html;
+
+		} // end postformats_callback
+
+/*	public function categories_callback( $args ) {
 		
 		$output = $args[0].'[categories]';
 		$value  = isset( $args[1]['categories'] ) ? $args[1]['categories'] : '';
@@ -459,6 +528,7 @@ class add_post_type_instructions_settings {
 		echo $html;
 
 	} // end tags_callback
+*/
 
 
 }
