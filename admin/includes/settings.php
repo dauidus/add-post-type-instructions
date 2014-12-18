@@ -53,6 +53,7 @@ class add_post_type_instructions_settings {
 	public function is_settings_page(){
 
 		wp_enqueue_style('apti-settings-style', plugins_url( '../css/apti-settings.css', __FILE__ ) );
+		wp_enqueue_script('apti-settings-script', plugins_url( '../scripts/apti-settings.js', __FILE__ ), array(), '1.0', false );
 
 	} // end is_settings_page
 
@@ -343,7 +344,6 @@ class add_post_type_instructions_settings {
 
 		$checkhtml = '<input type="checkbox" id="instruction_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
 		$checkhtml .= '<label for="instruction_check"> check to enable</label>';
-
 		echo $checkhtml;
 
 	} // end instruction_check_callback
@@ -354,10 +354,11 @@ class add_post_type_instructions_settings {
 			$value  = isset( $args[1]['instruction'] ) ? $args[1]['instruction'] : '';
 
 			$textareahtml = '<textarea id="instruction" name="' .$output. '" rows="4" type="textarea">' .$value. '</textarea>';
+			echo $textareahtml;
 
 			$html = '<p class="description">' . __( 'Enter content to display below the title field, such as special instructions for this post type. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
 
-			echo $textareahtml, $html;
+			echo $html;
 
 		} // end instruction_callback
 
