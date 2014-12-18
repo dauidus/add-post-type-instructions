@@ -94,9 +94,9 @@ class add_post_type_instructions_settings {
 			);
 
 			add_settings_field(
-				'instruction_input',
+				'instruction_check',
 				__( 'Below Title Field:', $this->plugin_slug ),
-				array( $this, 'instruction_input_callback' ),
+				array( $this, 'instruction_check_callback' ),
 				$section,
 				$pt,
 				$args
@@ -159,7 +159,7 @@ class add_post_type_instructions_settings {
 				);
 				add_settings_field(
 					'thumbnail',
-					__( 'Featured Image Metabox:', $this->plugin_slug ),
+					__( '', $this->plugin_slug ),
 					array( $this, 'thumbnail_callback' ),
 					$section,
 					$pt,
@@ -307,14 +307,17 @@ class add_post_type_instructions_settings {
 		}
 	} // end admin_init
 
-	public function instruction_input_callback( $args ) {
+	public function instruction_check_callback( $args ) {
 
-		$checkhtml = '<input type="checkbox" id="instruction_check" name="instruction_input" value="1" />';
+		$output = $args[0].'[instruction_check]';
+		$value  = isset( $args[1]['instruction_check'] ) ? $args[1]['instruction_check'] : '';
+
+		$checkhtml = '<input type="checkbox" id="instruction_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
 		$checkhtml .= '<label for="instruction_check"> check to enable</label>';
 
 		echo $checkhtml;
 
-	} // end instruction_input_callback
+	} // end instruction_check_callback
 
 		public function instruction_callback( $args ) {
 

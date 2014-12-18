@@ -80,7 +80,7 @@ class Add_Post_Type_Instructions_Admin {
 		// Fire functions
 			add_action( 'admin_print_styles', array( $this, 'is_edit_page' ) );
 			add_action( 'edit_form_after_title', array( $this, 'add_content_above' ) );
-			add_filter( 'the_editor_content', array( $this, 'change_editor_content' ) );
+			add_filter( 'default_content', array( $this, 'change_editor_content' ) );
 			add_action( 'admin_head', array( $this, 'change_author_metabox_content' ) );
 			add_filter( 'admin_post_thumbnail_html', array( $this, 'change_thumbnail_metabox_content' ) );
 			add_action( 'admin_head', array( $this, 'change_excerpt_metabox_content' ) );
@@ -214,12 +214,12 @@ class Add_Post_Type_Instructions_Admin {
 		$post_type = $this->get_post_type();
 		$options = get_option( $this->plugin_slug . '_' . $post_type );
 
-		// if ( isset( $options['instruction_input'] ) && ! empty( $options['instruction_input'] ) ) {
+		if ( isset( $options['instruction_check'] ) && ! empty( $options['instruction_check'] ) ) {
 			if ( isset( $options['instruction'] ) && ! empty( $options['instruction'] ) ) {
 				$template = $options['instruction'];
 				echo '<br /><div id="apti-below-title"><h3>' . $template . '</h3></div>';
 			}
-		// }
+		}
 
 	} // end add_content_above
 
