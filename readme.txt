@@ -3,7 +3,7 @@ Contributors: dauidus
 Author URI: http://dauid.us
 Tags: instructions, instruction, assist, direct, direction, directions, assistive, post type, help, metabox, insert text, wysiwyg, content, features, format, attributes, author, trackbacks, excerpt
 Requires at least: 3.1
-Tested up to: 4.0.1
+Tested up to: 4.1
 Stable tag: 1.0.3.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -32,6 +32,8 @@ Add Post Type Instructions works with multisite networks and allows users to def
 * add support for categories and tags
 * Help tab on settings page about unsupport features and how to support them
 * Translations
+
+This plugin will not work with Visual Composer or other drag-n-drop page builders.  I am looking into this for a future release.
 
 = Suggestions are welcome =
 * email the author at dave@dauid.us
