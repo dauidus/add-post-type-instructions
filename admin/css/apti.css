@@ -1,10 +1,13 @@
 
 p.apti-text {
 	font-style: italic; 
-	padding: 2px 2px 2px 25px;
+	padding: 2px 2px 2px 25px !important;
 	border-top: 1px solid #ccc;
 	border-bottom: 1px solid #ccc;
 	background: url('../images/info.gif') 5px center no-repeat #FFFFE6;
+}
+#commentsdiv p.apti-text {
+	margin: 1em 12px !important;
 }
 
 #apti-below-title {
