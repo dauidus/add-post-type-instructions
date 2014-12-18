@@ -86,12 +86,12 @@ class Add_Post_Type_Instructions_Admin {
 			add_action( 'admin_head', array( $this, 'change_excerpt_metabox_content' ) );
 			add_action( 'admin_head', array( $this, 'change_trackbacks_metabox_content' ) );
 			add_action( 'admin_head', array( $this, 'change_customfields_metabox_content' ) );
-			// add_action( 'admin_head', array( $this, 'change_comments_metabox_content' ) );
-			// revisions
+			add_action( 'admin_head', array( $this, 'change_comments_metabox_content' ) );
+			add_action( 'admin_head', array( $this, 'change_revisions_metabox_content' ) );
 			add_action( 'admin_head', array( $this, 'change_pageattributes_metabox_content' ) );
 			add_action( 'admin_head', array( $this, 'change_postformats_metabox_content' ) );
-			add_action( 'admin_head', array( $this, 'change_categories_metabox_content' ) );
-			add_action( 'admin_head', array( $this, 'change_tags_metabox_content' ) );
+			// add_action( 'admin_head', array( $this, 'change_categories_metabox_content' ) );
+			// add_action( 'admin_head', array( $this, 'change_tags_metabox_content' ) );
 
 	}
 
@@ -236,15 +236,15 @@ class Add_Post_Type_Instructions_Admin {
 		$post_type = $this->get_post_type();
 		$options = get_option( $this->plugin_slug . '_' . $post_type );
 
-		if ( isset( $options['editor'] ) && ! empty( $options['editor'] ) ) {
-
-			//add our content
-			if ( empty( $content ) ) {
-        		$template = $options['editor'];
-        		return $template;
-    		} else
-        		return $content;
-
+		if ( isset( $options['editor_check'] ) && ! empty( $options['editor_check'] ) ) {
+			if ( isset( $options['editor'] ) && ! empty( $options['editor'] ) ) {
+				//add our content
+				if ( empty( $content ) ) {
+	        		$template = $options['editor'];
+	        		return $template;
+	    		} else
+	        		return $content;
+			}
 		}
 
 	} // end change_editor_content
@@ -261,17 +261,19 @@ class Add_Post_Type_Instructions_Admin {
 		$post_type = $this->get_post_type();
 		$options = get_option( $this->plugin_slug . '_' . $post_type );
 
-		if ( isset( $options['author'] ) && ! empty( $options['author'] ) ) { 
-			$author = '<p class="apti-text apti-author">' . $options['author'] . '</p>'; ?>
+		if ( isset( $options['author_check'] ) && ! empty( $options['author_check'] ) ) {
+			if ( isset( $options['author'] ) && ! empty( $options['author'] ) ) { 
+				$author = '<p class="apti-text apti-author">' . $options['author'] . '</p>'; ?>
 
-			<script type="text/javascript">
-				jQuery(function($) {
-				    var text_to_insert = '<?php echo $author; ?>';
+				<script type="text/javascript">
+					jQuery(function($) {
+					    var text_to_insert = '<?php echo $author; ?>';
 
-				    $('' + text_to_insert + '').insertBefore('#authordiv .inside select')
-				});
-			</script>
-		<?php 
+					    $('' + text_to_insert + '').insertBefore('#authordiv .inside select')
+					});
+				</script>
+			<?php 
+			}
 		}
 
 	} // end change_author_metabox_content
@@ -289,9 +291,11 @@ class Add_Post_Type_Instructions_Admin {
 		$post_type = $this->get_post_type();
 		$options = get_option( $this->plugin_slug . '_' . $post_type );
 
-		if ( isset( $options['thumbnail'] ) && ! empty( $options['thumbnail'] ) ) {
-			$thumbnail = '<p class="apti-text apti-thumbnail">' . $options['thumbnail'] . '</p>';
-			$content = $thumbnail . $content;
+		if ( isset( $options['thumbnail_check'] ) && ! empty( $options['thumbnail_check'] ) ) {
+			if ( isset( $options['thumbnail'] ) && ! empty( $options['thumbnail'] ) ) {
+				$thumbnail = '<p class="apti-text apti-thumbnail">' . $options['thumbnail'] . '</p>';
+				$content = $thumbnail . $content;
+			}
 		}
 
 		return $content;
@@ -310,17 +314,19 @@ class Add_Post_Type_Instructions_Admin {
 		$post_type = $this->get_post_type();
 		$options = get_option( $this->plugin_slug . '_' . $post_type );
 
-		if ( isset( $options['excerpt'] ) && ! empty( $options['excerpt'] ) ) { 
-			$excerpt = '<p class="apti-text apti-excerpt">' . $options['excerpt'] . '</p>'; ?>
+		if ( isset( $options['excerpt_check'] ) && ! empty( $options['excerpt_check'] ) ) {
+			if ( isset( $options['excerpt'] ) && ! empty( $options['excerpt'] ) ) { 
+				$excerpt = '<p class="apti-text apti-excerpt">' . $options['excerpt'] . '</p>'; ?>
 
-			<script type="text/javascript">
-				jQuery(function($) {
-				    var text_to_insert = '<?php echo $excerpt; ?>';
+				<script type="text/javascript">
+					jQuery(function($) {
+					    var text_to_insert = '<?php echo $excerpt; ?>';
 
-				    $('' + text_to_insert + '').insertBefore('#postexcerpt .inside label')
-				});
-			</script>
-		<?php 
+					    $('' + text_to_insert + '').insertBefore('#postexcerpt .inside label')
+					});
+				</script>
+			<?php 
+			}
 		}
 
 	} // end change_excerpt_metabox_content
@@ -337,17 +343,19 @@ class Add_Post_Type_Instructions_Admin {
 		$post_type = $this->get_post_type();
 		$options = get_option( $this->plugin_slug . '_' . $post_type );
 
-		if ( isset( $options['trackbacks'] ) && ! empty( $options['trackbacks'] ) ) { 
-			$trackbacks = '<p class="apti-text apti-trackbacks">' . $options['trackbacks'] . '</p>'; ?>
+		if ( isset( $options['trackbacks_check'] ) && ! empty( $options['trackbacks_check'] ) ) {
+			if ( isset( $options['trackbacks'] ) && ! empty( $options['trackbacks'] ) ) { 
+				$trackbacks = '<p class="apti-text apti-trackbacks">' . $options['trackbacks'] . '</p>'; ?>
 
-			<script type="text/javascript">
-				jQuery(function($) {
-				    var text_to_insert = '<?php echo $trackbacks; ?>';
+				<script type="text/javascript">
+					jQuery(function($) {
+					    var text_to_insert = '<?php echo $trackbacks; ?>';
 
-				    $('' + text_to_insert + '').insertBefore('#trackbacksdiv .inside p:nth-of-type(1)')
-				});
-			</script>
-		<?php 
+					    $('' + text_to_insert + '').insertBefore('#trackbacksdiv .inside p:nth-of-type(1)')
+					});
+				</script>
+			<?php 
+			}
 		}
 
 	} // end change_trackbacks_metabox_content
@@ -364,17 +372,19 @@ class Add_Post_Type_Instructions_Admin {
 		$post_type = $this->get_post_type();
 		$options = get_option( $this->plugin_slug . '_' . $post_type );
 
-		if ( isset( $options['customfields'] ) && ! empty( $options['customfields'] ) ) { 
-			$customfields = '<p class="apti-text apti-customfields">' . $options['customfields'] . '</p>'; ?>
+		if ( isset( $options['customfields_check'] ) && ! empty( $options['customfields_check'] ) ) {
+			if ( isset( $options['customfields'] ) && ! empty( $options['customfields'] ) ) { 
+				$customfields = '<p class="apti-text apti-customfields">' . $options['customfields'] . '</p>'; ?>
 
-			<script type="text/javascript">
-				jQuery(function($) {
-				    var text_to_insert = '<?php echo $customfields; ?>';
+				<script type="text/javascript">
+					jQuery(function($) {
+					    var text_to_insert = '<?php echo $customfields; ?>';
 
-				    $('' + text_to_insert + '').insertBefore('#postcustom .inside #postcustomstuff')
-				});
-			</script>
-		<?php 
+					    $('' + text_to_insert + '').insertBefore('#postcustom .inside #postcustomstuff')
+					});
+				</script>
+			<?php 
+			}
 		}
 
 	} // end change_customfields_metabox_content
@@ -384,29 +394,58 @@ class Add_Post_Type_Instructions_Admin {
 	 *
 	 * @param  string $content HTML string
 	 *
-	 * @since 1.0.2
+	 * @since 2.0
 	 */
-/*	public function change_comments_metabox_content() {
+	public function change_comments_metabox_content() {
 
 		$post_type = $this->get_post_type();
 		$options = get_option( $this->plugin_slug . '_' . $post_type );
 
-		if ( isset( $options['comments'] ) && ! empty( $options['comments'] ) ) { 
-			$comments = '<p class="apti-text apti-comments">' . $options['comments'] . '</p>'; ?>
+		if ( isset( $options['comments_check'] ) && ! empty( $options['comments_check'] ) ) {
+			if ( isset( $options['comments'] ) && ! empty( $options['comments'] ) ) { 
+				$comments = '<p class="apti-text apti-comments">' . $options['comments'] . '</p>'; ?>
 
-			<script type="text/javascript">
-				jQuery(function($) {
-				    var text_to_insert = '<?php echo $comments; ?>';
+				<script type="text/javascript">
+					jQuery(function($) {
+					    var text_to_insert = '<?php echo $comments; ?>';
 
-				    $('' + text_to_insert + '').insertBefore('#commentstatusdiv .inside #postcustomstuff')
-				});
-			</script>
-		<?php 
+					    $('' + text_to_insert + '').insertBefore('#commentsdiv .inside p:nth-of-type(1)')
+					});
+				</script>
+			<?php 
+			}
 		}
 
-	} // end change_comments_metabox_content	*/
+	} // end change_comments_metabox_content	
 
-// revisions
+	/**
+	 * Change revisions metabox content
+	 *
+	 * @param  string $content HTML string
+	 *
+	 * @since 2.0
+	 */
+	public function change_revisions_metabox_content() {
+
+		$post_type = $this->get_post_type();
+		$options = get_option( $this->plugin_slug . '_' . $post_type );
+
+		if ( isset( $options['revisions_check'] ) && ! empty( $options['revisions_check'] ) ) {
+			if ( isset( $options['revisions'] ) && ! empty( $options['revisions'] ) ) { 
+				$revisions = '<p class="apti-text apti-revisions">' . $options['revisions'] . '</p>'; ?>
+
+				<script type="text/javascript">
+					jQuery(function($) {
+					    var text_to_insert = '<?php echo $revisions; ?>';
+
+					    $('' + text_to_insert + '').insertBefore('#revisionsdiv .inside ul:nth-of-type(1)')
+					});
+				</script>
+			<?php 
+			}
+		}
+
+	} // end change_revisions_metabox_content
 
 	/**
 	 * Change pageattributes metabox content
@@ -420,17 +459,19 @@ class Add_Post_Type_Instructions_Admin {
 		$post_type = $this->get_post_type();
 		$options = get_option( $this->plugin_slug . '_' . $post_type );
 
-		if ( isset( $options['pageattributes'] ) && ! empty( $options['pageattributes'] ) ) { 
-			$pageattributes = '<p class="apti-text apti-pageattributes">' . $options['pageattributes'] . '</p>'; ?>
+		if ( isset( $options['pageattributes_check'] ) && ! empty( $options['pageattributes_check'] ) ) {
+			if ( isset( $options['pageattributes'] ) && ! empty( $options['pageattributes'] ) ) { 
+				$pageattributes = '<p class="apti-text apti-pageattributes">' . $options['pageattributes'] . '</p>'; ?>
 
-			<script type="text/javascript">
-				jQuery(function($) {
-				    var text_to_insert = '<?php echo $pageattributes; ?>';
+				<script type="text/javascript">
+					jQuery(function($) {
+					    var text_to_insert = '<?php echo $pageattributes; ?>';
 
-				    $('' + text_to_insert + '').insertBefore('#pageparentdiv .inside p:nth-of-type(1)')
-				});
-			</script>
-		<?php 
+					    $('' + text_to_insert + '').insertBefore('#pageparentdiv .inside p:nth-of-type(1)')
+					});
+				</script>
+			<?php 
+			}
 		}
 
 	} // end change_pageattributes_metabox_content
@@ -447,17 +488,19 @@ class Add_Post_Type_Instructions_Admin {
 		$post_type = $this->get_post_type();
 		$options = get_option( $this->plugin_slug . '_' . $post_type );
 
-		if ( isset( $options['postformats'] ) && ! empty( $options['postformats'] ) ) { 
-			$postformats = '<p class="apti-text apti-postformats">' . $options['postformats'] . '</p>'; ?>
+		if ( isset( $options['postformats_check'] ) && ! empty( $options['postformats_check'] ) ) {
+			if ( isset( $options['postformats'] ) && ! empty( $options['postformats'] ) ) { 
+				$postformats = '<p class="apti-text apti-postformats">' . $options['postformats'] . '</p>'; ?>
 
-			<script type="text/javascript">
-				jQuery(function($) {
-				    var text_to_insert = '<?php echo $postformats; ?>';
+				<script type="text/javascript">
+					jQuery(function($) {
+					    var text_to_insert = '<?php echo $postformats; ?>';
 
-				    $('' + text_to_insert + '').insertBefore('#post-formats-select')
-				});
-			</script>
-		<?php 
+					    $('' + text_to_insert + '').insertBefore('#post-formats-select')
+					});
+				</script>
+			<?php 
+			}
 		}
 
 	} // end change_postformats_metabox_content
@@ -469,7 +512,7 @@ class Add_Post_Type_Instructions_Admin {
 	 *
 	 * @since 1.0.3
 	 */
-	public function change_categories_metabox_content() {
+/*	public function change_categories_metabox_content() {
 
 		$post_type = $this->get_post_type();
 		$options = get_option( $this->plugin_slug . '_' . $post_type );
@@ -487,7 +530,7 @@ class Add_Post_Type_Instructions_Admin {
 		<?php 
 		}
 
-	} // end change_categories_metabox_content
+	} // end change_categories_metabox_content	*/
 
 	/**
 	 * Change tags metabox content
@@ -496,7 +539,7 @@ class Add_Post_Type_Instructions_Admin {
 	 *
 	 * @since 1.0.3
 	 */
-	public function change_tags_metabox_content() {
+/*	public function change_tags_metabox_content() {
 
 		$post_type = $this->get_post_type();
 		$options = get_option( $this->plugin_slug . '_' . $post_type );
@@ -514,6 +557,6 @@ class Add_Post_Type_Instructions_Admin {
 		<?php 
 		}
 
-	} // end change_tags_metabox_content
+	} // end change_categories_metabox_content	*/
 
 }

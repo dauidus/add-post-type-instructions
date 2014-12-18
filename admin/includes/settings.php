@@ -73,10 +73,12 @@ class add_post_type_instructions_settings {
 				'excerpt' => '',
 				'trackbacks' => '',
 				'custom-fields' => '',
-				// 'comments' => '',
-				// 'revisions' => '',
+				'comments' => '',
+				'revisions' => '',
 				'page-attributes' => '',
 				'post-formats' => '',
+				// 'categories' => '',
+				// 'tags' => '',
 			);
 
 		foreach ( $post_types as $pt ) {
@@ -112,9 +114,9 @@ class add_post_type_instructions_settings {
 
 			if ( post_type_supports( $pt, 'editor' )) {
 				add_settings_field(
-					'editor_input',
+					'editor_check',
 					__( 'WYSIWYG Editor Content:', $this->plugin_slug ),
-					array( $this, 'editor_input_callback' ),
+					array( $this, 'editor_check_callback' ),
 					$section,
 					$pt,
 					$args
@@ -131,9 +133,9 @@ class add_post_type_instructions_settings {
 
 			if ( post_type_supports( $pt, 'author' )) {
 				add_settings_field(
-					'author_input',
+					'author_check',
 					__( 'Author Metabox:', $this->plugin_slug ),
-					array( $this, 'author_input_callback' ),
+					array( $this, 'author_check_callback' ),
 					$section,
 					$pt,
 					$args
@@ -150,9 +152,9 @@ class add_post_type_instructions_settings {
 
 			if ( post_type_supports( $pt, 'thumbnail' )) {
 				add_settings_field(
-					'thumbnail_input',
+					'thumbnail_check',
 					__( 'Featured Image Metabox:', $this->plugin_slug ),
-					array( $this, 'thumbnail_input_callback' ),
+					array( $this, 'thumbnail_check_callback' ),
 					$section,
 					$pt,
 					$args
@@ -169,9 +171,9 @@ class add_post_type_instructions_settings {
 
 			if ( post_type_supports( $pt, 'excerpt' )) {
 				add_settings_field(
-					'excerpt_input',
+					'excerpt_check',
 					__( '', $this->plugin_slug ),
-					array( $this, 'excerpt_input_callback' ),
+					array( $this, 'excerpt_check_callback' ),
 					$section,
 					$pt,
 					$args
@@ -188,9 +190,9 @@ class add_post_type_instructions_settings {
 
 			if ( post_type_supports( $pt, 'trackbacks' )) {
 				add_settings_field(
-					'trackbacks_input',
+					'trackbacks_check',
 					__( 'Trackbacks Metabox:', $this->plugin_slug ),
-					array( $this, 'trackbacks_input_callback' ),
+					array( $this, 'trackbacks_check_callback' ),
 					$section,
 					$pt,
 					$args
@@ -207,9 +209,9 @@ class add_post_type_instructions_settings {
 
 			if ( post_type_supports( $pt, 'custom-fields' )) {
 				add_settings_field(
-					'customfields_input',
+					'customfields_check',
 					__( 'Custom Fields Metabox:', $this->plugin_slug ),
-					array( $this, 'customfields_input_callback' ),
+					array( $this, 'customfields_check_callback' ),
 					$section,
 					$pt,
 					$args
@@ -224,22 +226,49 @@ class add_post_type_instructions_settings {
 				);
 			}
 
-		/*	if ( post_type_supports( $pt, 'comments' )) {
+			if ( post_type_supports( $pt, 'comments' )) {
+				add_settings_field(
+					'comments_check',
+					__( 'Comments Metabox:', $this->plugin_slug ),
+					array( $this, 'comments_check_callback' ),
+					$section,
+					$pt,
+					$args
+				);
 				add_settings_field(
 					'comments',
-					__( '<br />Comments Metabox:', $this->plugin_slug ),
+					__( '', $this->plugin_slug ),
 					array( $this, 'comments_callback' ),
 					$section,
 					$pt,
 					$args
 				);
-			}	*/
+			}	
+
+			if ( post_type_supports( $pt, 'revisions' )) {
+				add_settings_field(
+					'revisions_check',
+					__( 'Revisions Metabox:', $this->plugin_slug ),
+					array( $this, 'revisions_check_callback' ),
+					$section,
+					$pt,
+					$args
+				);
+				add_settings_field(
+					'revisions',
+					__( '', $this->plugin_slug ),
+					array( $this, 'revisions_callback' ),
+					$section,
+					$pt,
+					$args
+				);
+			}
 
 			if ( post_type_supports( $pt, 'page-attributes' )) {
 				add_settings_field(
-					'pageattributes_input',
+					'pageattributes_check',
 					__( 'Page Attributes Metabox:', $this->plugin_slug ),
-					array( $this, 'pageattributes_input_callback' ),
+					array( $this, 'pageattributes_check_callback' ),
 					$section,
 					$pt,
 					$args
@@ -258,9 +287,9 @@ class add_post_type_instructions_settings {
 
 				if ( post_type_supports( $pt, 'post-formats' )) {
 					add_settings_field(
-						'postformats_input',
+						'postformats_check',
 						__( 'Post Format Metabox:', $this->plugin_slug ),
-						array( $this, 'postformats_input_callback' ),
+						array( $this, 'postformats_check_callback' ),
 						$section,
 						$pt,
 						$args
@@ -332,14 +361,17 @@ class add_post_type_instructions_settings {
 
 		} // end instruction_callback
 
-	public function editor_input_callback( $args ) {
+	public function editor_check_callback( $args ) {
 
-		$checkhtml = '<input type="checkbox" id="editor_check" name="editor_input" value="1" />';
+		$output = $args[0].'[editor_check]';
+		$value  = isset( $args[1]['editor_check'] ) ? $args[1]['editor_check'] : '';
+
+		$checkhtml = '<input type="checkbox" id="editor_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
 		$checkhtml .= '<label for="editor_check"> check to enable</label>';
 
 		echo $checkhtml;
 
-	} // end editor_input_callback
+	} // end editor_check_callback
 
 		public function editor_callback( $args ) {
 			
@@ -358,14 +390,17 @@ class add_post_type_instructions_settings {
 
 		} // end editor_callback
 
-	public function author_input_callback( $args ) {
+	public function author_check_callback( $args ) {
 
-		$checkhtml = '<input type="checkbox" id="author_check" name="author_input" value="1" />';
+		$output = $args[0].'[author_check]';
+		$value  = isset( $args[1]['author_check'] ) ? $args[1]['author_check'] : '';
+
+		$checkhtml = '<input type="checkbox" id="author_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
 		$checkhtml .= '<label for="author_check"> check to enable</label>';
 
 		echo $checkhtml;
 
-	} // end author_input_callback
+	} // end author_check_callback
 
 		public function author_callback( $args ) {
 			
@@ -378,14 +413,17 @@ class add_post_type_instructions_settings {
 
 		} // end author_callback
 
-	public function thumbnail_input_callback( $args ) {
+	public function thumbnail_check_callback( $args ) {
 
-		$checkhtml = '<input type="checkbox" id="thumbnail_check" name="thumbnail_input" value="1" />';
+		$output = $args[0].'[thumbnail_check]';
+		$value  = isset( $args[1]['thumbnail_check'] ) ? $args[1]['thumbnail_check'] : '';
+
+		$checkhtml = '<input type="checkbox" id="thumbnail_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
 		$checkhtml .= '<label for="thumbnail_check"> check to enable</label>';
 
 		echo $checkhtml;
 
-	} // end thumbnail_input_callback
+	} // end thumbnail_check_callback
 
 		public function thumbnail_callback( $args ) {
 			
@@ -398,14 +436,17 @@ class add_post_type_instructions_settings {
 
 		} // end thumbnail_callback
 
-	public function excerpt_input_callback( $args ) {
+	public function excerpt_check_callback( $args ) {
 
-		$checkhtml = '<input type="checkbox" id="excerpt_check" name="excerpt_input" value="1" />';
+		$output = $args[0].'[excerpt_check]';
+		$value  = isset( $args[1]['excerpt_check'] ) ? $args[1]['excerpt_check'] : '';
+
+		$checkhtml = '<input type="checkbox" id="excerpt_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
 		$checkhtml .= '<label for="excerpt_check"> check to enable</label>';
 
 		echo $checkhtml;
 
-	} // end excerpt_input_callback
+	} // end excerpt_check_callback
 
 		public function excerpt_callback( $args ) {
 			
@@ -418,14 +459,17 @@ class add_post_type_instructions_settings {
 
 		} // end excerpt_callback
 
-	public function trackbacks_input_callback( $args ) {
+	public function trackbacks_check_callback( $args ) {
 
-		$checkhtml = '<input type="checkbox" id="trackbacks_check" name="trackbacks_input" value="1" />';
+		$output = $args[0].'[trackbacks_check]';
+		$value  = isset( $args[1]['trackbacks_check'] ) ? $args[1]['trackbacks_check'] : '';
+
+		$checkhtml = '<input type="checkbox" id="trackbacks_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
 		$checkhtml .= '<label for="trackbacks_check"> check to enable</label>';
 
 		echo $checkhtml;
 
-	} // end trackbacks_input_callback
+	} // end trackbacks_check_callback
 
 		public function trackbacks_callback( $args ) {
 			
@@ -438,14 +482,17 @@ class add_post_type_instructions_settings {
 
 		} // end trackbacks_callback
 
-	public function customfields_input_callback( $args ) {
+	public function customfields_check_callback( $args ) {
 
-		$checkhtml = '<input type="checkbox" id="customfields_check" name="customfields_input" value="1" />';
+		$output = $args[0].'[customfields_check]';
+		$value  = isset( $args[1]['customfields_check'] ) ? $args[1]['customfields_check'] : '';
+
+		$checkhtml = '<input type="checkbox" id="customfields_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
 		$checkhtml .= '<label for="customfields_check"> check to enable</label>';
 
 		echo $checkhtml;
 
-	} // end customfields_input_callback
+	} // end customfields_check_callback
 
 		public function customfields_callback( $args ) {
 			
@@ -458,26 +505,63 @@ class add_post_type_instructions_settings {
 
 		} // end customfields_callback
 
-/*	public function comments_callback( $args ) {
-		
-		$output = $args[0].'[comments]';
-		$value  = isset( $args[1]['comments'] ) ? $args[1]['comments'] : '';
+	public function comments_check_callback( $args ) {
 
-		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
-		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the comments metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
-		echo $html;
+		$output = $args[0].'[comments_check]';
+		$value  = isset( $args[1]['comments_check'] ) ? $args[1]['comments_check'] : '';
 
-	} // end comments_callback
-*/
+		$checkhtml = '<input type="checkbox" id="comments_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
+		$checkhtml .= '<label for="comments_check"> check to enable</label>';
 
-	public function pageattributes_input_callback( $args ) {
+		echo $checkhtml;
 
-		$checkhtml = '<input type="checkbox" id="pageattributes_check" name="pageattributes_input" value="1" />';
+	} // end comments_check_callback
+
+		public function comments_callback( $args ) {
+			
+			$output = $args[0].'[comments]';
+			$value  = isset( $args[1]['comments'] ) ? $args[1]['comments'] : '';
+
+			$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
+			$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the comments metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
+			echo $html;
+
+		} // end comments_callback
+
+	public function revisions_check_callback( $args ) {
+
+		$output = $args[0].'[revisions_check]';
+		$value  = isset( $args[1]['revisions_check'] ) ? $args[1]['revisions_check'] : '';
+
+		$checkhtml = '<input type="checkbox" id="revisions_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
+		$checkhtml .= '<label for="revisions_check"> check to enable</label>';
+
+		echo $checkhtml;
+
+	} // end revisions_check_callback
+
+		public function revisions_callback( $args ) {
+			
+			$output = $args[0].'[revisions]';
+			$value  = isset( $args[1]['revisions'] ) ? $args[1]['revisions'] : '';
+
+			$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
+			$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the revisions metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
+			echo $html;
+
+		} // end revisions_callback
+
+	public function pageattributes_check_callback( $args ) {
+
+		$output = $args[0].'[pageattributes_check]';
+		$value  = isset( $args[1]['pageattributes_check'] ) ? $args[1]['pageattributes_check'] : '';
+
+		$checkhtml = '<input type="checkbox" id="pageattributes_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
 		$checkhtml .= '<label for="pageattributes_check"> check to enable</label>';
 
 		echo $checkhtml;
 
-	} // end pageattributes_input_callback
+	} // end pageattributes_check_callback
 
 		public function pageattributes_callback( $args ) {
 			
@@ -490,14 +574,17 @@ class add_post_type_instructions_settings {
 
 		} // end pageattributes_callback
 
-	public function postformats_input_callback( $args ) {
+	public function postformats_check_callback( $args ) {
 
-		$checkhtml = '<input type="checkbox" id="postformats_check" name="postformats_input" value="1" />';
+		$output = $args[0].'[postformats_check]';
+		$value  = isset( $args[1]['postformats_check'] ) ? $args[1]['postformats_check'] : '';
+
+		$checkhtml = '<input type="checkbox" id="postformats_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
 		$checkhtml .= '<label for="postformats_check"> check to enable</label>';
 
 		echo $checkhtml;
 
-	} // end postformats_input_callback
+	} // end postformats_check_callback
 
 		public function postformats_callback( $args ) {
 			
