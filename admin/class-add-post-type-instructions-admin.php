@@ -80,7 +80,7 @@ class Add_Post_Type_Instructions_Admin {
 		// Fire functions
 			add_action( 'admin_print_styles', array( $this, 'is_edit_page' ) );
 			add_action( 'edit_form_after_title', array( $this, 'add_content_above' ) );
-			add_filter( 'the_editor_content', array( $this, 'change_editor_content' ) );
+			add_filter( 'default_content', array( $this, 'change_editor_content' ) );
 			add_action( 'admin_head', array( $this, 'change_author_metabox_content' ) );
 			add_filter( 'admin_post_thumbnail_html', array( $this, 'change_thumbnail_metabox_content' ) );
 			add_action( 'admin_head', array( $this, 'change_excerpt_metabox_content' ) );
@@ -240,12 +240,9 @@ class Add_Post_Type_Instructions_Admin {
 			if ( isset( $options['editor'] ) && ! empty( $options['editor'] ) ) {
 				//add our content
 				$template = $options['editor'];
-				if ( ! empty($the_content) ) {
-	        		return $the_content;
-	    		} else {
+				
 	        		$the_content = $template;
 	        		return $the_content;
-	    		}
 			}
 		}
 
