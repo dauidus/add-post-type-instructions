@@ -4,7 +4,7 @@ Author URI: http://dauid.us
 Tags: instructions, instruction, assist, direct, direction, directions, assistive, post type, help, metabox, insert text, wysiwyg, content, features, format, attributes, author, trackbacks, excerpt
 Requires at least: 3.1
 Tested up to: 4.1
-Stable tag: 1.0.3.3
+Stable tag: 2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,28 +12,33 @@ Allows admins to easily set instructional context for metaboxes and more on page
 
 == Description ==
 
-Allows admins to easily set instructional context for metaboxes and more on pages, posts or custom post types.  Currently it supports adding instructional text below the title field, setting default content within the WYSIWYG editor and adding instructional text inside the following metaboxes: 
+Add Post Type Instructions allows admins to easily set instructional context for metaboxes and more on pages, posts or custom post types.  Currently it supports adding instructional text in the following areas on the add/edit screen:
 ** **
-* author
-* featured image
-* excerpt
-* trackbacks
-* custom fields
-* page attributes
-* post format
+* below the title field
+* author metabox
+* featured image metabox
+* excerpt metabox
+* trackbacks metabox
+* custom fields metabox
+* page attributes metabox
+* post format metabox
+* comments metabox
+* revisions metabox
 
-This plugin uses OOP standards to add options only for those metaboxes which are supported for each post type and to execute code only on those pages where it is needed.  This helps to not only keep load response time quick, but also to alleviate user frustration by hiding unnecessary options.  It works especially well for sites with many custom post types that require content to be entered in a specific way (ie. when a post type requires a specific page template or when the absence of a featured image will break the intended look of a post).  Think of any theme or plugin that supports an image slider powered by a required featured image, and you can surely see where this plugin can come in handy.
+APTI also allows admins to set default content within the WYSIWYG editor, per post type.
 
-To be clear, this plugin does absolutely nothing to the front-end of your site.  It simply adds instructional context to the add/edit page/post admin screen so your clients and site editors might better understand how content is to be added.
+APTI uses OOP standards to add options only for those metaboxes which are supported for each post type and to execute code only on those pages where it is needed.  It works especially well for sites with many custom post types that require content to be entered in a specific way (ie. when a post type requires a specific page template or when the absence of a featured image will break the intended look of a post).  Think of any theme or plugin that supports an image slider powered by a required featured image, and you can surely see where APTI can come in handy.
 
-Add Post Type Instructions works with multisite networks and allows users to define settings on a per-site basis.
+To be clear, APTI does absolutely nothing to the front-end of your site.  It simply adds instructional context to the add/edit page/post admin screen so your clients and site editors might better understand how content is to be added.
+
+APTI works with multisite networks and allows users to define settings on a per-site basis.
 
 = Coming soon =
 * add support for categories and tags
 * Help tab on settings page about unsupport features and how to support them
 * Translations
 
-This plugin will not work with Visual Composer or other drag-n-drop page builders.  I am looking into this for a future release.
+APTI will work with drag-n-drop builders such as Visual Composer, but the author cannot recommend its use with them.  This will be addressed in a future release.
 
 = Suggestions are welcome =
 * email the author at dave@dauid.us
@@ -82,6 +87,12 @@ Simply delete this plugin to remove all data associated with it.  Deactivating t
 
 == Changelog ==
 
+= 2.0 =
+* major changes to settings logic
+* performance optimizations, expecially for multisite
+* better multisite uninstallation
+* support for comments and revisions
+
 = 1.0.3.3 =
 * update language file
 
@@ -110,6 +121,9 @@ Simply delete this plugin to remove all data associated with it.  Deactivating t
 * initial development release
 
 == Upgrade Notice ==
+
+= 2.0 =
+This is a major update. Visit plugin settings page immediately after updating.
 
 = 1.0.3 =
 Update to add support for categories and tags metaboxes.

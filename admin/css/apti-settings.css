@@ -9,6 +9,11 @@
 .settings_page_apti p.description {
 	margin-bottom: 10px;
 }
+.settings_page_apti p.editordescription  {
+	font-size: 14px;
+	font-style: italic;
+	color: #cc6666;
+}
 
 .settings_page_apti .form-table tr th,
 .settings_page_apti .form-table tr td {
@@ -19,3 +24,5 @@
 .settings_page_apti .form-table tr:nth-of-type(2n+0) td {
 	padding-top: 0px !important;
 }
+
+

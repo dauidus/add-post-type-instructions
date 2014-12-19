@@ -356,7 +356,7 @@ class add_post_type_instructions_settings {
 			$textareahtml = '<textarea id="instruction" name="' .$output. '" rows="4" type="textarea">' .$value. '</textarea>';
 			echo $textareahtml;
 
-			$html = '<p class="description">' . __( 'Enter content to display below the title field, such as special instructions for this post type. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
+			$html = '<p class="description">' . __( 'Enter content to display below the title field, such as special instructions for this type of content. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
 
 			echo $html;
 
@@ -368,7 +368,7 @@ class add_post_type_instructions_settings {
 		$value  = isset( $args[1]['editor_check'] ) ? $args[1]['editor_check'] : '';
 
 		$checkhtml = '<input type="checkbox" id="editor_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
-		$checkhtml .= '<label for="editor_check"> check to enable</label>';
+		$checkhtml .= '<label for="editor_check"> check to enable *</label>';
 
 		echo $checkhtml;
 
@@ -386,7 +386,9 @@ class add_post_type_instructions_settings {
 
 			$html = '<textarea id="textarea_one" name="' .$output. '" rows="6" type="textarea">' .$value. '</textarea>';
 			//wp_editor( $value, $id, $settings );
+			// $html .= '<p class="editordescription">* enabling this requires a title to be set on add/edit screen</p>';
 			$html .= '<p class="description">' . __( 'Enter default content to be displayed within the WYSIWYG editor, such as "delete this, then start writing".  This will be displayed only when no other content has been entered. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
+
 			echo $html;
 
 		} // end editor_callback
