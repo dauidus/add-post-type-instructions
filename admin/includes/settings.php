@@ -53,7 +53,7 @@ class add_post_type_instructions_settings {
 	public function is_settings_page(){
 
 		wp_enqueue_style('apti-settings-style', plugins_url( '../css/apti-settings.css', __FILE__ ) );
-		wp_enqueue_script('apti-settings-script', plugins_url( '../scripts/apti-settings.js', __FILE__ ), array(), '1.0', false );
+		// wp_enqueue_script('apti-settings-script', plugins_url( '../scripts/apti-settings.js', __FILE__ ), array(), '1.0', false );
 
 	} // end is_settings_page
 
