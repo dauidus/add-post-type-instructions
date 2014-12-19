@@ -240,9 +240,12 @@ class Add_Post_Type_Instructions_Admin {
 			if ( isset( $options['editor'] ) && ! empty( $options['editor'] ) ) {
 				//add our content
 				$template = $options['editor'];
-				
+				if ( ! empty($the_content) ) {
+	        		return $the_content;
+	    		} else {
 	        		$the_content = $template;
 	        		return $the_content;
+	        	}
 			}
 		}
 
