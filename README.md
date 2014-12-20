@@ -4,13 +4,16 @@ Add Post Type Instructions
 == Tags ==
 instructions, instruction, assist, direct, direction, directions, assistive, post type, help, metabox, insert text, wysiwyg, content, features, format, attributes, author, trackbacks, excerpt
 
+** **
+
 == Tested up to: ==
 4.2-alpha
+
+** **
 
 == Description ==
 
 Add Post Type Instructions allows admins to easily set instructional context for metaboxes and more on pages, posts or custom post types.  Currently it supports adding instructional text in the following areas on the add/edit screen:
-** **
 * below the title field
 * author metabox
 * featured image metabox
@@ -40,28 +43,7 @@ APTI will work with drag-n-drop builders such as Visual Composer, but the author
 = Suggestions are welcome =
 * email the author at dave@dauid.us
 
-= Follow Development on Github =
-* https://github.com/dauidus/add-post-type-instructions
-
-== Installation ==
-
-Installation from zip:
-
-1. From wp-admin interface, select Plugins -> Add New
-2. Click Upload
-3. Click "Choose File" and select add-post-type-instructions.zip
-4. Click "Install Now"
-5. Activate the plugin through the 'Plugins' menu in WordPress
-6. Add instructive text from the `settings -> Post Type Instructions` admin page
-
-Installation from WordPress Plugin Directory:
-
-1. From wp-admin interface, go to Plugins -> Add New
-2. Search for "Post Type Instructions"
-3. Click Install Now under the plugin name
-4. Click Ok to install the plugin
-5. Click Activate Plugin once installed
-6. Add instructive text from the `settings -> Post Type Instructions` admin page
+** **
 
 == Frequently Asked Questions ==
 
@@ -77,10 +59,7 @@ Yes.  This plugin can be either network activated or activated individually for 
 
 Simply delete this plugin to remove all data associated with it.  Deactivating the plugin will keep all plugin data saved in the database, but will not remove it.
 
-== Screenshots ==
-
-1. Settings page automatically recognizes post types and supported post type features.
-2. Non-intrusive instructive text can be easily added to multiple locations for any post type.
+** **
 
 == Changelog ==
 
@@ -117,6 +96,8 @@ Simply delete this plugin to remove all data associated with it.  Deactivating t
 
 = 1.0 =
 * initial development release
+
+** **
 
 == Upgrade Notice ==
 
