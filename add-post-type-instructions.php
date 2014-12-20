@@ -5,7 +5,7 @@
  * For A Better UX
  *
  * @package   Add_Post_Type_Instructions
- * @author    Dave Winter (dave@dauid.us)
+ * @author    Dave Winter
  * @license   GPL-2.0+
  * @link      http://dauid.us
  * @copyright 2014 dauid.us

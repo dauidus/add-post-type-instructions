@@ -24,8 +24,14 @@ foreach ( $post_types as $pt ) {
 	delete_option( $plugin->get_plugin_slug() . '_' . $pt );
 }
 
-// @todo create uninstallation message
-delete_option( 'apti-display-uninstallation-message' );
+	/**
+	 * Change tags metabox content
+	 *
+	 * @param  string $content HTML string
+	 *
+	 * @since 2.0
+	 */
+	delete_option( 'apti-display-uninstallation-message' );
 
 	if ( function_exists( 'is_multisite' ) && is_multisite() ) {
 

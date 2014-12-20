@@ -92,6 +92,7 @@ Simply delete this plugin to remove all data associated with it.  Deactivating t
 * performance optimizations, expecially for multisite
 * better multisite uninstallation
 * support for comments and revisions
+* change the_editor_content to default_content for WYSIWYG field
 
 = 1.0.3.3 =
 * update language file
