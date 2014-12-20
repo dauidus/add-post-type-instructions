@@ -1,11 +1,4 @@
 
-.settings_page_apti textarea {
-	width: 95%; 
-	padding: 10px; 
-	display: block; 
-	margin:8px 0;
-}
-
 .settings_page_apti p.description {
 	margin-bottom: 10px;
 }
@@ -23,6 +16,14 @@
 .settings_page_apti .form-table tr:nth-of-type(2n+0) th,
 .settings_page_apti .form-table tr:nth-of-type(2n+0) td {
 	padding-top: 0px !important;
+}
+
+/* Show/Hide textareas based on checkbox values */
+
+.settings_page_apti textarea {
+	width: 95%; 
+	padding: 10px; 
+	margin:8px 0;
 }
 
 

@@ -53,7 +53,6 @@ class add_post_type_instructions_settings {
 	public function is_settings_page(){
 
 		wp_enqueue_style('apti-settings-style', plugins_url( '../css/apti-settings.css', __FILE__ ) );
-		// wp_enqueue_script('apti-settings-script', plugins_url( '../scripts/apti-settings.js', __FILE__ ), array(), '1.0', false );
 
 	} // end is_settings_page
 
@@ -80,6 +79,8 @@ class add_post_type_instructions_settings {
 				'post-formats' => '',
 				// 'categories' => '',
 				// 'tags' => '',
+				// 'discussion' => '',
+				// 'slug' => '',
 			);
 
 		foreach ( $post_types as $pt ) {
@@ -173,7 +174,7 @@ class add_post_type_instructions_settings {
 			if ( post_type_supports( $pt, 'excerpt' )) {
 				add_settings_field(
 					'excerpt_check',
-					__( '', $this->plugin_slug ),
+					__( 'Excerpt Metabox:', $this->plugin_slug ),
 					array( $this, 'excerpt_check_callback' ),
 					$section,
 					$pt,
@@ -181,7 +182,7 @@ class add_post_type_instructions_settings {
 				);
 				add_settings_field(
 					'excerpt',
-					__( 'Excerpt Metabox:', $this->plugin_slug ),
+					__( '', $this->plugin_slug ),
 					array( $this, 'excerpt_callback' ),
 					$section,
 					$pt,
