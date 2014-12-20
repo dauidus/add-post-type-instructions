@@ -388,7 +388,7 @@ class add_post_type_instructions_settings {
 			$html = '<textarea id="textarea_one" name="' .$output. '" rows="6" type="textarea">' .$value. '</textarea>';
 			//wp_editor( $value, $id, $settings );
 			// $html .= '<p class="editordescription">* This will only display when content is created. It will </p>';
-			$html .= '<p class="description">' . __( 'Enter default content to be displayed within the WYSIWYG editor, such as "delete this, then start writing".  This will only be displayed before page/post content is saved.  Once content has been saved, this message will not display again for that page/post.  HTML allowed.', $this->plugin_slug ) . '</p><hr>';
+			$html .= '<p class="description">' . __( 'Enter default content to be displayed within the WYSIWYG editor, such as "delete this, then start writing".  This will only be included when page/post content is first created.  Once changed and content has been saved, this message will not be included again for that page/post.  HTML allowed.', $this->plugin_slug ) . '</p><hr>';
 
 			echo $html;
 
