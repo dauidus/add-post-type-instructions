@@ -92,7 +92,7 @@ class add_post_type_instructions_settings {
 			$args = array( $section, get_option( $section ) );
 			add_settings_section(
 				$pt,
-				sprintf( __( 'Set Instructions for %s', $this->plugin_slug ), $post_object->labels->name ),
+				sprintf( __( 'Set instructional content for all %s', $this->plugin_slug ), $post_object->labels->name ),
 				'',
 				$section
 			);
@@ -354,10 +354,10 @@ class add_post_type_instructions_settings {
 		    $output = $args[0].'[instruction]';
 			$value  = isset( $args[1]['instruction'] ) ? $args[1]['instruction'] : '';
 
-			$textareahtml = '<textarea id="instruction" name="' .$output. '" rows="4" type="textarea">' .$value. '</textarea>';
+			$textareahtml = '<textarea id="instruction" name="' .$output. '" rows="3" type="textarea">' .$value. '</textarea>';
 			echo $textareahtml;
 
-			$html = '<p class="description">' . __( 'Enter content to display below the title field, such as special instructions for this type of content. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
+			$html = '<p class="description">' . __( 'Enter content to display below the title field, such as general instructions for this type of content.  This will display as bold &lt;h3&gt; text, by default.  HTML allowed.', $this->plugin_slug ) . '</p><hr>';
 
 			echo $html;
 
@@ -385,14 +385,28 @@ class add_post_type_instructions_settings {
 				'textarea_rows' => '5'
 			);	*/
 
-			$html = '<textarea id="textarea_one" name="' .$output. '" rows="6" type="textarea">' .$value. '</textarea>';
+			$html = '<div id="editor"><textarea id="editor_input" name="' .$output. '" rows="5" type="textarea">' .$value. '</textarea></div>';
 			//wp_editor( $value, $id, $settings );
 			// $html .= '<p class="editordescription">* This will only display when content is created. It will </p>';
-			$html .= '<p class="description">' . __( 'Enter default content to be displayed within the WYSIWYG editor, such as "delete this, then start writing".  This will only be included when page/post content is first created.  Once changed and content has been saved, this message will not be included again for that page/post.  HTML allowed.', $this->plugin_slug ) . '</p><hr>';
+			$html .= '<p class="description">' . __( 'Enter default content to be displayed within the WYSIWYG editor, such as "delete this, then start writing".  This will only be included when page/post content is first created.  Once changed and content has been saved, this message will not be included again for that page/post.  HTML and shortcodes allowed.', $this->plugin_slug ) . '</p><hr>';
 
-			echo $html;
+			echo $html; ?>
+			<script>
+				(function() {
+			    	var d = document,
+			        	c = d.getElementById('editor'),
+			        	t = d.getElementById('editor_input'),
+			        	f = d.createTextNode('');		    
+			    	c.appendChild(f);			    
+			    	function updateSize() {
+			       		f.nodeValue = t.value + '\n\n';
+			    	}			    
+			    	t.onkeypress = t.onkeyup = t.onchange = updateSize;			    
+			    	updateSize();
+			  	})();
+			</script>
 
-		} // end editor_callback
+		<?php } // end editor_callback
 
 	public function author_check_callback( $args ) {
 

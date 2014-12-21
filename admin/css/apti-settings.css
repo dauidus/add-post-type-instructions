@@ -23,7 +23,25 @@
 .settings_page_apti textarea {
 	width: 95%; 
 	padding: 10px; 
-	margin:8px 0;
+	margin:8px 0px 0px;
+	resize:none;
+    overflow:hidden;
+    height:100%;
+}
+
+#editor {
+    padding: 10px; 
+    margin:0px 0px 15px;
+    position:relative;
+    width:auto;
+    height:auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+.settings_page_apti textarea#editor_input {
+	position:absolute;
+    top:0;
+    left:0;
 }
 
 
