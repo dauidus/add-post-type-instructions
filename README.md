@@ -64,11 +64,13 @@ Simply delete this plugin to remove all data associated with it.  Deactivating t
 == Changelog ==
 
 = 2.0 =
-* major changes to settings logic
-* performance optimizations, expecially for multisite
-* better multisite uninstallation
+* major update
+* performance optimizations, especially for multisite
+* better multisite support and uninstallation
 * support for comments and revisions
 * change the_editor_content to default_content for WYSIWYG field
+* add WYSIWYG editor to setting page
+* allow some fields to auto-resize to fit content on setting page
 
 = 1.0.3.3 =
 * update language file
