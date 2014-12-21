@@ -117,7 +117,7 @@ class add_post_type_instructions_settings {
 			if ( post_type_supports( $pt, 'editor' )) {
 				add_settings_field(
 					'editor_check',
-					__( 'WYSIWYG Editor Content:', $this->plugin_slug ),
+					__( 'WYSIWYG Editor:', $this->plugin_slug ),
 					array( $this, 'editor_check_callback' ),
 					$section,
 					$pt,
@@ -357,7 +357,7 @@ class add_post_type_instructions_settings {
 			$textareahtml = '<div id="instruction"><textarea id="instruction_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
 			echo $textareahtml;
 
-			$html = '<p class="description">' . __( 'Enter assistive text to be displayed below the title field, such as general instructions for this type of content.  This will display as bold &lt;h3&gt; text, by default.  HTML allowed.', $this->plugin_slug ) . '</p><hr>';
+			$html = '<p class="description" id="instdesc">' . __( 'Enter assistive text to be displayed below the title field, such as general instructions for this type of content.  HTML allowed.', $this->plugin_slug ) . '</p><hr>';
 
 			echo $html; ?>
 			<script>
@@ -374,7 +374,6 @@ class add_post_type_instructions_settings {
 			    	updateSize();
 			  	})();
 			</script>
-
 		<?php 
 		} // end instruction_callback
 
@@ -401,7 +400,7 @@ class add_post_type_instructions_settings {
 			);
 			wp_editor( $value, $id, $settings );
 			// $html .= '<p class="editordescription">* This will only display when content is created. It will </p>';
-			$html = '<p class="description">' . __( 'Enter default content to be displayed within the WYSIWYG editor, such as "delete this, then start writing".  This will only be included when page/post content is first created.  Once changed and content has been saved, this message will not be included again for that page/post.  HTML and shortcodes allowed.', $this->plugin_slug ) . '</p><hr>';
+			$html = '<p class="description" id="editdesc">' . __( 'Enter default content to be displayed within the WYSIWYG editor, such as "delete this, then start writing".  This will only be included when page/post content is first created.  Once changed and content has been saved, this message will not be included again for that page/post.  HTML and shortcodes allowed.', $this->plugin_slug ) . '</p><hr>';
 
 			echo $html;
 
@@ -424,8 +423,8 @@ class add_post_type_instructions_settings {
 			$output = $args[0].'[author]';
 			$value  = isset( $args[1]['author'] ) ? $args[1]['author'] : '';
 
-			$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
-			$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the author metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
+			$html = '<div id="author"><textarea id="author_input" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea></div>';
+			$html .= '<p class="description" id="authdesc">' . __( 'Enter assistive text to be displayed within the author metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
 			echo $html;
 
 		} // end author_callback

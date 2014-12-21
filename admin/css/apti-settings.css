@@ -2,11 +2,6 @@
 .settings_page_apti p.description {
 	margin-bottom: 10px;
 }
-.settings_page_apti p.editordescription  {
-	font-size: 14px;
-	font-style: italic;
-	color: #cc6666;
-}
 
 .settings_page_apti .form-table tr th,
 .settings_page_apti .form-table tr td {
@@ -17,20 +12,31 @@
 .settings_page_apti .form-table tr:nth-of-type(2n+0) td {
 	padding-top: 0px !important;
 }
+.settings_page_apti .form-table tr:nth-of-type(odd) th,
+.settings_page_apti .form-table tr:nth-of-type(odd) td {
+	padding-top: 30px !important;
+}
+
+.settings_page_apti label {
+	color: #B2B2B2;
+}
+
+.settings_page_apti input[type=checkbox]:checked + label {
+	color: #444;
+}
 
 /* Show/Hide textareas based on checkbox values */
 
 .settings_page_apti textarea {
-	width: 95%; 
+	width: 100%; 
 	padding: 10px; 
 	margin:8px 0px 0px;
 }
 .settings_page_apti .wp-editor-wrap {
-	width: 95%; 
-	margin-top: 8px;
+	margin: 8px 0 8px 0;
 }
 
-#instruction {
+.settings_page_apti #instruction {
     padding: 10px; 
     margin:0px 0px 15px;
     position:relative;
@@ -46,5 +52,4 @@
     top:0;
     left:0;
 }
-
 

@@ -12,7 +12,9 @@ p.apti-text {
 
 #apti-below-title {
 	font-style: italic !important;
-	padding: 0px 6px 0px 15px;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 3px 2px 3px 25px;
 	border-top: 1px solid #ccc;
 	border-bottom: 1px solid #ccc;
 	background: url('../images/info.gif') 6px center no-repeat #FFFFE8;
