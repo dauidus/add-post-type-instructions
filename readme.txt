@@ -1,7 +1,7 @@
 === Add Post Type Instructions ===
 Contributors: dauidus
 Author URI: http://dauid.us
-Tags: instructions, instruction, assist, direct, direction, directions, assistive, post type, help, metabox, insert text, wysiwyg, content, features, format, attributes, author, trackbacks, excerpt
+Tags: instructions, instruction, directions, assistive, post types, help, wysiwyg, client, text, editor, settings
 Requires at least: 3.1
 Tested up to: 4.1
 Stable tag: 2.0
