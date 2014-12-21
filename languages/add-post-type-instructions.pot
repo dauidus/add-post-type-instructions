@@ -1,0 +1,176 @@
+# Copyright (C) 2014 Add Post Type Instructions
+# This file is distributed under the same license as the Add Post Type Instructions package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Add Post Type Instructions 2.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/add-post-type-instructions\n"
+"POT-Creation-Date: 2014-12-21 18:53:15+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: admin/class-add-post-type-instructions-admin.php:131
+#: admin/class-add-post-type-instructions-admin.php:132
+msgid "Post Type Instructions"
+msgstr ""
+
+#: admin/class-add-post-type-instructions-admin.php:158
+msgid "Settings"
+msgstr ""
+
+#: admin/includes/settings.php:95
+msgid "Set instructional content for all %s"
+msgstr ""
+
+#: admin/includes/settings.php:102
+msgid "Below Title Field:"
+msgstr ""
+
+#: admin/includes/settings.php:120
+msgid "WYSIWYG Editor:"
+msgstr ""
+
+#: admin/includes/settings.php:139
+msgid "Author Metabox:"
+msgstr ""
+
+#: admin/includes/settings.php:158
+msgid "Featured Image Metabox:"
+msgstr ""
+
+#: admin/includes/settings.php:177
+msgid "Excerpt Metabox:"
+msgstr ""
+
+#: admin/includes/settings.php:196
+msgid "Trackbacks Metabox:"
+msgstr ""
+
+#: admin/includes/settings.php:215
+msgid "Custom Fields Metabox:"
+msgstr ""
+
+#: admin/includes/settings.php:234
+msgid "Comments Metabox:"
+msgstr ""
+
+#: admin/includes/settings.php:253
+msgid "Revisions Metabox:"
+msgstr ""
+
+#: admin/includes/settings.php:272
+msgid "Page Attributes Metabox:"
+msgstr ""
+
+#: admin/includes/settings.php:293
+msgid "Post Format Metabox:"
+msgstr ""
+
+#: admin/includes/settings.php:360
+msgid ""
+"Enter assistive text to be displayed below the title field, such as general "
+"instructions for this type of content.  HTML allowed."
+msgstr ""
+
+#: admin/includes/settings.php:403
+msgid ""
+"Enter default content to be displayed within the WYSIWYG editor, such as "
+"\"delete this, then start writing\".  This will only be included when page/"
+"post content is first created.  Once changed and content has been saved, "
+"this message will not be included again for that page/post.  HTML and "
+"shortcodes allowed."
+msgstr ""
+
+#: admin/includes/settings.php:427
+msgid ""
+"Enter assistive text to be displayed within the author metabox. HTML allowed."
+msgstr ""
+
+#: admin/includes/settings.php:450
+msgid ""
+"Enter assistive text to be displayed within the featured image metabox. HTML "
+"allowed."
+msgstr ""
+
+#: admin/includes/settings.php:473
+msgid ""
+"Enter assistive text to be displayed within the excerpt metabox. HTML "
+"allowed."
+msgstr ""
+
+#: admin/includes/settings.php:496
+msgid ""
+"Enter assistive text to be displayed within the trackbacks metabox. HTML "
+"allowed."
+msgstr ""
+
+#: admin/includes/settings.php:519
+msgid ""
+"Enter assistive text to be displayed within the custom fields metabox. HTML "
+"allowed."
+msgstr ""
+
+#: admin/includes/settings.php:542
+msgid ""
+"Enter assistive text to be displayed within the comments metabox. HTML "
+"allowed."
+msgstr ""
+
+#: admin/includes/settings.php:565
+msgid ""
+"Enter assistive text to be displayed within the revisions metabox. HTML "
+"allowed."
+msgstr ""
+
+#: admin/includes/settings.php:588
+msgid ""
+"Enter assistive text to be displayed within the page attributes metabox. "
+"HTML allowed."
+msgstr ""
+
+#: admin/includes/settings.php:611
+msgid ""
+"Enter assistive text to be displayed within the post format metabox. HTML "
+"allowed."
+msgstr ""
+
+#: public/class-add-post-type-instructions.php:269
+msgid ""
+"Plugin activated! Set instructional and default content for your site "
+"<strong><a href=\"%s\">here</a></strong>."
+msgstr ""
+
+#: public/class-add-post-type-instructions.php:294
+msgid ""
+"You have deleted the Add Post Type Instructions plugin. All settings "
+"associated with the plugin have been removed from the database."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Add Post Type Instructions"
+msgstr ""
+
+#. #-#-#-#-#  plugin.pot (Add Post Type Instructions 2.0)  #-#-#-#-#
+#. Plugin URI of the plugin/theme
+#. #-#-#-#-#  plugin.pot (Add Post Type Instructions 2.0)  #-#-#-#-#
+#. Author URI of the plugin/theme
+msgid "http://dauid.us"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Allows admins to easily set instructional text for pages, posts or custom "
+"post types.  Currently supports inserting text below the title field, "
+"setting content within the WYSIWYG editor and adding instructional text "
+"inside the following metaboxes: author, featured image, excerpt, trackbacks, "
+"custom fields, page attributes, post format, categories, tags.  Only adds "
+"options for the metaboxes supported for each post type.  Works with "
+"multisite."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Dave Winter"
+msgstr ""
