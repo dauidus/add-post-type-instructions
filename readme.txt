@@ -93,6 +93,8 @@ Simply delete this plugin to remove all data associated with it.  Deactivating t
 * better multisite uninstallation
 * support for comments and revisions
 * change the_editor_content to default_content for WYSIWYG field
+* add WYSIWYG editor to settings page
+* allow below title field to auto-resize to fit content on settings page
 
 = 1.0.3.3 =
 * update language file
@@ -124,7 +126,7 @@ Simply delete this plugin to remove all data associated with it.  Deactivating t
 == Upgrade Notice ==
 
 = 2.0 =
-This is a major update. Visit plugin settings page immediately after updating.
+This is a major update. Visit plugin settings page after updating to ensure all settings are updated. Users now need to enable each setting via checkbox. Input fields on settings page will be populated with previously entered values.
 
 = 1.0.3 =
 Update to add support for categories and tags metaboxes.
