@@ -217,7 +217,7 @@ class Add_Post_Type_Instructions_Admin {
 		if ( isset( $options['instruction_check'] ) && ! empty( $options['instruction_check'] ) ) {
 			if ( isset( $options['instruction'] ) && ! empty( $options['instruction'] ) ) {
 				$template = $options['instruction'];
-				echo '<br /><div id="apti-below-title"><h3>' . $template . '</h3></div>';
+				echo '<br /><div id="apti-below-title">' . $template . '</div>';
 			}
 		}
 
