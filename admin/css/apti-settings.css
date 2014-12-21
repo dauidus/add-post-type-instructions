@@ -24,21 +24,21 @@
 	width: 95%; 
 	padding: 10px; 
 	margin:8px 0px 0px;
-	resize:none;
-    overflow:hidden;
-    height:100%;
 }
 
-#editor {
+#instruction {
     padding: 10px; 
     margin:0px 0px 15px;
     position:relative;
-    width:auto;
+    width:90%;
     height:auto;
     white-space: pre-wrap;
     word-wrap: break-word;
 }
-.settings_page_apti textarea#editor_input {
+.settings_page_apti textarea#instruction_input {
+	resize:none;
+    overflow:hidden;
+    height:100%;
 	position:absolute;
     top:0;
     left:0;

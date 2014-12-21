@@ -354,13 +354,28 @@ class add_post_type_instructions_settings {
 		    $output = $args[0].'[instruction]';
 			$value  = isset( $args[1]['instruction'] ) ? $args[1]['instruction'] : '';
 
-			$textareahtml = '<textarea id="instruction" name="' .$output. '" rows="3" type="textarea">' .$value. '</textarea>';
+			$textareahtml = '<div id="instruction"><textarea id="instruction_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
 			echo $textareahtml;
 
 			$html = '<p class="description">' . __( 'Enter content to display below the title field, such as general instructions for this type of content.  This will display as bold &lt;h3&gt; text, by default.  HTML allowed.', $this->plugin_slug ) . '</p><hr>';
 
-			echo $html;
+			echo $html; ?>
+			<script>
+				(function() {
+			    	var d = document,
+			        	c = d.getElementById('instruction'),
+			        	t = d.getElementById('instruction_input'),
+			        	f = d.createTextNode('');		    
+			    	c.appendChild(f);			    
+			    	function updateSize() {
+			       		f.nodeValue = t.value + '\n\n';
+			    	}			    
+			    	t.onkeypress = t.onkeyup = t.onchange = updateSize;			    
+			    	updateSize();
+			  	})();
+			</script>
 
+		<?php 
 		} // end instruction_callback
 
 	public function editor_check_callback( $args ) {
@@ -379,34 +394,18 @@ class add_post_type_instructions_settings {
 			
 			$output = $args[0].'[editor]';
 			$value  = isset( $args[1]['editor'] ) ? $args[1]['editor'] : '';
-			// $id = 'textarea_one';
-			/* $settings = array( 
+			$id = 'textarea_one';
+			$settings = array( 
 				'textarea_name' => $output, 
-				'textarea_rows' => '5'
-			);	*/
-
-			$html = '<div id="editor"><textarea id="editor_input" name="' .$output. '" rows="5" type="textarea">' .$value. '</textarea></div>';
-			//wp_editor( $value, $id, $settings );
+				'textarea_rows' => '10'
+			);
+			wp_editor( $value, $id, $settings );
 			// $html .= '<p class="editordescription">* This will only display when content is created. It will </p>';
-			$html .= '<p class="description">' . __( 'Enter default content to be displayed within the WYSIWYG editor, such as "delete this, then start writing".  This will only be included when page/post content is first created.  Once changed and content has been saved, this message will not be included again for that page/post.  HTML and shortcodes allowed.', $this->plugin_slug ) . '</p><hr>';
+			$html = '<p class="description">' . __( 'Enter default content to be displayed within the WYSIWYG editor, such as "delete this, then start writing".  This will only be included when page/post content is first created.  Once changed and content has been saved, this message will not be included again for that page/post.  HTML and shortcodes allowed.', $this->plugin_slug ) . '</p><hr>';
 
-			echo $html; ?>
-			<script>
-				(function() {
-			    	var d = document,
-			        	c = d.getElementById('editor'),
-			        	t = d.getElementById('editor_input'),
-			        	f = d.createTextNode('');		    
-			    	c.appendChild(f);			    
-			    	function updateSize() {
-			       		f.nodeValue = t.value + '\n\n';
-			    	}			    
-			    	t.onkeypress = t.onkeyup = t.onchange = updateSize;			    
-			    	updateSize();
-			  	})();
-			</script>
+			echo $html;
 
-		<?php } // end editor_callback
+		} // end editor_callback
 
 	public function author_check_callback( $args ) {
 
