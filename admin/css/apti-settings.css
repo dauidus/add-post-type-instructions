@@ -25,12 +25,15 @@
 	padding: 10px; 
 	margin:8px 0px 0px;
 }
+.settings_page_apti .wp-editor-wrap {
+	width: 95%; 
+	margin-top: 8px;
+}
 
 #instruction {
     padding: 10px; 
     margin:0px 0px 15px;
     position:relative;
-    width:90%;
     height:auto;
     white-space: pre-wrap;
     word-wrap: break-word;
