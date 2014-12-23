@@ -2,6 +2,7 @@ Add Post Type Instructions
 ============================
 
 == Tags ==
+
 instructions, instruction, assist, direct, direction, directions, assistive, post type, help, metabox, insert text, wysiwyg, content, features, format, attributes, author, trackbacks, excerpt
 
 ** **
