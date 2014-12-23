@@ -7,6 +7,7 @@ instructions, instruction, assist, direct, direction, directions, assistive, pos
 ** **
 
 == Tested up to: ==
+
 4.2-alpha
 
 ** **
