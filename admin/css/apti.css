@@ -2,6 +2,7 @@
 p.apti-text {
 	font-style: italic; 
 	padding: 2px 2px 2px 25px !important;
+	font-size: 12px;
 	border-top: 1px solid #ccc;
 	border-bottom: 1px solid #ccc;
 	background: url('../images/info.gif') 5px center no-repeat #FFFFE6;
@@ -17,4 +18,8 @@ p.apti-text {
 	border-top: 1px solid #ccc;
 	border-bottom: 1px solid #ccc;
 	background: url('../images/info.gif') 6px center no-repeat #FFFFE8;
+}
+
+#edit-slug-box {
+    min-height: 0px !important;
 }
