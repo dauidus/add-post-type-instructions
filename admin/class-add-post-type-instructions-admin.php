@@ -79,7 +79,8 @@ class Add_Post_Type_Instructions_Admin {
 
 		// Fire functions
 			add_action( 'admin_print_styles', array( $this, 'is_edit_page' ) );
-			add_action( 'edit_form_after_title', array( $this, 'add_content_above' ) );
+			add_action( 'edit_form_top', array( $this, 'add_content_above_title' ) );
+			add_action( 'edit_form_after_title', array( $this, 'add_content_above_editor' ) );
 			add_filter( 'default_content', array( $this, 'change_editor_content' ) );
 			add_action( 'admin_head', array( $this, 'change_author_metabox_content' ) );
 			add_filter( 'admin_post_thumbnail_html', array( $this, 'change_thumbnail_metabox_content' ) );
@@ -203,21 +204,42 @@ class Add_Post_Type_Instructions_Admin {
 	} // end is_edit_page
 
 	/**
+	 * Add content above title
+	 *
+	 * @param  string $content HTML string
+	 *
+	 * @since 2.1
+	 */
+	public function add_content_above_title() {
+
+		$post_type = $this->get_post_type();
+		$options = get_option( $this->plugin_slug . '_' . $post_type );
+
+		if ( isset( $options['top_check'] ) && ! empty( $options['top_check'] ) ) {
+			if ( isset( $options['top'] ) && ! empty( $options['top'] ) ) { 
+				$top = $options['top'];
+				echo '<div id="apti-above-title">' . $top . '</div>';
+			}
+		}
+
+	} // end add_content_above_title
+
+	/**
 	 * Add instruction text above the content editor
 	 *
 	 * @param  string $content HTML string
 	 *
 	 * @since 1.0
 	 */
-	public function add_content_above() {
+	public function add_content_above_editor() {
 
 		$post_type = $this->get_post_type();
 		$options = get_option( $this->plugin_slug . '_' . $post_type );
 
 		if ( isset( $options['instruction_check'] ) && ! empty( $options['instruction_check'] ) ) {
 			if ( isset( $options['instruction'] ) && ! empty( $options['instruction'] ) ) {
-				$template = $options['instruction'];
-				echo '<br /><div id="apti-below-title">' . $template . '</div>';
+				$instruction = $options['instruction'];
+				echo '<br /><div id="apti-below-title">' . $instruction . '</div>';
 			}
 		}
 

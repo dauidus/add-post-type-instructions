@@ -2,7 +2,7 @@
 Contributors: dauidus
 Author URI: http://dauid.us
 Tags: instructions, instruction, directions, assistive, post types, help, wysiwyg, client, text, editor, settings
-Requires at least: 3.1
+Requires at least: 3.5
 Tested up to: 4.1
 Stable tag: 2.0
 License: GPLv2 or later
@@ -14,6 +14,7 @@ Allows admins to easily set instructional context for metaboxes and more on page
 
 Add Post Type Instructions allows admins to easily set instructional context for metaboxes and more on pages, posts or custom post types.  Currently it supports adding instructional text in the following areas on the add/edit screen:
 ** **
+* above the title field
 * below the title field
 * author metabox
 * featured image metabox
@@ -86,6 +87,11 @@ Simply delete this plugin to remove all data associated with it.  Deactivating t
 2. Non-intrusive instructive text can be easily added to multiple locations for any post type.
 
 == Changelog ==
+
+= 2.1 =
+* support for content above title field
+* more intuitive colors on add/edit screen
+* more appropriate spacing/font sizes on add/edit screen
 
 = 2.0 =
 * major changes to settings logic

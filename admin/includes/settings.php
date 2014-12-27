@@ -66,6 +66,7 @@ class add_post_type_instructions_settings {
 		$post_types = $plugin->supported_post_types();
 		$defaults = array(
 				// order defined by Parameters reference at http://codex.wordpress.org/Function_Reference/post_type_supports
+				'top' => '',
 				'instruction' => '',
 				'editor' => '',
 				'author' => '',
@@ -97,9 +98,28 @@ class add_post_type_instructions_settings {
 				$section
 			);
 
+			if ( post_type_supports( $pt, 'title' )) {
+				add_settings_field(
+					'top_check',
+					__( 'Above Title Field:', $this->plugin_slug ),
+					array( $this, 'top_check_callback' ),
+					$section,
+					$pt,
+					$args
+				);
+				add_settings_field(
+					'top',
+					__( '', $this->plugin_slug ),
+					array( $this, 'top_callback' ),
+					$section,
+					$pt,
+					$args
+				);
+			}
+
 			add_settings_field(
 				'instruction_check',
-				__( 'Below Title Field:', $this->plugin_slug ),
+				__( 'Above WYSIWYG Editor:', $this->plugin_slug ),
 				array( $this, 'instruction_check_callback' ),
 				$section,
 				$pt,
@@ -117,7 +137,7 @@ class add_post_type_instructions_settings {
 			if ( post_type_supports( $pt, 'editor' )) {
 				add_settings_field(
 					'editor_check',
-					__( 'WYSIWYG Editor:', $this->plugin_slug ),
+					__( 'WYSIWYG Content:', $this->plugin_slug ),
 					array( $this, 'editor_check_callback' ),
 					$section,
 					$pt,
@@ -338,6 +358,45 @@ class add_post_type_instructions_settings {
 		}
 	} // end admin_init
 
+	public function top_check_callback( $args ) {
+
+		$output = $args[0].'[top_check]';
+		$value  = isset( $args[1]['top_check'] ) ? $args[1]['top_check'] : '';
+
+		$checkhtml = '<input type="checkbox" id="top_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
+		$checkhtml .= '<label for="top_check"> check to enable</label>';
+		echo $checkhtml;
+
+	} // end top_check_callback
+
+		public function top_callback( $args ) {
+
+		    $output = $args[0].'[top]';
+			$value  = isset( $args[1]['top'] ) ? $args[1]['top'] : '';
+
+			$textareahtml = '<div id="top"><textarea id="top_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
+			echo $textareahtml;
+
+			$html = '<p class="description" id="instdesc">' . __( 'Enter assistive text to be displayed above the title field, such as general instructions for this type of content.  HTML allowed.', $this->plugin_slug ) . '</p><hr>';
+
+			echo $html; ?>
+			<script>
+				(function() {
+			    	var doc = document,
+			        	top = doc.getElementById('top'),
+			        	topinput = doc.getElementById('top_input'),
+			        	topnode = doc.createTextNode('');		    
+			    	top.appendChild(topnode);			    
+			    	function updateTop() {
+			       		topnode.nodeValue = topinput.value + '\n\n';
+			    	}			    
+			    	topinput.onkeypress = topinput.onkeyup = topinput.onchange = updateTop;			    
+			    	updateTop();
+			  	})();
+			</script>
+		<?php 
+		} // end top_callback
+
 	public function instruction_check_callback( $args ) {
 
 		$output = $args[0].'[instruction_check]';
@@ -357,21 +416,21 @@ class add_post_type_instructions_settings {
 			$textareahtml = '<div id="instruction"><textarea id="instruction_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
 			echo $textareahtml;
 
-			$html = '<p class="description" id="instdesc">' . __( 'Enter assistive text to be displayed below the title field, such as general instructions for this type of content.  HTML allowed.', $this->plugin_slug ) . '</p><hr>';
+			$html = '<p class="description" id="instdesc">' . __( 'Enter assistive text to be displayed below the title field, such as general instructions for the WYSIWYG editor.  HTML allowed.', $this->plugin_slug ) . '</p><hr>';
 
 			echo $html; ?>
 			<script>
 				(function() {
-			    	var d = document,
-			        	c = d.getElementById('instruction'),
-			        	t = d.getElementById('instruction_input'),
-			        	f = d.createTextNode('');		    
-			    	c.appendChild(f);			    
-			    	function updateSize() {
-			       		f.nodeValue = t.value + '\n\n';
+			    	var doc = document,
+			        	instruction = doc.getElementById('instruction'),
+			        	instructioninput = doc.getElementById('instruction_input'),
+			        	instructionnode = doc.createTextNode('');		    
+			    	instruction.appendChild(instructionnode);			    
+			    	function updateInstruction() {
+			       		instructionnode.nodeValue = instructioninput.value + '\n\n';
 			    	}			    
-			    	t.onkeypress = t.onkeyup = t.onchange = updateSize;			    
-			    	updateSize();
+			    	instructioninput.onkeypress = instructioninput.onkeyup = instructioninput.onchange = updateInstruction;
+			    	updateInstruction();
 			  	})();
 			</script>
 		<?php 

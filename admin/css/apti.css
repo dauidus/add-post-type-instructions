@@ -20,6 +20,9 @@ p.apti-text {
 	border-bottom: 1px solid #ccc;
 	background: url('../images/info.gif') 6px center no-repeat #F0FAFF;
 }
+#apti-above-title {
+	margin: 10px 0;
+}
 
 #edit-slug-box {
     min-height: 0px !important;

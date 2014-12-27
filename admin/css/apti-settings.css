@@ -36,7 +36,8 @@
 	margin: 8px 0 8px 0;
 }
 
-.settings_page_apti #instruction {
+.settings_page_apti #instruction,
+.settings_page_apti #top {
     padding: 10px; 
     margin:0px 0px 15px;
     position:relative;
@@ -44,7 +45,8 @@
     white-space: pre-wrap;
     word-wrap: break-word;
 }
-.settings_page_apti textarea#instruction_input {
+.settings_page_apti textarea#instruction_input,
+.settings_page_apti textarea#top_input {
 	resize:none;
     overflow:hidden;
     height:100%;
