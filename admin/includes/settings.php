@@ -377,7 +377,7 @@ class add_post_type_instructions_settings {
 			$textareahtml = '<div id="top"><textarea id="top_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
 			echo $textareahtml;
 
-			$html = '<p class="description" id="instdesc">' . __( 'Enter assistive text to be displayed above the title field, such as general instructions for this type of content.  HTML allowed.', $this->plugin_slug ) . '</p><hr>';
+			$html = '<p class="description" id="instdesc">' . __( 'Enter assistive text to be displayed above the title field, such as general instructions for this type of content.  This content will span the width of the page.  HTML allowed.', $this->plugin_slug ) . '</p><hr>';
 
 			echo $html; ?>
 			<script>
