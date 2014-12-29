@@ -4,7 +4,7 @@ Author URI: http://dauid.us
 Tags: instructions, instruction, directions, assistive, post types, help, wysiwyg, client, text, editor, settings
 Requires at least: 3.5
 Tested up to: 4.1
-Stable tag: 2.0
+Stable tag: 2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,16 +12,18 @@ Allows admins to easily set instructional context for metaboxes and more on page
 
 == Description ==
 
-Add Post Type Instructions allows admins to easily set instructional context for metaboxes and more on pages, posts or custom post types.  Currently it supports adding instructional text in the following areas on the add/edit screen:
+Add Post Type Instructions allows admins to easily set instructional context for metaboxes and more on pages, posts or custom post types.  Currently it supports adding instructional context in the following areas on the add/edit screen:
 ** **
 * above the title field
-* below the title field
+* above the WYSIWYG editor
 * author metabox
 * featured image metabox
 * excerpt metabox
 * trackbacks metabox
 * custom fields metabox
 * page attributes metabox
+* categories metabox
+* tags metabox
 * post format metabox
 * comments metabox
 * revisions metabox
@@ -89,9 +91,11 @@ Simply delete this plugin to remove all data associated with it.  Deactivating t
 == Changelog ==
 
 = 2.1 =
-* support for content above title field
-* more intuitive colors on add/edit screen
+* support for content above title field, categories and tags
+* more intuitive colors on add/edit screen (from yellow to blue)
 * more appropriate spacing/font sizes on add/edit screen
+* every settings field now resizes
+* renamed "above title field" option to "above WYSIWYG editor"
 
 = 2.0 =
 * major changes to settings logic

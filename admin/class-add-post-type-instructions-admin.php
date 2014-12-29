@@ -90,9 +90,9 @@ class Add_Post_Type_Instructions_Admin {
 			add_action( 'admin_head', array( $this, 'change_comments_metabox_content' ) );
 			add_action( 'admin_head', array( $this, 'change_revisions_metabox_content' ) );
 			add_action( 'admin_head', array( $this, 'change_pageattributes_metabox_content' ) );
+			add_action( 'admin_head', array( $this, 'change_categories_metabox_content' ) );
+			add_action( 'admin_head', array( $this, 'change_tags_metabox_content' ) );
 			add_action( 'admin_head', array( $this, 'change_postformats_metabox_content' ) );
-			// add_action( 'admin_head', array( $this, 'change_categories_metabox_content' ) );
-			// add_action( 'admin_head', array( $this, 'change_tags_metabox_content' ) );
 
 	}
 
@@ -494,11 +494,69 @@ class Add_Post_Type_Instructions_Admin {
 					    $('' + text_to_insert + '').insertBefore('#pageparentdiv .inside p:nth-of-type(1)')
 					});
 				</script>
-			<?php 
+				<?php 
 			}
 		}
 
 	} // end change_pageattributes_metabox_content
+
+	/**
+	 * Change categories metabox content
+	 *
+	 * @param  string $content HTML string
+	 *
+	 * @since 2.1
+	 */
+	public function change_categories_metabox_content() {
+
+		$post_type = $this->get_post_type();
+		$options = get_option( $this->plugin_slug . '_' . $post_type );
+
+		if ( isset( $options['categories_check'] ) && ! empty( $options['categories_check'] ) ) {
+			if ( isset( $options['categories'] ) && ! empty( $options['categories'] ) ) { 
+				$categories = '<p class="apti-text apti-categories">' . $options['categories'] . '</p>'; ?>
+
+				<script type="text/javascript">
+					jQuery(function($) {
+					    var text_to_insert = '<?php echo $categories; ?>';
+
+					    $('' + text_to_insert + '').insertBefore('#taxonomy-category')
+					});
+				</script>
+				<?php 
+			}
+		}
+
+	} // end change_categories_metabox_content	
+
+	/**
+	 * Change tags metabox content
+	 *
+	 * @param  string $content HTML string
+	 *
+	 * @since 2.1
+	 */
+	public function change_tags_metabox_content() {
+
+		$post_type = $this->get_post_type();
+		$options = get_option( $this->plugin_slug . '_' . $post_type );
+
+		if ( isset( $options['tags_check'] ) && ! empty( $options['tags_check'] ) ) {
+			if ( isset( $options['tags'] ) && ! empty( $options['tags'] ) ) { 
+				$tags = '<p class="apti-text apti-tags">' . $options['tags'] . '</p>'; ?>
+
+				<script type="text/javascript">
+					jQuery(function($) {
+					    var text_to_insert = '<?php echo $tags; ?>';
+
+					    $('' + text_to_insert + '').insertBefore('.tagsdiv')
+					});
+				</script>
+				<?php 
+			}
+		}
+
+	} // end change_categories_metabox_content	
 
 	/**
 	 * Change postformats metabox content
@@ -528,59 +586,5 @@ class Add_Post_Type_Instructions_Admin {
 		}
 
 	} // end change_postformats_metabox_content
-
-	/**
-	 * Change categories metabox content
-	 *
-	 * @param  string $content HTML string
-	 *
-	 * @since 1.0.3
-	 */
-/*	public function change_categories_metabox_content() {
-
-		$post_type = $this->get_post_type();
-		$options = get_option( $this->plugin_slug . '_' . $post_type );
-
-		if ( isset( $options['categories'] ) && ! empty( $options['categories'] ) ) { 
-			$categories = '<p class="apti-text apti-categories">' . $options['categories'] . '</p>'; ?>
-
-			<script type="text/javascript">
-				jQuery(function($) {
-				    var text_to_insert = '<?php echo $categories; ?>';
-
-				    $('' + text_to_insert + '').insertBefore('#taxonomy-category')
-				});
-			</script>
-		<?php 
-		}
-
-	} // end change_categories_metabox_content	*/
-
-	/**
-	 * Change tags metabox content
-	 *
-	 * @param  string $content HTML string
-	 *
-	 * @since 1.0.3
-	 */
-/*	public function change_tags_metabox_content() {
-
-		$post_type = $this->get_post_type();
-		$options = get_option( $this->plugin_slug . '_' . $post_type );
-
-		if ( isset( $options['tags'] ) && ! empty( $options['tags'] ) ) { 
-			$tags = '<p class="apti-text apti-tags">' . $options['tags'] . '</p>'; ?>
-
-			<script type="text/javascript">
-				jQuery(function($) {
-				    var text_to_insert = '<?php echo $tags; ?>';
-
-				    $('' + text_to_insert + '').insertBefore('.tagsdiv')
-				});
-			</script>
-		<?php 
-		}
-
-	} // end change_categories_metabox_content	*/
 
 }

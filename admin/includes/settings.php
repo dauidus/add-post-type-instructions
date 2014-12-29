@@ -78,8 +78,8 @@ class add_post_type_instructions_settings {
 				'revisions' => '',
 				'page-attributes' => '',
 				'post-formats' => '',
-				// 'categories' => '',
-				// 'tags' => '',
+				'categories' => '',
+				'tags' => '',
 				// 'discussion' => '',
 				// 'slug' => '',
 			);
@@ -306,6 +306,44 @@ class add_post_type_instructions_settings {
 			}
 
 			if ( !($pt == 'page') ) {
+				
+				if ( is_object_in_taxonomy( $pt, 'category' ) ) {
+					add_settings_field(
+						'categories_check',
+						__( '<br />Categories Metabox:', $this->plugin_slug ),
+						array( $this, 'categories_check_callback' ),
+						$section,
+						$pt,
+						$args
+					);
+					add_settings_field(
+						'categories',
+						__( '', $this->plugin_slug ),
+						array( $this, 'categories_callback' ),
+						$section,
+						$pt,
+						$args
+					);
+				}
+
+				if ( is_object_in_taxonomy( $pt, 'post_tag' ) ) {
+					add_settings_field(
+						'tags_check',
+						__( '<br />Tags Metabox:', $this->plugin_slug ),
+						array( $this, 'tags_check_callback' ),
+						$section,
+						$pt,
+						$args
+					);
+					add_settings_field(
+						'tags',
+						__( '', $this->plugin_slug ),
+						array( $this, 'tags_callback' ),
+						$section,
+						$pt,
+						$args
+					);
+				}
 
 				if ( post_type_supports( $pt, 'post-formats' )) {
 					add_settings_field(
@@ -325,30 +363,7 @@ class add_post_type_instructions_settings {
 						$args
 					);
 				}
-/*
-				if ( taxonomy_exists( 'category' )) {
-					add_settings_field(
-						'categories',
-						__( '<br />Categories Metabox:', $this->plugin_slug ),
-						array( $this, 'categories_callback' ),
-						$section,
-						$pt,
-						$args
-					);
-				}
 
-				if ( taxonomy_exists( 'post_tag' )) {
-					add_settings_field(
-						'tags',
-						__( '<br />Tags Metabox:', $this->plugin_slug ),
-						array( $this, 'tags_callback' ),
-						$section,
-						$pt,
-						$args
-					);
-				}
-*/
-				
 			}
 
 			register_setting(
@@ -482,10 +497,24 @@ class add_post_type_instructions_settings {
 			$output = $args[0].'[author]';
 			$value  = isset( $args[1]['author'] ) ? $args[1]['author'] : '';
 
-			$html = '<div id="author"><textarea id="author_input" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea></div>';
+			$html = '<div id="author"><textarea id="author_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
 			$html .= '<p class="description" id="authdesc">' . __( 'Enter assistive text to be displayed within the author metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
-			echo $html;
-
+			echo $html; ?>
+			<script>
+				(function() {
+			    	var doc = document,
+			        	author = doc.getElementById('author'),
+			        	authorinput = doc.getElementById('author_input'),
+			        	authornode = doc.createTextNode('');		    
+			    	author.appendChild(authornode);			    
+			    	function updateAuthor() {
+			       		authornode.nodeValue = authorinput.value + '\n\n';
+			    	}			    
+			    	authorinput.onkeypress = authorinput.onkeyup = authorinput.onchange = updateAuthor;
+			    	updateAuthor();
+			  	})();
+			</script>
+		<?php 
 		} // end author_callback
 
 	public function thumbnail_check_callback( $args ) {
@@ -505,10 +534,24 @@ class add_post_type_instructions_settings {
 			$output = $args[0].'[thumbnail]';
 			$value  = isset( $args[1]['thumbnail'] ) ? $args[1]['thumbnail'] : '';
 
-			$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
+			$html = '<div id="thumbnail"><textarea id="thumbnail_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
 			$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the featured image metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
-			echo $html;
-
+			echo $html; ?>
+			<script>
+				(function() {
+			    	var doc = document,
+			        	thumbnail = doc.getElementById('thumbnail'),
+			        	thumbnailinput = doc.getElementById('thumbnail_input'),
+			        	thumbnailnode = doc.createTextNode('');		    
+			    	thumbnail.appendChild(thumbnailnode);			    
+			    	function updateThumbnail() {
+			       		thumbnailnode.nodeValue = thumbnailinput.value + '\n\n';
+			    	}			    
+			    	thumbnailinput.onkeypress = thumbnailinput.onkeyup = thumbnailinput.onchange = updateThumbnail;
+			    	updateThumbnail();
+			  	})();
+			</script>
+		<?php 
 		} // end thumbnail_callback
 
 	public function excerpt_check_callback( $args ) {
@@ -528,9 +571,24 @@ class add_post_type_instructions_settings {
 			$output = $args[0].'[excerpt]';
 			$value  = isset( $args[1]['excerpt'] ) ? $args[1]['excerpt'] : '';
 
-			$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
+			$html = '<div id="excerpt"><textarea id="excerpt_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
 			$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the excerpt metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
-			echo $html;
+			echo $html; ?>
+			<script>
+				(function() {
+			    	var doc = document,
+			        	excerpt = doc.getElementById('excerpt'),
+			        	excerptinput = doc.getElementById('excerpt_input'),
+			        	excerptnode = doc.createTextNode('');		    
+			    	excerpt.appendChild(excerptnode);			    
+			    	function updateExcerpt() {
+			       		excerptnode.nodeValue = excerptinput.value + '\n\n';
+			    	}			    
+			    	excerptinput.onkeypress = excerptinput.onkeyup = excerptinput.onchange = updateExcerpt;
+			    	updateExcerpt();
+			  	})();
+			</script>
+		<?php 
 
 		} // end excerpt_callback
 
@@ -551,9 +609,24 @@ class add_post_type_instructions_settings {
 			$output = $args[0].'[trackbacks]';
 			$value  = isset( $args[1]['trackbacks'] ) ? $args[1]['trackbacks'] : '';
 
-			$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
+			$html = '<div id="trackbacks"><textarea id="trackbacks_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
 			$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the trackbacks metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
-			echo $html;
+			echo $html; ?>
+			<script>
+				(function() {
+			    	var doc = document,
+			        	trackbacks = doc.getElementById('trackbacks'),
+			        	trackbacksinput = doc.getElementById('trackbacks_input'),
+			        	trackbacksnode = doc.createTextNode('');		    
+			    	trackbacks.appendChild(trackbacksnode);			    
+			    	function updateTrackbacks() {
+			       		trackbacksnode.nodeValue = trackbacksinput.value + '\n\n';
+			    	}			    
+			    	trackbacksinput.onkeypress = trackbacksinput.onkeyup = trackbacksinput.onchange = updateTrackbacks;
+			    	updateTrackbacks();
+			  	})();
+			</script>
+		<?php 
 
 		} // end trackbacks_callback
 
@@ -574,9 +647,24 @@ class add_post_type_instructions_settings {
 			$output = $args[0].'[customfields]';
 			$value  = isset( $args[1]['customfields'] ) ? $args[1]['customfields'] : '';
 
-			$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
+			$html = '<div id="customfields"><textarea id="customfields_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
 			$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the custom fields metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
-			echo $html;
+			echo $html; ?>
+			<script>
+				(function() {
+			    	var doc = document,
+			        	customfields = doc.getElementById('customfields'),
+			        	customfieldsinput = doc.getElementById('customfields_input'),
+			        	customfieldsnode = doc.createTextNode('');		    
+			    	customfields.appendChild(customfieldsnode);			    
+			    	function updateCustomfields() {
+			       		customfieldsnode.nodeValue = customfieldsinput.value + '\n\n';
+			    	}			    
+			    	customfieldsinput.onkeypress = customfieldsinput.onkeyup = customfieldsinput.onchange = updateCustomfields;
+			    	updateCustomfields();
+			  	})();
+			</script>
+		<?php 
 
 		} // end customfields_callback
 
@@ -597,9 +685,24 @@ class add_post_type_instructions_settings {
 			$output = $args[0].'[comments]';
 			$value  = isset( $args[1]['comments'] ) ? $args[1]['comments'] : '';
 
-			$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
+			$html = '<div id="comments"><textarea id="comments_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
 			$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the comments metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
-			echo $html;
+			echo $html; ?>
+			<script>
+				(function() {
+			    	var doc = document,
+			        	comments = doc.getElementById('comments'),
+			        	commentsinput = doc.getElementById('comments_input'),
+			        	commentsnode = doc.createTextNode('');		    
+			    	comments.appendChild(commentsnode);			    
+			    	function updateComments() {
+			       		commentsnode.nodeValue = commentsinput.value + '\n\n';
+			    	}			    
+			    	commentsinput.onkeypress = commentsinput.onkeyup = commentsinput.onchange = updateComments;
+			    	updateComments();
+			  	})();
+			</script>
+		<?php 
 
 		} // end comments_callback
 
@@ -620,9 +723,24 @@ class add_post_type_instructions_settings {
 			$output = $args[0].'[revisions]';
 			$value  = isset( $args[1]['revisions'] ) ? $args[1]['revisions'] : '';
 
-			$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
+			$html = '<div id="revisions"><textarea id="revisions_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
 			$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the revisions metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
-			echo $html;
+			echo $html; ?>
+			<script>
+				(function() {
+			    	var doc = document,
+			        	revisions = doc.getElementById('revisions'),
+			        	revisionsinput = doc.getElementById('revisions_input'),
+			        	revisionsnode = doc.createTextNode('');		    
+			    	revisions.appendChild(revisionsnode);			    
+			    	function updateRevisions() {
+			       		revisionsnode.nodeValue = revisionsinput.value + '\n\n';
+			    	}			    
+			    	revisionsinput.onkeypress = revisionsinput.onkeyup = revisionsinput.onchange = updateRevisions;
+			    	updateRevisions();
+			  	})();
+			</script>
+		<?php 
 
 		} // end revisions_callback
 
@@ -643,11 +761,102 @@ class add_post_type_instructions_settings {
 			$output = $args[0].'[pageattributes]';
 			$value  = isset( $args[1]['pageattributes'] ) ? $args[1]['pageattributes'] : '';
 
-			$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
+			$html = '<div id="pageattributes"><textarea id="pageattributes_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
 			$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the page attributes metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
-			echo $html;
+			echo $html; ?>
+			<script>
+				(function() {
+			    	var doc = document,
+			        	pageattributes = doc.getElementById('pageattributes'),
+			        	pageattributesinput = doc.getElementById('pageattributes_input'),
+			        	pageattributesnode = doc.createTextNode('');		    
+			    	pageattributes.appendChild(pageattributesnode);			    
+			    	function updatePageattributes() {
+			       		pageattributesnode.nodeValue = pageattributesinput.value + '\n\n';
+			    	}			    
+			    	pageattributesinput.onkeypress = pageattributesinput.onkeyup = pageattributesinput.onchange = updatePageattributes;
+			    	updatePageattributes();
+			  	})();
+			</script>
+		<?php 
 
 		} // end pageattributes_callback
+
+	public function categories_check_callback( $args ) {
+		
+		$output = $args[0].'[categories_check]';
+		$value  = isset( $args[1]['categories_check'] ) ? $args[1]['categories_check'] : '';
+
+		$checkhtml = '<input type="checkbox" id="categories_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
+		$checkhtml .= '<label for="categories_check"> check to enable</label>';
+
+		echo $checkhtml;
+
+	} // end categories_check_callback
+
+		public function categories_callback( $args ) {
+			
+			$output = $args[0].'[categories]';
+			$value  = isset( $args[1]['categories'] ) ? $args[1]['categories'] : '';
+
+			$html = '<div id="categories"><textarea id="categories_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
+			$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the categories metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
+			echo $html; ?>
+			<script>
+				(function() {
+			    	var doc = document,
+			        	categories = doc.getElementById('categories'),
+			        	categoriesinput = doc.getElementById('categories_input'),
+			        	categoriesnode = doc.createTextNode('');		    
+			    	categories.appendChild(categoriesnode);			    
+			    	function updateCategories() {
+			       		categoriesnode.nodeValue = categoriesinput.value + '\n\n';
+			    	}			    
+			    	categoriesinput.onkeypress = categoriesinput.onkeyup = categoriesinput.onchange = updateCategories;
+			    	updateCategories();
+			  	})();
+			</script>
+		<?php 
+
+		} // end categories_callback
+
+	public function tags_check_callback( $args ) {
+		
+		$output = $args[0].'[tags_check]';
+		$value  = isset( $args[1]['tags_check'] ) ? $args[1]['tags_check'] : '';
+
+		$checkhtml = '<input type="checkbox" id="tags_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
+		$checkhtml .= '<label for="tags_check"> check to enable</label>';
+
+		echo $checkhtml;
+
+	} // end tags_check_callback
+
+		public function tags_callback( $args ) {
+			
+			$output = $args[0].'[tags]';
+			$value  = isset( $args[1]['tags'] ) ? $args[1]['tags'] : '';
+
+			$html = '<div id="tags"><textarea id="tags_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
+			$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the tags metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
+			echo $html; ?>
+			<script>
+				(function() {
+			    	var doc = document,
+			        	tags = doc.getElementById('tags'),
+			        	tagsinput = doc.getElementById('tags_input'),
+			        	tagsnode = doc.createTextNode('');		    
+			    	tags.appendChild(tagsnode);			    
+			    	function updateTags() {
+			       		tagsnode.nodeValue = tagsinput.value + '\n\n';
+			    	}			    
+			    	tagsinput.onkeypress = tagsinput.onkeyup = tagsinput.onchange = updateTags;
+			    	updateTags();
+			  	})();
+			</script>
+		<?php 
+
+		} // end tags_callback
 
 	public function postformats_check_callback( $args ) {
 
@@ -666,35 +875,26 @@ class add_post_type_instructions_settings {
 			$output = $args[0].'[postformats]';
 			$value  = isset( $args[1]['postformats'] ) ? $args[1]['postformats'] : '';
 
-			$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
+			$html = '<div id="postformats"><textarea id="postformats_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
 			$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the post format metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
-			echo $html;
+			echo $html; ?>
+			<script>
+				(function() {
+			    	var doc = document,
+			        	postformats = doc.getElementById('postformats'),
+			        	postformatsinput = doc.getElementById('postformats_input'),
+			        	postformatsnode = doc.createTextNode('');		    
+			    	postformats.appendChild(postformatsnode);			    
+			    	function updatePostformats() {
+			       		postformatsnode.nodeValue = postformatsinput.value + '\n\n';
+			    	}			    
+			    	postformatsinput.onkeypress = postformatsinput.onkeyup = postformatsinput.onchange = updatePostformats;
+			    	updatePostformats();
+			  	})();
+			</script>
+		<?php 
 
 		} // end postformats_callback
-
-/*	public function categories_callback( $args ) {
-		
-		$output = $args[0].'[categories]';
-		$value  = isset( $args[1]['categories'] ) ? $args[1]['categories'] : '';
-
-		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
-		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the post format metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
-		echo $html;
-
-	} // end categories_callback
-
-	public function tags_callback( $args ) {
-		
-		$output = $args[0].'[tags]';
-		$value  = isset( $args[1]['tags'] ) ? $args[1]['tags'] : '';
-
-		$html = '<textarea id="' .$output. '" name="' .$output. '" rows="2" type="textarea">' .$value. '</textarea>';
-		$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the post format metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
-		echo $html;
-
-	} // end tags_callback
-*/
-
 
 }
 add_post_type_instructions_settings::get_instance();
