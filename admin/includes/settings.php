@@ -64,6 +64,25 @@ class add_post_type_instructions_settings {
 	public function admin_init() {
 		$plugin = add_post_type_instructions::get_instance();
 		$post_types = $plugin->supported_post_types();
+		$defaults = array(
+				// order defined by Parameters reference at http://codex.wordpress.org/Function_Reference/post_type_supports
+				'top' => '',
+				'instruction' => '',
+				'editor' => '',
+				'author' => '',
+				'thumbnail' => '',
+				'excerpt' => '',
+				'trackbacks' => '',
+				'custom-fields' => '',
+				'comments' => '',
+				'revisions' => '',
+				'page-attributes' => '',
+				'post-formats' => '',
+				'categories' => '',
+				'tags' => '',
+				// 'discussion' => '',
+				// 'slug' => '',
+			);
 
 		foreach ( $post_types as $pt ) {
 			$post_object = get_post_type_object( $pt );
