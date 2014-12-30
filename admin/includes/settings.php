@@ -310,7 +310,7 @@ class add_post_type_instructions_settings {
 				if ( is_object_in_taxonomy( $pt, 'category' ) ) {
 					add_settings_field(
 						'categories_check',
-						__( '<br />Categories Metabox:', $this->plugin_slug ),
+						__( 'Categories Metabox:', $this->plugin_slug ),
 						array( $this, 'categories_check_callback' ),
 						$section,
 						$pt,
@@ -329,7 +329,7 @@ class add_post_type_instructions_settings {
 				if ( is_object_in_taxonomy( $pt, 'post_tag' ) ) {
 					add_settings_field(
 						'tags_check',
-						__( '<br />Tags Metabox:', $this->plugin_slug ),
+						__( 'Tags Metabox:', $this->plugin_slug ),
 						array( $this, 'tags_check_callback' ),
 						$section,
 						$pt,
@@ -379,7 +379,7 @@ class add_post_type_instructions_settings {
 		$value  = isset( $args[1]['top_check'] ) ? $args[1]['top_check'] : '';
 
 		$checkhtml = '<input type="checkbox" id="top_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
-		$checkhtml .= '<label for="top_check"> check to enable</label>';
+		$checkhtml .= '<label for="top_check"> ' . __( 'check to enable', $this->plugin_slug ) . '</label>';
 		echo $checkhtml;
 
 	} // end top_check_callback
@@ -418,7 +418,7 @@ class add_post_type_instructions_settings {
 		$value  = isset( $args[1]['instruction_check'] ) ? $args[1]['instruction_check'] : '';
 
 		$checkhtml = '<input type="checkbox" id="instruction_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
-		$checkhtml .= '<label for="instruction_check"> check to enable</label>';
+		$checkhtml .= '<label for="instruction_check"> ' . __( 'check to enable', $this->plugin_slug ) . '</label>';
 		echo $checkhtml;
 
 	} // end instruction_check_callback
@@ -457,7 +457,7 @@ class add_post_type_instructions_settings {
 		$value  = isset( $args[1]['editor_check'] ) ? $args[1]['editor_check'] : '';
 
 		$checkhtml = '<input type="checkbox" id="editor_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
-		$checkhtml .= '<label for="editor_check"> check to enable</label>';
+		$checkhtml .= '<label for="editor_check"> ' . __( 'check to enable', $this->plugin_slug ) . '</label>';
 
 		echo $checkhtml;
 
@@ -486,7 +486,7 @@ class add_post_type_instructions_settings {
 		$value  = isset( $args[1]['author_check'] ) ? $args[1]['author_check'] : '';
 
 		$checkhtml = '<input type="checkbox" id="author_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
-		$checkhtml .= '<label for="author_check"> check to enable</label>';
+		$checkhtml .= '<label for="author_check"> ' . __( 'check to enable', $this->plugin_slug ) . '</label>';
 
 		echo $checkhtml;
 
@@ -523,7 +523,7 @@ class add_post_type_instructions_settings {
 		$value  = isset( $args[1]['thumbnail_check'] ) ? $args[1]['thumbnail_check'] : '';
 
 		$checkhtml = '<input type="checkbox" id="thumbnail_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
-		$checkhtml .= '<label for="thumbnail_check"> check to enable</label>';
+		$checkhtml .= '<label for="thumbnail_check"> ' . __( 'check to enable', $this->plugin_slug ) . '</label>';
 
 		echo $checkhtml;
 
@@ -560,7 +560,7 @@ class add_post_type_instructions_settings {
 		$value  = isset( $args[1]['excerpt_check'] ) ? $args[1]['excerpt_check'] : '';
 
 		$checkhtml = '<input type="checkbox" id="excerpt_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
-		$checkhtml .= '<label for="excerpt_check"> check to enable</label>';
+		$checkhtml .= '<label for="excerpt_check"> ' . __( 'check to enable', $this->plugin_slug ) . '</label>';
 
 		echo $checkhtml;
 
@@ -598,7 +598,7 @@ class add_post_type_instructions_settings {
 		$value  = isset( $args[1]['trackbacks_check'] ) ? $args[1]['trackbacks_check'] : '';
 
 		$checkhtml = '<input type="checkbox" id="trackbacks_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
-		$checkhtml .= '<label for="trackbacks_check"> check to enable</label>';
+		$checkhtml .= '<label for="trackbacks_check"> ' . __( 'check to enable', $this->plugin_slug ) . '</label>';
 
 		echo $checkhtml;
 
@@ -636,7 +636,7 @@ class add_post_type_instructions_settings {
 		$value  = isset( $args[1]['customfields_check'] ) ? $args[1]['customfields_check'] : '';
 
 		$checkhtml = '<input type="checkbox" id="customfields_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
-		$checkhtml .= '<label for="customfields_check"> check to enable</label>';
+		$checkhtml .= '<label for="customfields_check"> ' . __( 'check to enable', $this->plugin_slug ) . '</label>';
 
 		echo $checkhtml;
 
@@ -674,7 +674,7 @@ class add_post_type_instructions_settings {
 		$value  = isset( $args[1]['comments_check'] ) ? $args[1]['comments_check'] : '';
 
 		$checkhtml = '<input type="checkbox" id="comments_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
-		$checkhtml .= '<label for="comments_check"> check to enable</label>';
+		$checkhtml .= '<label for="comments_check"> ' . __( 'check to enable', $this->plugin_slug ) . '</label>';
 
 		echo $checkhtml;
 
@@ -712,7 +712,7 @@ class add_post_type_instructions_settings {
 		$value  = isset( $args[1]['revisions_check'] ) ? $args[1]['revisions_check'] : '';
 
 		$checkhtml = '<input type="checkbox" id="revisions_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
-		$checkhtml .= '<label for="revisions_check"> check to enable</label>';
+		$checkhtml .= '<label for="revisions_check"> ' . __( 'check to enable', $this->plugin_slug ) . '</label>';
 
 		echo $checkhtml;
 
@@ -750,7 +750,7 @@ class add_post_type_instructions_settings {
 		$value  = isset( $args[1]['pageattributes_check'] ) ? $args[1]['pageattributes_check'] : '';
 
 		$checkhtml = '<input type="checkbox" id="pageattributes_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
-		$checkhtml .= '<label for="pageattributes_check"> check to enable</label>';
+		$checkhtml .= '<label for="pageattributes_check"> ' . __( 'check to enable', $this->plugin_slug ) . '</label>';
 
 		echo $checkhtml;
 
@@ -788,7 +788,7 @@ class add_post_type_instructions_settings {
 		$value  = isset( $args[1]['categories_check'] ) ? $args[1]['categories_check'] : '';
 
 		$checkhtml = '<input type="checkbox" id="categories_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
-		$checkhtml .= '<label for="categories_check"> check to enable</label>';
+		$checkhtml .= '<label for="categories_check"> ' . __( 'check to enable', $this->plugin_slug ) . '</label>';
 
 		echo $checkhtml;
 
@@ -826,7 +826,7 @@ class add_post_type_instructions_settings {
 		$value  = isset( $args[1]['tags_check'] ) ? $args[1]['tags_check'] : '';
 
 		$checkhtml = '<input type="checkbox" id="tags_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
-		$checkhtml .= '<label for="tags_check"> check to enable</label>';
+		$checkhtml .= '<label for="tags_check"> ' . __( 'check to enable', $this->plugin_slug ) . '</label>';
 
 		echo $checkhtml;
 
@@ -864,7 +864,7 @@ class add_post_type_instructions_settings {
 		$value  = isset( $args[1]['postformats_check'] ) ? $args[1]['postformats_check'] : '';
 
 		$checkhtml = '<input type="checkbox" id="postformats_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
-		$checkhtml .= '<label for="postformats_check"> check to enable</label>';
+		$checkhtml .= '<label for="postformats_check"> ' . __( 'check to enable', $this->plugin_slug ) . '</label>';
 
 		echo $checkhtml;
 
