@@ -16,19 +16,24 @@ Add Post Type Instructions allows admins to easily set instructional context for
 ** **
 * above the title field
 * above the WYSIWYG editor
-* author metabox
-* featured image metabox
-* excerpt metabox
-* trackbacks metabox
-* custom fields metabox
-* page attributes metabox
-* categories metabox
-* tags metabox
-* post format metabox
-* comments metabox
-* revisions metabox
+* default content within the WYSIWYG editor
 
-APTI also allows admins to set default content within the WYSIWYG editor, per post type.
+and within the following metaboxes:
+** **
+* publish
+* author
+* featured image
+* excerpt
+* trackbacks
+* custom fields
+* page attributes
+* categories
+* tags
+* post format
+* discussion
+* comments
+* revisions
+* slug
 
 APTI uses OOP standards to add options only for those metaboxes which are supported for each post type and to execute code only on those pages where it is needed.  It works especially well for sites with many custom post types that require content to be entered in a specific way (ie. when a post type requires a specific page template or when the absence of a featured image will break the intended look of a post).  Think of any theme or plugin that supports an image slider powered by a required featured image, and you can surely see where APTI can come in handy.
 
@@ -91,7 +96,8 @@ Simply delete this plugin to remove all data associated with it.  Deactivating t
 == Changelog ==
 
 = 2.1 =
-* support for content above title field, categories and tags
+* support for content above title field
+* support for categories, tags, discussion, slug and publish metaboxes
 * more intuitive colors on add/edit screen (from yellow to blue)
 * more appropriate spacing/font sizes on add/edit screen
 * every settings field now resizes

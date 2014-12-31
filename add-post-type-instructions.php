@@ -13,7 +13,7 @@
  * @wordpress-plugin
  * Plugin Name:       Add Post Type Instructions
  * Plugin URI:        http://dauid.us
- * Description:       Allows admins to easily set instructional context for pages, posts or custom post types.  Currently supports inserting context above the title field, above the WYSIWYG editor, within the WYSIWYG editor, and inside the following metaboxes: author, featured image, excerpt, trackbacks, custom fields, comments, revisions, page attributes, categories (with minimum required), tags (with minimum required) and post format.  Only adds options for the metaboxes supported for each post type.  Works with multisite.
+ * Description:       Allows admins to easily set instructional context for pages, posts or custom post types.  Currently supports inserting context above the title field, above the WYSIWYG editor, within the WYSIWYG editor, and inside the following metaboxes: publish, author, featured image, excerpt, trackbacks, custom fields, comments, discussion, revisions, page attributes, categories, tags, slug and post format.  Only adds options for the metaboxes supported for each post type.  Works with multisite.
  * Version:           2.1
  * Author:            Dave Winter
  * Author URI:        http://dauid.us

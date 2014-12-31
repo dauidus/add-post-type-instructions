@@ -82,17 +82,20 @@ class Add_Post_Type_Instructions_Admin {
 			add_action( 'edit_form_top', array( $this, 'add_content_above_title' ) );
 			add_action( 'edit_form_after_title', array( $this, 'add_content_above_editor' ) );
 			add_filter( 'default_content', array( $this, 'change_editor_content' ) );
+			add_action( 'admin_head', array( $this, 'change_publish_metabox_content' ) );
 			add_action( 'admin_head', array( $this, 'change_author_metabox_content' ) );
 			add_filter( 'admin_post_thumbnail_html', array( $this, 'change_thumbnail_metabox_content' ) );
 			add_action( 'admin_head', array( $this, 'change_excerpt_metabox_content' ) );
 			add_action( 'admin_head', array( $this, 'change_trackbacks_metabox_content' ) );
 			add_action( 'admin_head', array( $this, 'change_customfields_metabox_content' ) );
 			add_action( 'admin_head', array( $this, 'change_comments_metabox_content' ) );
+			add_action( 'admin_head', array( $this, 'change_discussion_metabox_content' ) );
 			add_action( 'admin_head', array( $this, 'change_revisions_metabox_content' ) );
 			add_action( 'admin_head', array( $this, 'change_pageattributes_metabox_content' ) );
 			add_action( 'admin_head', array( $this, 'change_categories_metabox_content' ) );
 			add_action( 'admin_head', array( $this, 'change_tags_metabox_content' ) );
 			add_action( 'admin_head', array( $this, 'change_postformats_metabox_content' ) );
+			add_action( 'admin_head', array( $this, 'change_slug_metabox_content' ) );
 
 	}
 
@@ -263,6 +266,33 @@ class Add_Post_Type_Instructions_Admin {
 	} // end change_editor_content
 
 	/**
+	 * Change publish metabox content
+	 *
+	 * @since 2.1
+	 */
+	public function change_publish_metabox_content() {
+
+		$post_type = $this->get_post_type();
+		$options = get_option( $this->plugin_slug . '_' . $post_type );
+
+		if ( isset( $options['publish_check'] ) && ! empty( $options['publish_check'] ) ) {
+			if ( isset( $options['publish'] ) && ! empty( $options['publish'] ) ) { 
+				$publish = '<p class="apti-text apti-publish">' . $options['publish'] . '</p>'; ?>
+
+				<script type="text/javascript">
+					jQuery(function($) {
+					    var text_to_insert = '<?php echo $publish; ?>';
+
+					    $('' + text_to_insert + '').insertBefore('#submitdiv .inside #minor-publishing-actions')
+					});
+				</script>
+			<?php 
+			}
+		}
+
+	} // end change_publish_metabox_content
+
+	/**
 	 * Change author metabox content
 	 *
 	 * @since 1.0.1
@@ -419,6 +449,33 @@ class Add_Post_Type_Instructions_Admin {
 	} // end change_comments_metabox_content	
 
 	/**
+	 * Change discussion metabox content
+	 *
+	 * @since 2.1
+	 */
+	public function change_discussion_metabox_content() {
+
+		$post_type = $this->get_post_type();
+		$options = get_option( $this->plugin_slug . '_' . $post_type );
+
+		if ( isset( $options['discussion_check'] ) && ! empty( $options['discussion_check'] ) ) {
+			if ( isset( $options['discussion'] ) && ! empty( $options['discussion'] ) ) { 
+				$discussion = '<p class="apti-text apti-discussion">' . $options['discussion'] . '</p>'; ?>
+
+				<script type="text/javascript">
+					jQuery(function($) {
+					    var text_to_insert = '<?php echo $discussion; ?>';
+
+					    $('' + text_to_insert + '').insertBefore('#commentstatusdiv .inside p:nth-of-type(1)')
+					});
+				</script>
+			<?php 
+			}
+		}
+
+	} // end change_discussion_metabox_content	
+
+	/**
 	 * Change revisions metabox content
 	 *
 	 * @since 2.0
@@ -552,5 +609,32 @@ class Add_Post_Type_Instructions_Admin {
 		}
 
 	} // end change_postformats_metabox_content
+
+	/**
+	 * Change slug metabox content
+	 *
+	 * @since 2.1
+	 */
+	public function change_slug_metabox_content() {
+
+		$post_type = $this->get_post_type();
+		$options = get_option( $this->plugin_slug . '_' . $post_type );
+
+		if ( isset( $options['slug_check'] ) && ! empty( $options['slug_check'] ) ) {
+			if ( isset( $options['slug'] ) && ! empty( $options['slug'] ) ) { 
+				$slug = '<p class="apti-text apti-slug">' . $options['slug'] . '</p>'; ?>
+
+				<script type="text/javascript">
+					jQuery(function($) {
+					    var text_to_insert = '<?php echo $slug; ?>';
+
+					    $('' + text_to_insert + '').insertBefore('#slugdiv .inside label')
+					});
+				</script>
+			<?php 
+			}
+		}
+
+	} // end change_slug_metabox_content	
 
 }

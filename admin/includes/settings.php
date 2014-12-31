@@ -153,6 +153,23 @@ class add_post_type_instructions_settings {
 				);
 			}
 
+			add_settings_field(
+				'publish_check',
+				__( 'Publish Metabox:', $this->plugin_slug ),
+				array( $this, 'publish_check_callback' ),
+				$section,
+				$pt,
+				$args
+			);
+			add_settings_field(
+				'publish',
+				__( '', $this->plugin_slug ),
+				array( $this, 'publish_callback' ),
+				$section,
+				$pt,
+				$args
+			);
+
 			if ( post_type_supports( $pt, 'author' )) {
 				add_settings_field(
 					'author_check',
@@ -265,6 +282,23 @@ class add_post_type_instructions_settings {
 					$pt,
 					$args
 				);
+
+				add_settings_field(
+					'discussion_check',
+					__( 'Discussion Metabox:', $this->plugin_slug ),
+					array( $this, 'discussion_check_callback' ),
+					$section,
+					$pt,
+					$args
+				);
+				add_settings_field(
+					'discussion',
+					__( '', $this->plugin_slug ),
+					array( $this, 'discussion_callback' ),
+					$section,
+					$pt,
+					$args
+				);
 			}	
 
 			if ( post_type_supports( $pt, 'revisions' )) {
@@ -365,6 +399,23 @@ class add_post_type_instructions_settings {
 				}
 
 			}
+
+			add_settings_field(
+				'slug_check',
+				__( 'Slug Metabox:', $this->plugin_slug ),
+				array( $this, 'slug_check_callback' ),
+				$section,
+				$pt,
+				$args
+			);
+			add_settings_field(
+				'slug',
+				__( '', $this->plugin_slug ),
+				array( $this, 'slug_callback' ),
+				$section,
+				$pt,
+				$args
+			);
 
 			register_setting(
 				$section,
@@ -479,6 +530,43 @@ class add_post_type_instructions_settings {
 			echo $html;
 
 		} // end editor_callback
+
+	public function publish_check_callback( $args ) {
+
+		$output = $args[0].'[publish_check]';
+		$value  = isset( $args[1]['publish_check'] ) ? $args[1]['publish_check'] : '';
+
+		$checkhtml = '<input type="checkbox" id="publish_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
+		$checkhtml .= '<label for="publish_check"> ' . __( 'check to enable', $this->plugin_slug ) . '</label>';
+
+		echo $checkhtml;
+
+	} // end publish_check_callback
+
+		public function publish_callback( $args ) {
+			
+			$output = $args[0].'[publish]';
+			$value  = isset( $args[1]['publish'] ) ? $args[1]['publish'] : '';
+
+			$html = '<div id="publish"><textarea id="publish_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
+			$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the featured image metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
+			echo $html; ?>
+			<script>
+				(function() {
+			    	var doc = document,
+			        	publish = doc.getElementById('publish'),
+			        	publishinput = doc.getElementById('publish_input'),
+			        	publishnode = doc.createTextNode('');		    
+			    	publish.appendChild(publishnode);			    
+			    	function updatePublish() {
+			       		publishnode.nodeValue = publishinput.value + '\n\n';
+			    	}			    
+			    	publishinput.onkeypress = publishinput.onkeyup = publishinput.onchange = updatePublish;
+			    	updatePublish();
+			  	})();
+			</script>
+		<?php 
+		} // end publish_callback
 
 	public function author_check_callback( $args ) {
 
@@ -706,6 +794,44 @@ class add_post_type_instructions_settings {
 
 		} // end comments_callback
 
+	public function discussion_check_callback( $args ) {
+
+		$output = $args[0].'[discussion_check]';
+		$value  = isset( $args[1]['discussion_check'] ) ? $args[1]['discussion_check'] : '';
+
+		$checkhtml = '<input type="checkbox" id="discussion_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
+		$checkhtml .= '<label for="discussion_check"> ' . __( 'check to enable', $this->plugin_slug ) . '</label>';
+
+		echo $checkhtml;
+
+	} // end discussion_check_callback
+
+		public function discussion_callback( $args ) {
+			
+			$output = $args[0].'[discussion]';
+			$value  = isset( $args[1]['discussion'] ) ? $args[1]['discussion'] : '';
+
+			$html = '<div id="discussion"><textarea id="discussion_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
+			$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the discussion metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
+			echo $html; ?>
+			<script>
+				(function() {
+			    	var doc = document,
+			        	discussion = doc.getElementById('discussion'),
+			        	discussioninput = doc.getElementById('discussion_input'),
+			        	discussionnode = doc.createTextNode('');		    
+			    	discussion.appendChild(discussionnode);			    
+			    	function updateDiscussion() {
+			       		discussionnode.nodeValue = discussioninput.value + '\n\n';
+			    	}			    
+			    	discussioninput.onkeypress = discussioninput.onkeyup = discussioninput.onchange = updateDiscussion;
+			    	updateDiscussion();
+			  	})();
+			</script>
+		<?php 
+
+		} // end discussion_callback	
+
 	public function revisions_check_callback( $args ) {
 
 		$output = $args[0].'[revisions_check]';
@@ -895,6 +1021,44 @@ class add_post_type_instructions_settings {
 		<?php 
 
 		} // end postformats_callback
+
+	public function slug_check_callback( $args ) {
+
+		$output = $args[0].'[slug_check]';
+		$value  = isset( $args[1]['slug_check'] ) ? $args[1]['slug_check'] : '';
+
+		$checkhtml = '<input type="checkbox" id="slug_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
+		$checkhtml .= '<label for="slug_check"> ' . __( 'check to enable', $this->plugin_slug ) . '</label>';
+
+		echo $checkhtml;
+
+	} // end slug_check_callback
+
+		public function slug_callback( $args ) {
+			
+			$output = $args[0].'[slug]';
+			$value  = isset( $args[1]['slug'] ) ? $args[1]['slug'] : '';
+
+			$html = '<div id="slug"><textarea id="slug_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
+			$html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the post format metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
+			echo $html; ?>
+			<script>
+				(function() {
+			    	var doc = document,
+			        	slug = doc.getElementById('slug'),
+			        	sluginput = doc.getElementById('slug_input'),
+			        	slugnode = doc.createTextNode('');		    
+			    	slug.appendChild(slugnode);			    
+			    	function updateSlug() {
+			       		slugnode.nodeValue = sluginput.value + '\n\n';
+			    	}			    
+			    	sluginput.onkeypress = sluginput.onkeyup = sluginput.onchange = updateSlug;
+			    	updateSlug();
+			  	})();
+			</script>
+		<?php 
+
+		} // end slug_callback
 
 }
 add_post_type_instructions_settings::get_instance();

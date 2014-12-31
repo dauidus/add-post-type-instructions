@@ -7,7 +7,8 @@ p.apti-text {
 	border-bottom: 1px solid #ccc;
 	background: url('../images/info.gif') 5px center no-repeat #F0FAFF;
 }
-#commentsdiv p.apti-text {
+#commentsdiv p.apti-text,
+#submitdiv p.apti-text {
 	margin: 1em 12px !important;
 }
 

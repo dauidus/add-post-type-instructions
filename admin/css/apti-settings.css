@@ -37,13 +37,16 @@
 }
 
 .settings_page_apti #top,
+.settings_page_apti #slug,
 .settings_page_apti #instruction,
+.settings_page_apti #publish,
 .settings_page_apti #author,
 .settings_page_apti #thumbnail,
 .settings_page_apti #excerpt,
 .settings_page_apti #trackbacks,
 .settings_page_apti #customfields,
 .settings_page_apti #comments,
+.settings_page_apti #discussion,
 .settings_page_apti #revisions,
 .settings_page_apti #pageattributes,
 .settings_page_apti #categories,
@@ -57,13 +60,16 @@
     word-wrap: break-word;
 }
 .settings_page_apti textarea#top_input,
+.settings_page_apti textarea#slug_input,
 .settings_page_apti textarea#instruction_input,
+.settings_page_apti textarea#publish_input,
 .settings_page_apti textarea#author_input,
 .settings_page_apti textarea#thumbnail_input,
 .settings_page_apti textarea#excerpt_input,
 .settings_page_apti textarea#trackbacks_input,
 .settings_page_apti textarea#customfields_input,
 .settings_page_apti textarea#comments_input,
+.settings_page_apti textarea#discussion_input,
 .settings_page_apti textarea#revisions_input,
 .settings_page_apti textarea#pageattributes_input,
 .settings_page_apti textarea#categories_input,
