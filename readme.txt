@@ -42,9 +42,7 @@ To be clear, APTI does absolutely nothing to the front-end of your site.  It sim
 APTI works with multisite networks and allows users to define settings on a per-site basis.
 
 = Coming soon =
-* add support for categories and tags
-* Help tab on settings page about unsupport features and how to support them
-* Translations
+* Translations - to submit a translation, please contact the author
 
 APTI will work with drag-n-drop builders such as Visual Composer, but the author cannot recommend its use with them.  This will be addressed in a future release.
 
@@ -96,6 +94,7 @@ Simply delete this plugin to remove all data associated with it.  Deactivating t
 == Changelog ==
 
 = 2.1 =
+* initial production release
 * support for content above title field
 * support for categories, tags, discussion, slug and publish metaboxes
 * more intuitive colors on add/edit screen (from yellow to blue)
@@ -140,6 +139,9 @@ Simply delete this plugin to remove all data associated with it.  Deactivating t
 * initial development release
 
 == Upgrade Notice ==
+
+= 2.1 =
+This update adds many new features, and is backward-compatible with version 2.0.  Users are urged to update for a better overall user experience.  This is the first production release of this plugin.
 
 = 2.0 =
 This is a major update. Visit plugin settings page after updating to ensure all settings are updated. Users now need to enable each setting via checkbox. Input fields on settings page will be populated with previously entered values.
