@@ -379,6 +379,8 @@ class add_post_type_instructions_settings {
 					);
 				}
 
+				// custom taxonomies
+
 				if ( post_type_supports( $pt, 'post-formats' )) {
 					add_settings_field(
 						'postformats_check',
