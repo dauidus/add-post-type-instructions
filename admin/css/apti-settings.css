@@ -1,4 +1,8 @@
 
+.settings_page_apti .hidden {
+	display: none;
+}
+
 .settings_page_apti p.description {
 	margin-bottom: 10px;
 }

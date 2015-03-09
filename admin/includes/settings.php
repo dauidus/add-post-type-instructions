@@ -434,7 +434,7 @@ class add_post_type_instructions_settings {
 
 		$checkhtml = '<input type="checkbox" id="top_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
 		$checkhtml .= '<label for="top_check"> ' . __( 'check to enable', $this->plugin_slug ) . '</label>';
-		echo $checkhtml;
+		echo $checkhtml; 
 
 	} // end top_check_callback
 
