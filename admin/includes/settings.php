@@ -69,19 +69,20 @@ class add_post_type_instructions_settings {
 				'top' => '',
 				'instruction' => '',
 				'editor' => '',
+				'publish' => '',
 				'author' => '',
 				'thumbnail' => '',
 				'excerpt' => '',
 				'trackbacks' => '',
 				'custom-fields' => '',
 				'comments' => '',
+				'discussion' => '',
 				'revisions' => '',
 				'page-attributes' => '',
-				'post-formats' => '',
 				'categories' => '',
 				'tags' => '',
-				// 'discussion' => '',
-				// 'slug' => '',
+				'post-formats' => '',
+				'slug' => '',
 			);
 
 		foreach ( $post_types as $pt ) {
@@ -444,8 +445,6 @@ class add_post_type_instructions_settings {
 
 			$html = '<div id="top"><textarea id="top_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
 
-			// $html .= '<p class="description" id="instdesc">' . __( 'Enter assistive text to be displayed above the title field, such as general instructions for this type of content.  This content will span the width of the page.  HTML allowed.', $this->plugin_slug ) . '</p><hr>';
-
 			echo $html; ?>
 			<script>
 				(function() {
@@ -481,8 +480,6 @@ class add_post_type_instructions_settings {
 			$value  = isset( $args[1]['instruction'] ) ? $args[1]['instruction'] : '';
 
 			$html = '<div id="instruction"><textarea id="instruction_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
-
-			// $html .= '<p class="description" id="instdesc">' . __( 'Enter assistive text to be displayed below the title field, such as general instructions for the WYSIWYG editor.  HTML allowed.', $this->plugin_slug ) . '</p><hr>';
 
 			echo $html; ?>
 			<script>
@@ -525,10 +522,6 @@ class add_post_type_instructions_settings {
 			);
 			wp_editor( $value, $id, $settings );
 
-			// $html = '<p class="description" id="editdesc">' . __( 'Enter default content to be displayed within the WYSIWYG editor, such as "delete this, then start writing".  This will only be included when page/post content is first created.  Once changed and content has been saved, this message will not be included again for that page/post.  HTML and shortcodes allowed.', $this->plugin_slug ) . '</p><hr>';
-
-			// echo $html;
-
 		} // end editor_callback
 
 	public function publish_check_callback( $args ) {
@@ -549,7 +542,6 @@ class add_post_type_instructions_settings {
 			$value  = isset( $args[1]['publish'] ) ? $args[1]['publish'] : '';
 
 			$html = '<div id="publish"><textarea id="publish_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
-			// $html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the featured image metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
 
 			echo $html; ?>
 			<script>
@@ -587,7 +579,6 @@ class add_post_type_instructions_settings {
 			$value  = isset( $args[1]['author'] ) ? $args[1]['author'] : '';
 
 			$html = '<div id="author"><textarea id="author_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
-			// $html .= '<p class="description" id="authdesc">' . __( 'Enter assistive text to be displayed within the author metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
 
 			echo $html; ?>
 			<script>
@@ -625,7 +616,6 @@ class add_post_type_instructions_settings {
 			$value  = isset( $args[1]['thumbnail'] ) ? $args[1]['thumbnail'] : '';
 
 			$html = '<div id="thumbnail"><textarea id="thumbnail_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
-			// $html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the featured image metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
 
 			echo $html; ?>
 			<script>
@@ -663,7 +653,6 @@ class add_post_type_instructions_settings {
 			$value  = isset( $args[1]['excerpt'] ) ? $args[1]['excerpt'] : '';
 
 			$html = '<div id="excerpt"><textarea id="excerpt_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
-			// $html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the excerpt metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
 
 			echo $html; ?>
 			<script>
@@ -702,7 +691,6 @@ class add_post_type_instructions_settings {
 			$value  = isset( $args[1]['trackbacks'] ) ? $args[1]['trackbacks'] : '';
 
 			$html = '<div id="trackbacks"><textarea id="trackbacks_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
-			// $html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the trackbacks metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
 
 			echo $html; ?>
 			<script>
@@ -741,7 +729,6 @@ class add_post_type_instructions_settings {
 			$value  = isset( $args[1]['customfields'] ) ? $args[1]['customfields'] : '';
 
 			$html = '<div id="customfields"><textarea id="customfields_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
-			// $html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the custom fields metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
 
 			echo $html; ?>
 			<script>
@@ -780,7 +767,6 @@ class add_post_type_instructions_settings {
 			$value  = isset( $args[1]['comments'] ) ? $args[1]['comments'] : '';
 
 			$html = '<div id="comments"><textarea id="comments_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
-			// $html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the comments metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
 
 			echo $html; ?>
 			<script>
@@ -819,7 +805,6 @@ class add_post_type_instructions_settings {
 			$value  = isset( $args[1]['discussion'] ) ? $args[1]['discussion'] : '';
 
 			$html = '<div id="discussion"><textarea id="discussion_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
-			// $html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the discussion metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
 
 			echo $html; ?>
 			<script>
@@ -858,7 +843,6 @@ class add_post_type_instructions_settings {
 			$value  = isset( $args[1]['revisions'] ) ? $args[1]['revisions'] : '';
 
 			$html = '<div id="revisions"><textarea id="revisions_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
-			// $html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the revisions metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
 
 			echo $html; ?>
 			<script>
@@ -897,7 +881,6 @@ class add_post_type_instructions_settings {
 			$value  = isset( $args[1]['pageattributes'] ) ? $args[1]['pageattributes'] : '';
 
 			$html = '<div id="pageattributes"><textarea id="pageattributes_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
-			// $html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the page attributes metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
 
 			echo $html; ?>
 			<script>
@@ -936,7 +919,6 @@ class add_post_type_instructions_settings {
 			$value  = isset( $args[1]['categories'] ) ? $args[1]['categories'] : '';
 
 			$html = '<div id="categories"><textarea id="categories_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
-			// $html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the categories metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
 
 			echo $html; ?>
 			<script>
@@ -975,7 +957,6 @@ class add_post_type_instructions_settings {
 			$value  = isset( $args[1]['tags'] ) ? $args[1]['tags'] : '';
 
 			$html = '<div id="tags"><textarea id="tags_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
-			// $html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the tags metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
 
 			echo $html; ?>
 			<script>
@@ -1014,7 +995,6 @@ class add_post_type_instructions_settings {
 			$value  = isset( $args[1]['postformats'] ) ? $args[1]['postformats'] : '';
 
 			$html = '<div id="postformats"><textarea id="postformats_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
-			// $html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the post format metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
 
 			echo $html; ?>
 			<script>
@@ -1053,7 +1033,6 @@ class add_post_type_instructions_settings {
 			$value  = isset( $args[1]['slug'] ) ? $args[1]['slug'] : '';
 
 			$html = '<div id="slug"><textarea id="slug_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
-			// $html .= '<p class="description">' . __( 'Enter assistive text to be displayed within the post format metabox. HTML allowed.', $this->plugin_slug ) . '</p><hr>';
 			
 			echo $html; ?>
 			<script>

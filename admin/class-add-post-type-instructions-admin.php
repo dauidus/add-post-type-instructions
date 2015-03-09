@@ -574,7 +574,7 @@ class Add_Post_Type_Instructions_Admin {
 					jQuery(function($) {
 					    var text_to_insert = '<?php echo $tags; ?>';
 
-					    $('' + text_to_insert + '').insertBefore('.tagsdiv')
+					    $('' + text_to_insert + '').insertBefore('#tagsdiv-post_tag .tagsdiv')
 					});
 				</script>
 				<?php 
