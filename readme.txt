@@ -3,8 +3,8 @@ Contributors: dauidus
 Author URI: http://dauid.us
 Tags: instructions, instruction, directions, assistive, post types, help, wysiwyg, client, text, editor, settings
 Requires at least: 3.5
-Tested up to: 4.1
-Stable tag: 2.1
+Tested up to: 4.2
+Stable tag: 2.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -93,6 +93,9 @@ Simply delete this plugin to remove all data associated with it.  Deactivating t
 
 == Changelog ==
 
+= 2.1.1 =
+* bug fixes
+
 = 2.1 =
 * initial production release
 * support for content above title field
@@ -139,6 +142,9 @@ Simply delete this plugin to remove all data associated with it.  Deactivating t
 * initial development release
 
 == Upgrade Notice ==
+
+= 2.1.1 =
+Bug fixes.
 
 = 2.1 =
 This update adds many new features, and is backward-compatible with version 2.0.  Users are urged to update for a better overall user experience.  This is the first production release of this plugin.
