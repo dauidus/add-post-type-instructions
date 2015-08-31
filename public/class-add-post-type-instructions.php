@@ -84,6 +84,7 @@ class add_post_type_instructions {
 
 		$args = array(
 		   'show_ui' => true,
+		   'public' => true,  // @since 2.3
 		);
 
 		$output = 'names'; // names or objects, note names is the default

@@ -3,8 +3,8 @@ Contributors: dauidus
 Author URI: http://dauid.us
 Tags: instructions, instruction, directions, assistive, post types, help, wysiwyg, client, text, editor, settings
 Requires at least: 3.5
-Tested up to: 4.2
-Stable tag: 2.1.1
+Tested up to: 4.3
+Stable tag: 2.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -92,6 +92,9 @@ Simply delete this plugin to remove all data associated with it.  Deactivating t
 2. Non-intrusive instructive text can be easily added to multiple locations for any post type.
 
 == Changelog ==
+
+= 2.1.2 =
+* only allows for post types with ‘public’ and ‘show ui’ set to true
 
 = 2.1.1 =
 * bug fixes
