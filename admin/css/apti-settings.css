@@ -25,7 +25,6 @@
 }
 
 .settings_page_apti .form-table {
-
 	width: 100%;
 	background: #fff;
 	margin-top: 0px;
@@ -36,6 +35,7 @@
 }
 .settings_page_apti .form-table tbody {
 	width: 100%;
+	padding-bottom: 20px;
 }
 .settings_page_apti h3 {
 	margin: 20px 0 0 0;

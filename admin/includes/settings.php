@@ -608,6 +608,15 @@ class add_post_type_instructions_settings {
 				)
 			);
 
+			add_settings_field(
+				'filler',
+				__( '', $this->plugin_slug ),
+				array( $this, 'filler' ),
+				$section,
+				$pt,
+				$args
+			);
+
 			register_setting(
 				$section,
 				$section
@@ -623,7 +632,6 @@ class add_post_type_instructions_settings {
 		$html = '<input type="checkbox" id="' . $name . '" name="' . $field . '" value="1"' . checked( 1, $value, false ) . ' />';
 		$html .= '<label for="' . $name . '"> ' . __( 'enable', 'aptrc' ) . '</label>';
 		echo $html;
-		echo $checkhtml; 
 
 	} // end top_check_callback
 
@@ -700,6 +708,14 @@ class add_post_type_instructions_settings {
 
 			<?php
 		} // end editor_callback
+
+
+		public function filler( $args ) {
+
+			echo '<div class="filler">';
+			echo '<div>';
+
+		} // end filler
 
 
 
