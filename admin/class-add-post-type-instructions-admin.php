@@ -132,8 +132,8 @@ class Add_Post_Type_Instructions_Admin {
 		 *
 		 */
 		$this->plugin_screen_hook_suffix = add_options_page(
-			__( 'Post Type Instructions', $this->plugin_slug ),
-			__( 'Post Type Instructions', $this->plugin_slug ),
+			__( 'Instructional Content', $this->plugin_slug ),
+			__( 'Instructional Content', $this->plugin_slug ),
 			'manage_options',
 			$this->plugin_slug,
 			array( $this, 'display_plugin_admin_page' )

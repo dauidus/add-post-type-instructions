@@ -2,25 +2,26 @@
 
 p.apti-text {
 	font-style: italic; 
-	padding: 2px 6px 2px 25px !important;
+	padding: 10px 10px 10px 15px !important;
 	font-size: 12px;
-	border-top: 1px solid #ccc;
-	border-bottom: 1px solid #ccc;
-	background: url('../images/info.gif') 5px center no-repeat #F0FAFF;
+	border-bottom: 1px solid #e5e5e5;
+	margin: -7px -12px 20px -12px;
+	border-left: 4px solid #0074a2;
 }
 #commentsdiv p.apti-text,
 #submitdiv p.apti-text {
-	margin: 1em 12px !important;
+	margin: 0px 0px 10px 0px;
 }
 
 #apti-above-title,
 #apti-below-title {
 	font-style: italic !important;
 	font-size: 13px;
-	padding: 3px 8px 3px 25px;
-	border-top: 1px solid #ccc;
-	border-bottom: 1px solid #ccc;
-	background: url('../images/info.gif') 6px center no-repeat #F0FAFF;
+	padding: 10px 10px 10px 15px;
+	border-top: 1px solid #e5e5e5;
+	border-bottom: 1px solid #e5e5e5;
+	border-left: 4px solid #0074a2;
+	background: #fff;
 }
 #apti-above-title {
 	margin: 10px 0;
