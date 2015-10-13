@@ -1,10 +1,88 @@
 
+.settings_page_apti #wpbody-content .wrap {
+	background: url(../images/pattern-bg.png) no-repeat;
+    background-size: 500px;
+    background-position: 80% 0px;
+    padding-top: 50px;
+    margin-top: 1px;
+}
+
+.settings_page_apti #wpbody-content .wrap h2:nth-of-type(1) {
+	margin-top: -40px;
+	padding-bottom: 40px;
+}
+
 .settings_page_apti .hidden {
 	display: none;
 }
 
 .settings_page_apti p.description {
 	margin-bottom: 10px;
+}
+
+.settings_page_apti form {
+	width: calc(100% - 2px);
+}
+
+.settings_page_apti .form-table {
+
+	width: 100%;
+	background: #fff;
+	margin-top: 0px;
+	border: 1px solid #e5e5e5;
+	border-top: none;
+	padding-bottom: 10px;
+	overflow: hidden;
+}
+.settings_page_apti .form-table tbody {
+	width: 100%;
+}
+.settings_page_apti h3 {
+	margin: 20px 0 0 0;
+	padding: 10px;
+	background: #fff;
+	border: 1px solid #e5e5e5;
+}
+
+.settings_page_apti tr {
+	/* border-bottom: 1px solid #ccc; */
+	margin: 0px 0;
+	width: 100%;
+	display: table-row;
+}
+.settings_page_apti tr td {
+	padding: 0px 0px 5px 5px;
+	font-size: 13px;
+	vertical-align: top;
+	margin-left: 0px;
+}
+.settings_page_apti tbody tr:first-child {
+	margin-top: 10px;
+}
+.settings_page_apti tbody tr:last-child {
+	padding-bottom: 20px;
+}
+.settings_page_apti tbody tr td:last-child {
+	margin-bottom: 20px;
+}
+.settings_page_apti th {
+	text-transform: capitalize;
+	font-size: 13px;
+	padding: 20px 10px 10px 15px;
+	width: 160px;
+	max-height: 16px !important;
+	overflow: visible;
+}
+.settings_page_apti th:empty {
+	height: 0px;
+	padding: 0px 10px 0px 15px;
+}
+
+.settings_page_apti th + td {
+	padding-top: 20px;
+}
+.settings_page_apti th:empty + td {
+	padding-top: 0px;
 }
 
 .settings_page_apti .form-table tr th,
@@ -32,12 +110,12 @@
 /* Show/Hide textareas based on checkbox values */
 
 .settings_page_apti textarea {
-	width: 100%; 
+	width: calc(100% - 20px); 
 	padding: 10px; 
-	margin:8px 0px 0px;
+	margin:8px 0px 0 0;
 }
 .settings_page_apti .wp-editor-wrap {
-	margin: 8px 0 8px 0;
+	margin: 8px 20px 8px 0;
 }
 
 .settings_page_apti #top,

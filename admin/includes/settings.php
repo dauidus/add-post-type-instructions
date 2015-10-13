@@ -103,90 +103,146 @@ class add_post_type_instructions_settings {
 				add_settings_field(
 					'top_check',
 					__( 'Above Title Field:', $this->plugin_slug ),
-					array( $this, 'top_check_callback' ),
+					array( $this, 'check_callback' ),
 					$section,
 					$pt,
-					$args
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[top_check]',
+						'name' => 'top_check'
+					)
 				);
+
 				add_settings_field(
 					'top',
 					__( '', $this->plugin_slug ),
-					array( $this, 'top_callback' ),
+					array( $this, 'textarea_callback' ),
 					$section,
 					$pt,
-					$args
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[top]',
+						'name' => 'top',
+						'parent' => 'top_check'
+					)
 				);
 			}
 
 			add_settings_field(
 				'instruction_check',
 				__( 'Above WYSIWYG Editor:', $this->plugin_slug ),
-				array( $this, 'instruction_check_callback' ),
+				array( $this, 'check_callback' ),
 				$section,
 				$pt,
-				$args
+				array( 
+					$section, 
+					get_option( $section ),
+					'field' => $section.'[instruction_check]',
+					'name' => 'instruction_check'
+				)
 			);
 			add_settings_field(
 				'instruction',
 				__( '', $this->plugin_slug ),
-				array( $this, 'instruction_callback' ),
+				array( $this, 'textarea_callback' ),
 				$section,
 				$pt,
-				$args
+				array( 
+					$section, 
+					get_option( $section ),
+					'field' => $section.'[instruction]',
+					'name' => 'instruction',
+					'parent' => 'instruction_check'
+				)
 			);
 
 			if ( post_type_supports( $pt, 'editor' )) {
 				add_settings_field(
 					'editor_check',
 					__( 'WYSIWYG Content:', $this->plugin_slug ),
-					array( $this, 'editor_check_callback' ),
+					array( $this, 'check_callback' ),
 					$section,
 					$pt,
-					$args
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[editor_check]',
+						'name' => 'editor_check'
+					)
 				);
 				add_settings_field(
 					'editor',
 					__( '', $this->plugin_slug ),
-					array( $this, 'editor_callback' ),
+					array( $this, 'wysiwyg_callback' ),
 					$section,
 					$pt,
-					$args
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[editor]',
+						'name' => 'editor',
+						'parent' => 'editor_check'
+					)
 				);
 			}
 
 			add_settings_field(
 				'publish_check',
 				__( 'Publish Metabox:', $this->plugin_slug ),
-				array( $this, 'publish_check_callback' ),
+				array( $this, 'check_callback' ),
 				$section,
 				$pt,
-				$args
+				array( 
+					$section, 
+					get_option( $section ),
+					'field' => $section.'[publish_check]',
+					'name' => 'publish_check'
+				)
 			);
 			add_settings_field(
 				'publish',
 				__( '', $this->plugin_slug ),
-				array( $this, 'publish_callback' ),
+				array( $this, 'textarea_callback' ),
 				$section,
 				$pt,
-				$args
+				array( 
+					$section, 
+					get_option( $section ),
+					'field' => $section.'[publish]',
+					'name' => 'publish',
+					'parent' => 'publish_check'
+				)
 			);
 
 			if ( post_type_supports( $pt, 'author' )) {
 				add_settings_field(
 					'author_check',
 					__( 'Author Metabox:', $this->plugin_slug ),
-					array( $this, 'author_check_callback' ),
+					array( $this, 'check_callback' ),
 					$section,
 					$pt,
-					$args
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[author_check]',
+						'name' => 'author_check'
+					)
 				);
 				add_settings_field(
 					'author',
 					__( '', $this->plugin_slug ),
-					array( $this, 'author_callback' ),
+					array( $this, 'textarea_callback' ),
 					$section,
 					$pt,
-					$args
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[author]',
+						'name' => 'author',
+						'parent' => 'author_check'
+					)
 				);
 			}
 
@@ -194,18 +250,29 @@ class add_post_type_instructions_settings {
 				add_settings_field(
 					'thumbnail_check',
 					__( 'Featured Image Metabox:', $this->plugin_slug ),
-					array( $this, 'thumbnail_check_callback' ),
+					array( $this, 'check_callback' ),
 					$section,
 					$pt,
-					$args
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[thumbnail_check]',
+						'name' => 'thumbnail_check'
+					)
 				);
 				add_settings_field(
 					'thumbnail',
 					__( '', $this->plugin_slug ),
-					array( $this, 'thumbnail_callback' ),
+					array( $this, 'textarea_callback' ),
 					$section,
 					$pt,
-					$args
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[thumbnail]',
+						'name' => 'thumbnail',
+						'parent' => 'thumbnail_check'
+					)
 				);
 			}
 
@@ -213,18 +280,29 @@ class add_post_type_instructions_settings {
 				add_settings_field(
 					'excerpt_check',
 					__( 'Excerpt Metabox:', $this->plugin_slug ),
-					array( $this, 'excerpt_check_callback' ),
+					array( $this, 'check_callback' ),
 					$section,
 					$pt,
-					$args
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[excerpt_check]',
+						'name' => 'excerpt_check'
+					)
 				);
 				add_settings_field(
 					'excerpt',
 					__( '', $this->plugin_slug ),
-					array( $this, 'excerpt_callback' ),
+					array( $this, 'textarea_callback' ),
 					$section,
 					$pt,
-					$args
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[excerpt]',
+						'name' => 'excerpt',
+						'parent' => 'excerpt_check'
+					)
 				);
 			}
 
@@ -232,18 +310,29 @@ class add_post_type_instructions_settings {
 				add_settings_field(
 					'trackbacks_check',
 					__( 'Trackbacks Metabox:', $this->plugin_slug ),
-					array( $this, 'trackbacks_check_callback' ),
+					array( $this, 'check_callback' ),
 					$section,
 					$pt,
-					$args
+					array( 
+					$section, 
+						get_option( $section ),
+						'field' => $section.'[trackbacks_check]',
+						'name' => 'trackbacks_check'
+					)
 				);
 				add_settings_field(
 					'trackbacks',
 					__( '', $this->plugin_slug ),
-					array( $this, 'trackbacks_callback' ),
+					array( $this, 'textarea_callback' ),
 					$section,
 					$pt,
-					$args
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[trackbacks]',
+						'name' => 'trackbacks',
+						'parent' => 'trackbacks_check'
+					)
 				);
 			}
 
@@ -251,18 +340,29 @@ class add_post_type_instructions_settings {
 				add_settings_field(
 					'customfields_check',
 					__( 'Custom Fields Metabox:', $this->plugin_slug ),
-					array( $this, 'customfields_check_callback' ),
+					array( $this, 'check_callback' ),
 					$section,
 					$pt,
-					$args
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[customfields_check]',
+						'name' => 'customfields_check'
+					)
 				);
 				add_settings_field(
 					'customfields',
 					__( '', $this->plugin_slug ),
-					array( $this, 'customfields_callback' ),
+					array( $this, 'textarea_callback' ),
 					$section,
 					$pt,
-					$args
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[customfields]',
+						'name' => 'customfields',
+						'parent' => 'customfields_check'
+					)
 				);
 			}
 
@@ -270,35 +370,57 @@ class add_post_type_instructions_settings {
 				add_settings_field(
 					'comments_check',
 					__( 'Comments Metabox:', $this->plugin_slug ),
-					array( $this, 'comments_check_callback' ),
+					array( $this, 'check_callback' ),
 					$section,
 					$pt,
-					$args
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[comments_check]',
+						'name' => 'comments_check'
+					)
 				);
 				add_settings_field(
 					'comments',
 					__( '', $this->plugin_slug ),
-					array( $this, 'comments_callback' ),
+					array( $this, 'textarea_callback' ),
 					$section,
 					$pt,
-					$args
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[comments]',
+						'name' => 'comments',
+						'parent' => 'comments_check'
+					)
 				);
 
 				add_settings_field(
 					'discussion_check',
 					__( 'Discussion Metabox:', $this->plugin_slug ),
-					array( $this, 'discussion_check_callback' ),
+					array( $this, 'check_callback' ),
 					$section,
 					$pt,
-					$args
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[discussion_check]',
+						'name' => 'discussion_check'
+					)
 				);
 				add_settings_field(
 					'discussion',
 					__( '', $this->plugin_slug ),
-					array( $this, 'discussion_callback' ),
+					array( $this, 'textarea_callback' ),
 					$section,
 					$pt,
-					$args
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[discussion]',
+						'name' => 'discussion',
+						'parent' => 'discussion_check'
+					)
 				);
 			}	
 
@@ -306,18 +428,29 @@ class add_post_type_instructions_settings {
 				add_settings_field(
 					'revisions_check',
 					__( 'Revisions Metabox:', $this->plugin_slug ),
-					array( $this, 'revisions_check_callback' ),
+					array( $this, 'check_callback' ),
 					$section,
 					$pt,
-					$args
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[revisions_check]',
+						'name' => 'revisions_check'
+					)
 				);
 				add_settings_field(
 					'revisions',
 					__( '', $this->plugin_slug ),
-					array( $this, 'revisions_callback' ),
+					array( $this, 'textarea_callback' ),
 					$section,
 					$pt,
-					$args
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[revisions]',
+						'name' => 'revisions',
+						'parent' => 'revisions_check'
+					)
 				);
 			}
 
@@ -325,18 +458,29 @@ class add_post_type_instructions_settings {
 				add_settings_field(
 					'pageattributes_check',
 					__( 'Page Attributes Metabox:', $this->plugin_slug ),
-					array( $this, 'pageattributes_check_callback' ),
+					array( $this, 'check_callback' ),
 					$section,
 					$pt,
-					$args
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[pageattributes_check]',
+						'name' => 'pageattributes_check'
+					)
 				);
 				add_settings_field(
 					'pageattributes',
 					__( '', $this->plugin_slug ),
-					array( $this, 'pageattributes_callback' ),
+					array( $this, 'textarea_callback' ),
 					$section,
 					$pt,
-					$args
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[pageattributes]',
+						'name' => 'pageattributes',
+						'parent' => 'pageattributes_check'
+					)
 				);
 			}
 
@@ -346,18 +490,29 @@ class add_post_type_instructions_settings {
 					add_settings_field(
 						'categories_check',
 						__( 'Categories Metabox:', $this->plugin_slug ),
-						array( $this, 'categories_check_callback' ),
+						array( $this, 'check_callback' ),
 						$section,
 						$pt,
-						$args
+						array( 
+							$section, 
+							get_option( $section ),
+							'field' => $section.'[categories_check]',
+							'name' => 'categories_check'
+						)
 					);
 					add_settings_field(
 						'categories',
 						__( '', $this->plugin_slug ),
-						array( $this, 'categories_callback' ),
+						array( $this, 'textarea_callback' ),
 						$section,
 						$pt,
-						$args
+						array( 
+							$section, 
+							get_option( $section ),
+							'field' => $section.'[categories]',
+							'name' => 'categories',
+							'parent' => 'categories_check'
+						)
 					);
 				}
 
@@ -365,18 +520,29 @@ class add_post_type_instructions_settings {
 					add_settings_field(
 						'tags_check',
 						__( 'Tags Metabox:', $this->plugin_slug ),
-						array( $this, 'tags_check_callback' ),
+						array( $this, 'check_callback' ),
 						$section,
 						$pt,
-						$args
+						array( 
+							$section, 
+							get_option( $section ),
+							'field' => $section.'[tags_check]',
+							'name' => 'tags_check'
+						)
 					);
 					add_settings_field(
 						'tags',
 						__( '', $this->plugin_slug ),
-						array( $this, 'tags_callback' ),
+						array( $this, 'textarea_callback' ),
 						$section,
 						$pt,
-						$args
+						array( 
+							$section, 
+							get_option( $section ),
+							'field' => $section.'[tags]',
+							'name' => 'tags',
+							'parent' => 'tags_check'
+						)
 					);
 				}
 
@@ -386,18 +552,29 @@ class add_post_type_instructions_settings {
 					add_settings_field(
 						'postformats_check',
 						__( 'Post Format Metabox:', $this->plugin_slug ),
-						array( $this, 'postformats_check_callback' ),
+						array( $this, 'check_callback' ),
 						$section,
 						$pt,
-						$args
+						array( 
+							$section, 
+							get_option( $section ),
+							'field' => $section.'[postformats_check]',
+							'name' => 'postformats_check'
+						)
 					);
 					add_settings_field(
 						'postformats',
 						__( '', $this->plugin_slug ),
-						array( $this, 'postformats_callback' ),
+						array( $this, 'textarea_callback' ),
 						$section,
 						$pt,
-						$args
+						array( 
+							$section, 
+							get_option( $section ),
+							'field' => $section.'[postformats]',
+							'name' => 'postformats',
+							'parent' => 'postformats_check'
+						)
 					);
 				}
 
@@ -406,18 +583,29 @@ class add_post_type_instructions_settings {
 			add_settings_field(
 				'slug_check',
 				__( 'Slug Metabox:', $this->plugin_slug ),
-				array( $this, 'slug_check_callback' ),
+				array( $this, 'check_callback' ),
 				$section,
 				$pt,
-				$args
+				array( 
+					$section, 
+					get_option( $section ),
+					'field' => $section.'[slug_check]',
+					'name' => 'slug_check'
+				)
 			);
 			add_settings_field(
 				'slug',
 				__( '', $this->plugin_slug ),
-				array( $this, 'slug_callback' ),
+				array( $this, 'textarea_callback' ),
 				$section,
 				$pt,
-				$args
+				array( 
+					$section, 
+					get_option( $section ),
+					'field' => $section.'[slug]',
+					'name' => 'slug',
+					'parent' => 'slug_check'
+				)
 			);
 
 			register_setting(
@@ -427,631 +615,93 @@ class add_post_type_instructions_settings {
 		}
 	} // end admin_init
 
-	public function top_check_callback( $args ) {
+	public function check_callback( $args ) {
+		$name = $args['name'];
+		$field = $args['field'];
+		$value  = isset( $args[1][''.$name.''] ) ? $args[1][''.$name.''] : '';
 
-		$output = $args[0].'[top_check]';
-		$value  = isset( $args[1]['top_check'] ) ? $args[1]['top_check'] : '';
-
-		$checkhtml = '<input type="checkbox" id="top_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
-		$checkhtml .= '<label for="top_check"> ' . __( 'check to enable', $this->plugin_slug ) . '</label>';
+		$html = '<input type="checkbox" id="' . $name . '" name="' . $field . '" value="1"' . checked( 1, $value, false ) . ' />';
+		$html .= '<label for="' . $name . '"> ' . __( 'enable', 'aptrc' ) . '</label>';
+		echo $html;
 		echo $checkhtml; 
 
 	} // end top_check_callback
 
-		public function top_callback( $args ) {
+		public function textarea_callback( $args ) {
+			$name = $args['name'];
+			$field = $args['field'];
+			$value  = isset( $args[1][''.$name.''] ) ? $args[1][''.$name.''] : '';
+			$parent = $args['parent'];
 
-		    $output = $args[0].'[top]';
-			$value  = isset( $args[1]['top'] ) ? $args[1]['top'] : '';
-
-			$html = '<div id="top"><textarea id="top_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
-
+			$html = '<div class="' . $parent . '">';
+			$html .= '<div id="' . $name . '"><textarea id="' . $name . '_input" name="' .$field. '" type="textarea">' .$value. '</textarea></div>';
+			$html .= '<div>';
 			echo $html; ?>
+
 			<script>
 				(function() {
 			    	var doc = document,
-			        	top = doc.getElementById('top'),
-			        	topinput = doc.getElementById('top_input'),
-			        	topnode = doc.createTextNode('');		    
-			    	top.appendChild(topnode);			    
-			    	function updateTop() {
-			       		topnode.nodeValue = topinput.value + '\n\n';
+			        	txt = doc.getElementById('<?php echo $name; ?>'),
+			        	txtinput = doc.getElementById('<?php echo $name; ?>_input'),
+			        	txtnode = doc.createTextNode('');		    
+			    	txt.appendChild(txtnode);			    
+			    	function updateIt() {
+			       		txtnode.nodeValue = txtinput.value + '\n\n';
 			    	}			    
-			    	topinput.onkeypress = topinput.onkeyup = topinput.onchange = updateTop;			    
-			    	updateTop();
+			    	txtinput.onkeypress = txtinput.onkeyup = txtinput.onchange = updateIt;			    
+			    	updateIt();
 			  	})();
+
+			  	function check_is_enabled() {
+					if (document.getElementById('<?php echo $parent; ?>').checked){
+						jQuery('.<?php echo $parent; ?>').slideDown("fast");
+					} else {
+						jQuery('.<?php echo $parent; ?>').slideUp("fast");
+					}
+				}
+				check_is_enabled();
+				jQuery( "#<?php echo $parent; ?>" ).on('change', check_is_enabled );
 			</script>
 		<?php 
 		} // end top_callback
 
-	public function instruction_check_callback( $args ) {
 
-		$output = $args[0].'[instruction_check]';
-		$value  = isset( $args[1]['instruction_check'] ) ? $args[1]['instruction_check'] : '';
 
-		$checkhtml = '<input type="checkbox" id="instruction_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
-		$checkhtml .= '<label for="instruction_check"> ' . __( 'check to enable', $this->plugin_slug ) . '</label>';
-		echo $checkhtml;
 
-	} // end instruction_check_callback
 
-		public function instruction_callback( $args ) {
 
-		    $output = $args[0].'[instruction]';
-			$value  = isset( $args[1]['instruction'] ) ? $args[1]['instruction'] : '';
+		public function wysiwyg_callback( $args ) {
+			$name = $args['name'];
+			$field = $args['field'];
+			$value  = isset( $args[1][''.$name.''] ) ? $args[1][''.$name.''] : '';
+			$parent = $args['parent'];
 
-			$html = '<div id="instruction"><textarea id="instruction_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
-
-			echo $html; ?>
-			<script>
-				(function() {
-			    	var doc = document,
-			        	instruction = doc.getElementById('instruction'),
-			        	instructioninput = doc.getElementById('instruction_input'),
-			        	instructionnode = doc.createTextNode('');		    
-			    	instruction.appendChild(instructionnode);			    
-			    	function updateInstruction() {
-			       		instructionnode.nodeValue = instructioninput.value + '\n\n';
-			    	}			    
-			    	instructioninput.onkeypress = instructioninput.onkeyup = instructioninput.onchange = updateInstruction;
-			    	updateInstruction();
-			  	})();
-			</script>
-		<?php 
-		} // end instruction_callback
-
-	public function editor_check_callback( $args ) {
-
-		$output = $args[0].'[editor_check]';
-		$value  = isset( $args[1]['editor_check'] ) ? $args[1]['editor_check'] : '';
-
-		$checkhtml = '<input type="checkbox" id="editor_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
-		$checkhtml .= '<label for="editor_check"> ' . __( 'check to enable', $this->plugin_slug ) . '</label>';
-
-		echo $checkhtml;
-
-	} // end editor_check_callback
-
-		public function editor_callback( $args ) {
-			
-			$output = $args[0].'[editor]';
-			$value  = isset( $args[1]['editor'] ) ? $args[1]['editor'] : '';
-			$id = 'textarea_one';
+			$id = $name;
 			$settings = array( 
-				'textarea_name' => $output, 
+				'textarea_name' => $field, 
 				'textarea_rows' => '10'
 			);
+			echo '<div class="' . $parent . '">';
 			wp_editor( $value, $id, $settings );
+			echo '<div>';
+			?>
 
+			<script>
+			  	function check_is_enabled() {
+					if (document.getElementById('<?php echo $parent; ?>').checked){
+						jQuery('.<?php echo $parent; ?>').slideDown("fast");
+					} else {
+						jQuery('.<?php echo $parent; ?>').slideUp("fast");
+					}
+				}
+				check_is_enabled();
+				jQuery( "#<?php echo $parent; ?>" ).on('change', check_is_enabled );
+			</script>
+
+			<?php
 		} // end editor_callback
 
-	public function publish_check_callback( $args ) {
 
-		$output = $args[0].'[publish_check]';
-		$value  = isset( $args[1]['publish_check'] ) ? $args[1]['publish_check'] : '';
-
-		$checkhtml = '<input type="checkbox" id="publish_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
-		$checkhtml .= '<label for="publish_check"> ' . __( 'check to enable', $this->plugin_slug ) . '</label>';
-
-		echo $checkhtml;
-
-	} // end publish_check_callback
-
-		public function publish_callback( $args ) {
-			
-			$output = $args[0].'[publish]';
-			$value  = isset( $args[1]['publish'] ) ? $args[1]['publish'] : '';
-
-			$html = '<div id="publish"><textarea id="publish_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
-
-			echo $html; ?>
-			<script>
-				(function() {
-			    	var doc = document,
-			        	publish = doc.getElementById('publish'),
-			        	publishinput = doc.getElementById('publish_input'),
-			        	publishnode = doc.createTextNode('');		    
-			    	publish.appendChild(publishnode);			    
-			    	function updatePublish() {
-			       		publishnode.nodeValue = publishinput.value + '\n\n';
-			    	}			    
-			    	publishinput.onkeypress = publishinput.onkeyup = publishinput.onchange = updatePublish;
-			    	updatePublish();
-			  	})();
-			</script>
-		<?php 
-		} // end publish_callback
-
-	public function author_check_callback( $args ) {
-
-		$output = $args[0].'[author_check]';
-		$value  = isset( $args[1]['author_check'] ) ? $args[1]['author_check'] : '';
-
-		$checkhtml = '<input type="checkbox" id="author_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
-		$checkhtml .= '<label for="author_check"> ' . __( 'check to enable', $this->plugin_slug ) . '</label>';
-
-		echo $checkhtml;
-
-	} // end author_check_callback
-
-		public function author_callback( $args ) {
-			
-			$output = $args[0].'[author]';
-			$value  = isset( $args[1]['author'] ) ? $args[1]['author'] : '';
-
-			$html = '<div id="author"><textarea id="author_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
-
-			echo $html; ?>
-			<script>
-				(function() {
-			    	var doc = document,
-			        	author = doc.getElementById('author'),
-			        	authorinput = doc.getElementById('author_input'),
-			        	authornode = doc.createTextNode('');		    
-			    	author.appendChild(authornode);			    
-			    	function updateAuthor() {
-			       		authornode.nodeValue = authorinput.value + '\n\n';
-			    	}			    
-			    	authorinput.onkeypress = authorinput.onkeyup = authorinput.onchange = updateAuthor;
-			    	updateAuthor();
-			  	})();
-			</script>
-		<?php 
-		} // end author_callback
-
-	public function thumbnail_check_callback( $args ) {
-
-		$output = $args[0].'[thumbnail_check]';
-		$value  = isset( $args[1]['thumbnail_check'] ) ? $args[1]['thumbnail_check'] : '';
-
-		$checkhtml = '<input type="checkbox" id="thumbnail_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
-		$checkhtml .= '<label for="thumbnail_check"> ' . __( 'check to enable', $this->plugin_slug ) . '</label>';
-
-		echo $checkhtml;
-
-	} // end thumbnail_check_callback
-
-		public function thumbnail_callback( $args ) {
-			
-			$output = $args[0].'[thumbnail]';
-			$value  = isset( $args[1]['thumbnail'] ) ? $args[1]['thumbnail'] : '';
-
-			$html = '<div id="thumbnail"><textarea id="thumbnail_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
-
-			echo $html; ?>
-			<script>
-				(function() {
-			    	var doc = document,
-			        	thumbnail = doc.getElementById('thumbnail'),
-			        	thumbnailinput = doc.getElementById('thumbnail_input'),
-			        	thumbnailnode = doc.createTextNode('');		    
-			    	thumbnail.appendChild(thumbnailnode);			    
-			    	function updateThumbnail() {
-			       		thumbnailnode.nodeValue = thumbnailinput.value + '\n\n';
-			    	}			    
-			    	thumbnailinput.onkeypress = thumbnailinput.onkeyup = thumbnailinput.onchange = updateThumbnail;
-			    	updateThumbnail();
-			  	})();
-			</script>
-		<?php 
-		} // end thumbnail_callback
-
-	public function excerpt_check_callback( $args ) {
-
-		$output = $args[0].'[excerpt_check]';
-		$value  = isset( $args[1]['excerpt_check'] ) ? $args[1]['excerpt_check'] : '';
-
-		$checkhtml = '<input type="checkbox" id="excerpt_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
-		$checkhtml .= '<label for="excerpt_check"> ' . __( 'check to enable', $this->plugin_slug ) . '</label>';
-
-		echo $checkhtml;
-
-	} // end excerpt_check_callback
-
-		public function excerpt_callback( $args ) {
-			
-			$output = $args[0].'[excerpt]';
-			$value  = isset( $args[1]['excerpt'] ) ? $args[1]['excerpt'] : '';
-
-			$html = '<div id="excerpt"><textarea id="excerpt_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
-
-			echo $html; ?>
-			<script>
-				(function() {
-			    	var doc = document,
-			        	excerpt = doc.getElementById('excerpt'),
-			        	excerptinput = doc.getElementById('excerpt_input'),
-			        	excerptnode = doc.createTextNode('');		    
-			    	excerpt.appendChild(excerptnode);			    
-			    	function updateExcerpt() {
-			       		excerptnode.nodeValue = excerptinput.value + '\n\n';
-			    	}			    
-			    	excerptinput.onkeypress = excerptinput.onkeyup = excerptinput.onchange = updateExcerpt;
-			    	updateExcerpt();
-			  	})();
-			</script>
-		<?php 
-
-		} // end excerpt_callback
-
-	public function trackbacks_check_callback( $args ) {
-
-		$output = $args[0].'[trackbacks_check]';
-		$value  = isset( $args[1]['trackbacks_check'] ) ? $args[1]['trackbacks_check'] : '';
-
-		$checkhtml = '<input type="checkbox" id="trackbacks_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
-		$checkhtml .= '<label for="trackbacks_check"> ' . __( 'check to enable', $this->plugin_slug ) . '</label>';
-
-		echo $checkhtml;
-
-	} // end trackbacks_check_callback
-
-		public function trackbacks_callback( $args ) {
-			
-			$output = $args[0].'[trackbacks]';
-			$value  = isset( $args[1]['trackbacks'] ) ? $args[1]['trackbacks'] : '';
-
-			$html = '<div id="trackbacks"><textarea id="trackbacks_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
-
-			echo $html; ?>
-			<script>
-				(function() {
-			    	var doc = document,
-			        	trackbacks = doc.getElementById('trackbacks'),
-			        	trackbacksinput = doc.getElementById('trackbacks_input'),
-			        	trackbacksnode = doc.createTextNode('');		    
-			    	trackbacks.appendChild(trackbacksnode);			    
-			    	function updateTrackbacks() {
-			       		trackbacksnode.nodeValue = trackbacksinput.value + '\n\n';
-			    	}			    
-			    	trackbacksinput.onkeypress = trackbacksinput.onkeyup = trackbacksinput.onchange = updateTrackbacks;
-			    	updateTrackbacks();
-			  	})();
-			</script>
-		<?php 
-
-		} // end trackbacks_callback
-
-	public function customfields_check_callback( $args ) {
-
-		$output = $args[0].'[customfields_check]';
-		$value  = isset( $args[1]['customfields_check'] ) ? $args[1]['customfields_check'] : '';
-
-		$checkhtml = '<input type="checkbox" id="customfields_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
-		$checkhtml .= '<label for="customfields_check"> ' . __( 'check to enable', $this->plugin_slug ) . '</label>';
-
-		echo $checkhtml;
-
-	} // end customfields_check_callback
-
-		public function customfields_callback( $args ) {
-			
-			$output = $args[0].'[customfields]';
-			$value  = isset( $args[1]['customfields'] ) ? $args[1]['customfields'] : '';
-
-			$html = '<div id="customfields"><textarea id="customfields_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
-
-			echo $html; ?>
-			<script>
-				(function() {
-			    	var doc = document,
-			        	customfields = doc.getElementById('customfields'),
-			        	customfieldsinput = doc.getElementById('customfields_input'),
-			        	customfieldsnode = doc.createTextNode('');		    
-			    	customfields.appendChild(customfieldsnode);			    
-			    	function updateCustomfields() {
-			       		customfieldsnode.nodeValue = customfieldsinput.value + '\n\n';
-			    	}			    
-			    	customfieldsinput.onkeypress = customfieldsinput.onkeyup = customfieldsinput.onchange = updateCustomfields;
-			    	updateCustomfields();
-			  	})();
-			</script>
-		<?php 
-
-		} // end customfields_callback
-
-	public function comments_check_callback( $args ) {
-
-		$output = $args[0].'[comments_check]';
-		$value  = isset( $args[1]['comments_check'] ) ? $args[1]['comments_check'] : '';
-
-		$checkhtml = '<input type="checkbox" id="comments_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
-		$checkhtml .= '<label for="comments_check"> ' . __( 'check to enable', $this->plugin_slug ) . '</label>';
-
-		echo $checkhtml;
-
-	} // end comments_check_callback
-
-		public function comments_callback( $args ) {
-			
-			$output = $args[0].'[comments]';
-			$value  = isset( $args[1]['comments'] ) ? $args[1]['comments'] : '';
-
-			$html = '<div id="comments"><textarea id="comments_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
-
-			echo $html; ?>
-			<script>
-				(function() {
-			    	var doc = document,
-			        	comments = doc.getElementById('comments'),
-			        	commentsinput = doc.getElementById('comments_input'),
-			        	commentsnode = doc.createTextNode('');		    
-			    	comments.appendChild(commentsnode);			    
-			    	function updateComments() {
-			       		commentsnode.nodeValue = commentsinput.value + '\n\n';
-			    	}			    
-			    	commentsinput.onkeypress = commentsinput.onkeyup = commentsinput.onchange = updateComments;
-			    	updateComments();
-			  	})();
-			</script>
-		<?php 
-
-		} // end comments_callback
-
-	public function discussion_check_callback( $args ) {
-
-		$output = $args[0].'[discussion_check]';
-		$value  = isset( $args[1]['discussion_check'] ) ? $args[1]['discussion_check'] : '';
-
-		$checkhtml = '<input type="checkbox" id="discussion_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
-		$checkhtml .= '<label for="discussion_check"> ' . __( 'check to enable', $this->plugin_slug ) . '</label>';
-
-		echo $checkhtml;
-
-	} // end discussion_check_callback
-
-		public function discussion_callback( $args ) {
-			
-			$output = $args[0].'[discussion]';
-			$value  = isset( $args[1]['discussion'] ) ? $args[1]['discussion'] : '';
-
-			$html = '<div id="discussion"><textarea id="discussion_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
-
-			echo $html; ?>
-			<script>
-				(function() {
-			    	var doc = document,
-			        	discussion = doc.getElementById('discussion'),
-			        	discussioninput = doc.getElementById('discussion_input'),
-			        	discussionnode = doc.createTextNode('');		    
-			    	discussion.appendChild(discussionnode);			    
-			    	function updateDiscussion() {
-			       		discussionnode.nodeValue = discussioninput.value + '\n\n';
-			    	}			    
-			    	discussioninput.onkeypress = discussioninput.onkeyup = discussioninput.onchange = updateDiscussion;
-			    	updateDiscussion();
-			  	})();
-			</script>
-		<?php 
-
-		} // end discussion_callback	
-
-	public function revisions_check_callback( $args ) {
-
-		$output = $args[0].'[revisions_check]';
-		$value  = isset( $args[1]['revisions_check'] ) ? $args[1]['revisions_check'] : '';
-
-		$checkhtml = '<input type="checkbox" id="revisions_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
-		$checkhtml .= '<label for="revisions_check"> ' . __( 'check to enable', $this->plugin_slug ) . '</label>';
-
-		echo $checkhtml;
-
-	} // end revisions_check_callback
-
-		public function revisions_callback( $args ) {
-			
-			$output = $args[0].'[revisions]';
-			$value  = isset( $args[1]['revisions'] ) ? $args[1]['revisions'] : '';
-
-			$html = '<div id="revisions"><textarea id="revisions_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
-
-			echo $html; ?>
-			<script>
-				(function() {
-			    	var doc = document,
-			        	revisions = doc.getElementById('revisions'),
-			        	revisionsinput = doc.getElementById('revisions_input'),
-			        	revisionsnode = doc.createTextNode('');		    
-			    	revisions.appendChild(revisionsnode);			    
-			    	function updateRevisions() {
-			       		revisionsnode.nodeValue = revisionsinput.value + '\n\n';
-			    	}			    
-			    	revisionsinput.onkeypress = revisionsinput.onkeyup = revisionsinput.onchange = updateRevisions;
-			    	updateRevisions();
-			  	})();
-			</script>
-		<?php 
-
-		} // end revisions_callback
-
-	public function pageattributes_check_callback( $args ) {
-
-		$output = $args[0].'[pageattributes_check]';
-		$value  = isset( $args[1]['pageattributes_check'] ) ? $args[1]['pageattributes_check'] : '';
-
-		$checkhtml = '<input type="checkbox" id="pageattributes_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
-		$checkhtml .= '<label for="pageattributes_check"> ' . __( 'check to enable', $this->plugin_slug ) . '</label>';
-
-		echo $checkhtml;
-
-	} // end pageattributes_check_callback
-
-		public function pageattributes_callback( $args ) {
-			
-			$output = $args[0].'[pageattributes]';
-			$value  = isset( $args[1]['pageattributes'] ) ? $args[1]['pageattributes'] : '';
-
-			$html = '<div id="pageattributes"><textarea id="pageattributes_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
-
-			echo $html; ?>
-			<script>
-				(function() {
-			    	var doc = document,
-			        	pageattributes = doc.getElementById('pageattributes'),
-			        	pageattributesinput = doc.getElementById('pageattributes_input'),
-			        	pageattributesnode = doc.createTextNode('');		    
-			    	pageattributes.appendChild(pageattributesnode);			    
-			    	function updatePageattributes() {
-			       		pageattributesnode.nodeValue = pageattributesinput.value + '\n\n';
-			    	}			    
-			    	pageattributesinput.onkeypress = pageattributesinput.onkeyup = pageattributesinput.onchange = updatePageattributes;
-			    	updatePageattributes();
-			  	})();
-			</script>
-		<?php 
-
-		} // end pageattributes_callback
-
-	public function categories_check_callback( $args ) {
-		
-		$output = $args[0].'[categories_check]';
-		$value  = isset( $args[1]['categories_check'] ) ? $args[1]['categories_check'] : '';
-
-		$checkhtml = '<input type="checkbox" id="categories_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
-		$checkhtml .= '<label for="categories_check"> ' . __( 'check to enable', $this->plugin_slug ) . '</label>';
-
-		echo $checkhtml;
-
-	} // end categories_check_callback
-
-		public function categories_callback( $args ) {
-			
-			$output = $args[0].'[categories]';
-			$value  = isset( $args[1]['categories'] ) ? $args[1]['categories'] : '';
-
-			$html = '<div id="categories"><textarea id="categories_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
-
-			echo $html; ?>
-			<script>
-				(function() {
-			    	var doc = document,
-			        	categories = doc.getElementById('categories'),
-			        	categoriesinput = doc.getElementById('categories_input'),
-			        	categoriesnode = doc.createTextNode('');		    
-			    	categories.appendChild(categoriesnode);			    
-			    	function updateCategories() {
-			       		categoriesnode.nodeValue = categoriesinput.value + '\n\n';
-			    	}			    
-			    	categoriesinput.onkeypress = categoriesinput.onkeyup = categoriesinput.onchange = updateCategories;
-			    	updateCategories();
-			  	})();
-			</script>
-		<?php 
-
-		} // end categories_callback
-
-	public function tags_check_callback( $args ) {
-		
-		$output = $args[0].'[tags_check]';
-		$value  = isset( $args[1]['tags_check'] ) ? $args[1]['tags_check'] : '';
-
-		$checkhtml = '<input type="checkbox" id="tags_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
-		$checkhtml .= '<label for="tags_check"> ' . __( 'check to enable', $this->plugin_slug ) . '</label>';
-
-		echo $checkhtml;
-
-	} // end tags_check_callback
-
-		public function tags_callback( $args ) {
-			
-			$output = $args[0].'[tags]';
-			$value  = isset( $args[1]['tags'] ) ? $args[1]['tags'] : '';
-
-			$html = '<div id="tags"><textarea id="tags_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
-
-			echo $html; ?>
-			<script>
-				(function() {
-			    	var doc = document,
-			        	tags = doc.getElementById('tags'),
-			        	tagsinput = doc.getElementById('tags_input'),
-			        	tagsnode = doc.createTextNode('');		    
-			    	tags.appendChild(tagsnode);			    
-			    	function updateTags() {
-			       		tagsnode.nodeValue = tagsinput.value + '\n\n';
-			    	}			    
-			    	tagsinput.onkeypress = tagsinput.onkeyup = tagsinput.onchange = updateTags;
-			    	updateTags();
-			  	})();
-			</script>
-		<?php 
-
-		} // end tags_callback
-
-	public function postformats_check_callback( $args ) {
-
-		$output = $args[0].'[postformats_check]';
-		$value  = isset( $args[1]['postformats_check'] ) ? $args[1]['postformats_check'] : '';
-
-		$checkhtml = '<input type="checkbox" id="postformats_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
-		$checkhtml .= '<label for="postformats_check"> ' . __( 'check to enable', $this->plugin_slug ) . '</label>';
-
-		echo $checkhtml;
-
-	} // end postformats_check_callback
-
-		public function postformats_callback( $args ) {
-			
-			$output = $args[0].'[postformats]';
-			$value  = isset( $args[1]['postformats'] ) ? $args[1]['postformats'] : '';
-
-			$html = '<div id="postformats"><textarea id="postformats_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
-
-			echo $html; ?>
-			<script>
-				(function() {
-			    	var doc = document,
-			        	postformats = doc.getElementById('postformats'),
-			        	postformatsinput = doc.getElementById('postformats_input'),
-			        	postformatsnode = doc.createTextNode('');		    
-			    	postformats.appendChild(postformatsnode);			    
-			    	function updatePostformats() {
-			       		postformatsnode.nodeValue = postformatsinput.value + '\n\n';
-			    	}			    
-			    	postformatsinput.onkeypress = postformatsinput.onkeyup = postformatsinput.onchange = updatePostformats;
-			    	updatePostformats();
-			  	})();
-			</script>
-		<?php 
-
-		} // end postformats_callback
-
-	public function slug_check_callback( $args ) {
-
-		$output = $args[0].'[slug_check]';
-		$value  = isset( $args[1]['slug_check'] ) ? $args[1]['slug_check'] : '';
-
-		$checkhtml = '<input type="checkbox" id="slug_check" name="' . $output . '" value="1"' . checked( 1, $value, false ) . ' />';
-		$checkhtml .= '<label for="slug_check"> ' . __( 'check to enable', $this->plugin_slug ) . '</label>';
-
-		echo $checkhtml;
-
-	} // end slug_check_callback
-
-		public function slug_callback( $args ) {
-			
-			$output = $args[0].'[slug]';
-			$value  = isset( $args[1]['slug'] ) ? $args[1]['slug'] : '';
-
-			$html = '<div id="slug"><textarea id="slug_input" name="' .$output. '" type="textarea">' .$value. '</textarea></div>';
-			
-			echo $html; ?>
-			<script>
-				(function() {
-			    	var doc = document,
-			        	slug = doc.getElementById('slug'),
-			        	sluginput = doc.getElementById('slug_input'),
-			        	slugnode = doc.createTextNode('');		    
-			    	slug.appendChild(slugnode);			    
-			    	function updateSlug() {
-			       		slugnode.nodeValue = sluginput.value + '\n\n';
-			    	}			    
-			    	sluginput.onkeypress = sluginput.onkeyup = sluginput.onchange = updateSlug;
-			    	updateSlug();
-			  	})();
-			</script>
-		<?php 
-
-		} // end slug_callback
 
 }
 add_post_type_instructions_settings::get_instance();
