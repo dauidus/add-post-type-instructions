@@ -63,6 +63,7 @@ class add_post_type_instructions_settings {
 	 */
 	public function admin_init() {
 		$plugin = add_post_type_instructions::get_instance();
+		$slug = $this->plugin_slug;
 		$post_types = $plugin->supported_post_types();
 		$defaults = array(
 				// order defined by Parameters reference at http://codex.wordpress.org/Function_Reference/post_type_supports
@@ -88,13 +89,39 @@ class add_post_type_instructions_settings {
 		foreach ( $post_types as $pt ) {
 			$post_object = get_post_type_object( $pt );
 			$section = $this->plugin_slug . '_' . $pt;
+			$name = $post_object->labels->name;
 			if ( false == get_option( $section ) ) {
 				add_option( $section, apply_filters( $section . '_default_settings', $defaults ) );
 			}
 			$args = array( $section, get_option( $section ) );
+
+			// section
+			add_settings_section(
+				'check_' . $pt,
+				' ',
+				'',
+				$section
+			);
+
+			// enable for post type
+			add_settings_field(
+				'enable_check',
+				__( 'Enable for', $slug ) . ' ' . $name . ':',
+				array( $this, 'enable_check_callback' ),
+				$section,
+				'check_' . $pt,
+				array( 
+					$section, 
+					get_option( $section ),
+					'field' => $section.'[enable_check]',
+					'name' => 'enable_check'
+				)
+			);
+
+
 			add_settings_section(
 				$pt,
-				sprintf( __( 'Set instructional content for all %s', $this->plugin_slug ), $post_object->labels->name ),
+				__( 'Initial Instructional Content', $slug ),
 				'',
 				$section
 			);
@@ -102,7 +129,7 @@ class add_post_type_instructions_settings {
 			if ( post_type_supports( $pt, 'title' )) {
 				add_settings_field(
 					'top_check',
-					__( 'Above Title Field:', $this->plugin_slug ),
+					__( 'Above Title Field:', $slug ),
 					array( $this, 'check_callback' ),
 					$section,
 					$pt,
@@ -116,7 +143,7 @@ class add_post_type_instructions_settings {
 
 				add_settings_field(
 					'top',
-					__( '', $this->plugin_slug ),
+					__( '', $slug ),
 					array( $this, 'textarea_callback' ),
 					$section,
 					$pt,
@@ -132,7 +159,7 @@ class add_post_type_instructions_settings {
 
 			add_settings_field(
 				'instruction_check',
-				__( 'Above WYSIWYG Editor:', $this->plugin_slug ),
+				__( 'Below Title Field:', $slug ),
 				array( $this, 'check_callback' ),
 				$section,
 				$pt,
@@ -145,7 +172,7 @@ class add_post_type_instructions_settings {
 			);
 			add_settings_field(
 				'instruction',
-				__( '', $this->plugin_slug ),
+				__( '', $slug ),
 				array( $this, 'textarea_callback' ),
 				$section,
 				$pt,
@@ -158,13 +185,23 @@ class add_post_type_instructions_settings {
 				)
 			);
 
+
 			if ( post_type_supports( $pt, 'editor' )) {
+
+				// section
+				add_settings_section(
+					'wysiwyg_' . $pt,
+					__( 'Default Content', $slug ) .':',
+					'',
+					$section
+				);
+
 				add_settings_field(
 					'editor_check',
-					__( 'WYSIWYG Content:', $this->plugin_slug ),
+					__( 'WYSIWYG Content:', $slug),
 					array( $this, 'check_callback' ),
 					$section,
-					$pt,
+					'wysiwyg_' . $pt,
 					array( 
 						$section, 
 						get_option( $section ),
@@ -174,10 +211,10 @@ class add_post_type_instructions_settings {
 				);
 				add_settings_field(
 					'editor',
-					__( '', $this->plugin_slug ),
+					__( '', $slug ),
 					array( $this, 'wysiwyg_callback' ),
 					$section,
-					$pt,
+					'wysiwyg_' . $pt,
 					array( 
 						$section, 
 						get_option( $section ),
@@ -186,14 +223,23 @@ class add_post_type_instructions_settings {
 						'parent' => 'editor_check'
 					)
 				);
+
 			}
+
+			// section
+			add_settings_section(
+				'metabox_' . $pt,
+				__( 'Metabox Instructional Content', $slug ) .':',
+				'',
+				$section
+			);
 
 			add_settings_field(
 				'publish_check',
-				__( 'Publish Metabox:', $this->plugin_slug ),
+				__( 'Publish Metabox:', $slug ),
 				array( $this, 'check_callback' ),
 				$section,
-				$pt,
+				'metabox_' . $pt,
 				array( 
 					$section, 
 					get_option( $section ),
@@ -203,10 +249,10 @@ class add_post_type_instructions_settings {
 			);
 			add_settings_field(
 				'publish',
-				__( '', $this->plugin_slug ),
+				__( '', $slug ),
 				array( $this, 'textarea_callback' ),
 				$section,
-				$pt,
+				'metabox_' . $pt,
 				array( 
 					$section, 
 					get_option( $section ),
@@ -216,73 +262,13 @@ class add_post_type_instructions_settings {
 				)
 			);
 
-			if ( post_type_supports( $pt, 'author' )) {
-				add_settings_field(
-					'author_check',
-					__( 'Author Metabox:', $this->plugin_slug ),
-					array( $this, 'check_callback' ),
-					$section,
-					$pt,
-					array( 
-						$section, 
-						get_option( $section ),
-						'field' => $section.'[author_check]',
-						'name' => 'author_check'
-					)
-				);
-				add_settings_field(
-					'author',
-					__( '', $this->plugin_slug ),
-					array( $this, 'textarea_callback' ),
-					$section,
-					$pt,
-					array( 
-						$section, 
-						get_option( $section ),
-						'field' => $section.'[author]',
-						'name' => 'author',
-						'parent' => 'author_check'
-					)
-				);
-			}
-
-			if ( post_type_supports( $pt, 'thumbnail' )) {
-				add_settings_field(
-					'thumbnail_check',
-					__( 'Featured Image Metabox:', $this->plugin_slug ),
-					array( $this, 'check_callback' ),
-					$section,
-					$pt,
-					array( 
-						$section, 
-						get_option( $section ),
-						'field' => $section.'[thumbnail_check]',
-						'name' => 'thumbnail_check'
-					)
-				);
-				add_settings_field(
-					'thumbnail',
-					__( '', $this->plugin_slug ),
-					array( $this, 'textarea_callback' ),
-					$section,
-					$pt,
-					array( 
-						$section, 
-						get_option( $section ),
-						'field' => $section.'[thumbnail]',
-						'name' => 'thumbnail',
-						'parent' => 'thumbnail_check'
-					)
-				);
-			}
-
 			if ( post_type_supports( $pt, 'excerpt' )) {
 				add_settings_field(
 					'excerpt_check',
-					__( 'Excerpt Metabox:', $this->plugin_slug ),
+					__( 'Excerpt Metabox:', $slug ),
 					array( $this, 'check_callback' ),
 					$section,
-					$pt,
+					'metabox_' . $pt,
 					array( 
 						$section, 
 						get_option( $section ),
@@ -292,10 +278,10 @@ class add_post_type_instructions_settings {
 				);
 				add_settings_field(
 					'excerpt',
-					__( '', $this->plugin_slug ),
+					__( '', $slug ),
 					array( $this, 'textarea_callback' ),
 					$section,
-					$pt,
+					'metabox_' . $pt,
 					array( 
 						$section, 
 						get_option( $section ),
@@ -306,193 +292,48 @@ class add_post_type_instructions_settings {
 				);
 			}
 
-			if ( post_type_supports( $pt, 'trackbacks' )) {
+		
+
+			if ( post_type_supports( $pt, 'thumbnail' )) {
 				add_settings_field(
-					'trackbacks_check',
-					__( 'Trackbacks Metabox:', $this->plugin_slug ),
+					'thumbnail_check',
+					__( 'Featured Image Metabox:', $slug ),
 					array( $this, 'check_callback' ),
 					$section,
-					$pt,
-					array( 
-					$section, 
-						get_option( $section ),
-						'field' => $section.'[trackbacks_check]',
-						'name' => 'trackbacks_check'
-					)
-				);
-				add_settings_field(
-					'trackbacks',
-					__( '', $this->plugin_slug ),
-					array( $this, 'textarea_callback' ),
-					$section,
-					$pt,
+					'metabox_' . $pt,
 					array( 
 						$section, 
 						get_option( $section ),
-						'field' => $section.'[trackbacks]',
-						'name' => 'trackbacks',
-						'parent' => 'trackbacks_check'
+						'field' => $section.'[thumbnail_check]',
+						'name' => 'thumbnail_check'
+					)
+				);
+				add_settings_field(
+					'thumbnail',
+					__( '', $slug ),
+					array( $this, 'textarea_callback' ),
+					$section,
+					'metabox_' . $pt,
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[thumbnail]',
+						'name' => 'thumbnail',
+						'parent' => 'thumbnail_check'
 					)
 				);
 			}
 
-			if ( post_type_supports( $pt, 'custom-fields' )) {
-				add_settings_field(
-					'customfields_check',
-					__( 'Custom Fields Metabox:', $this->plugin_slug ),
-					array( $this, 'check_callback' ),
-					$section,
-					$pt,
-					array( 
-						$section, 
-						get_option( $section ),
-						'field' => $section.'[customfields_check]',
-						'name' => 'customfields_check'
-					)
-				);
-				add_settings_field(
-					'customfields',
-					__( '', $this->plugin_slug ),
-					array( $this, 'textarea_callback' ),
-					$section,
-					$pt,
-					array( 
-						$section, 
-						get_option( $section ),
-						'field' => $section.'[customfields]',
-						'name' => 'customfields',
-						'parent' => 'customfields_check'
-					)
-				);
-			}
-
-			if ( post_type_supports( $pt, 'comments' )) {
-				add_settings_field(
-					'comments_check',
-					__( 'Comments Metabox:', $this->plugin_slug ),
-					array( $this, 'check_callback' ),
-					$section,
-					$pt,
-					array( 
-						$section, 
-						get_option( $section ),
-						'field' => $section.'[comments_check]',
-						'name' => 'comments_check'
-					)
-				);
-				add_settings_field(
-					'comments',
-					__( '', $this->plugin_slug ),
-					array( $this, 'textarea_callback' ),
-					$section,
-					$pt,
-					array( 
-						$section, 
-						get_option( $section ),
-						'field' => $section.'[comments]',
-						'name' => 'comments',
-						'parent' => 'comments_check'
-					)
-				);
-
-				add_settings_field(
-					'discussion_check',
-					__( 'Discussion Metabox:', $this->plugin_slug ),
-					array( $this, 'check_callback' ),
-					$section,
-					$pt,
-					array( 
-						$section, 
-						get_option( $section ),
-						'field' => $section.'[discussion_check]',
-						'name' => 'discussion_check'
-					)
-				);
-				add_settings_field(
-					'discussion',
-					__( '', $this->plugin_slug ),
-					array( $this, 'textarea_callback' ),
-					$section,
-					$pt,
-					array( 
-						$section, 
-						get_option( $section ),
-						'field' => $section.'[discussion]',
-						'name' => 'discussion',
-						'parent' => 'discussion_check'
-					)
-				);
-			}	
-
-			if ( post_type_supports( $pt, 'revisions' )) {
-				add_settings_field(
-					'revisions_check',
-					__( 'Revisions Metabox:', $this->plugin_slug ),
-					array( $this, 'check_callback' ),
-					$section,
-					$pt,
-					array( 
-						$section, 
-						get_option( $section ),
-						'field' => $section.'[revisions_check]',
-						'name' => 'revisions_check'
-					)
-				);
-				add_settings_field(
-					'revisions',
-					__( '', $this->plugin_slug ),
-					array( $this, 'textarea_callback' ),
-					$section,
-					$pt,
-					array( 
-						$section, 
-						get_option( $section ),
-						'field' => $section.'[revisions]',
-						'name' => 'revisions',
-						'parent' => 'revisions_check'
-					)
-				);
-			}
-
-			if ( post_type_supports( $pt, 'page-attributes' )) {
-				add_settings_field(
-					'pageattributes_check',
-					__( 'Page Attributes Metabox:', $this->plugin_slug ),
-					array( $this, 'check_callback' ),
-					$section,
-					$pt,
-					array( 
-						$section, 
-						get_option( $section ),
-						'field' => $section.'[pageattributes_check]',
-						'name' => 'pageattributes_check'
-					)
-				);
-				add_settings_field(
-					'pageattributes',
-					__( '', $this->plugin_slug ),
-					array( $this, 'textarea_callback' ),
-					$section,
-					$pt,
-					array( 
-						$section, 
-						get_option( $section ),
-						'field' => $section.'[pageattributes]',
-						'name' => 'pageattributes',
-						'parent' => 'pageattributes_check'
-					)
-				);
-			}
 
 			if ( !($pt == 'page') ) {
 				
 				if ( is_object_in_taxonomy( $pt, 'category' ) ) {
 					add_settings_field(
 						'categories_check',
-						__( 'Categories Metabox:', $this->plugin_slug ),
+						__( 'Categories Metabox:', $slug ),
 						array( $this, 'check_callback' ),
 						$section,
-						$pt,
+						'metabox_' . $pt,
 						array( 
 							$section, 
 							get_option( $section ),
@@ -502,10 +343,10 @@ class add_post_type_instructions_settings {
 					);
 					add_settings_field(
 						'categories',
-						__( '', $this->plugin_slug ),
+						__( '', $slug ),
 						array( $this, 'textarea_callback' ),
 						$section,
-						$pt,
+						'metabox_' . $pt,
 						array( 
 							$section, 
 							get_option( $section ),
@@ -519,10 +360,10 @@ class add_post_type_instructions_settings {
 				if ( is_object_in_taxonomy( $pt, 'post_tag' ) ) {
 					add_settings_field(
 						'tags_check',
-						__( 'Tags Metabox:', $this->plugin_slug ),
+						__( 'Tags Metabox:', $slug),
 						array( $this, 'check_callback' ),
 						$section,
-						$pt,
+						'metabox_' . $pt,
 						array( 
 							$section, 
 							get_option( $section ),
@@ -532,10 +373,10 @@ class add_post_type_instructions_settings {
 					);
 					add_settings_field(
 						'tags',
-						__( '', $this->plugin_slug ),
+						__( '', $slug ),
 						array( $this, 'textarea_callback' ),
 						$section,
-						$pt,
+						'metabox_' . $pt,
 						array( 
 							$section, 
 							get_option( $section ),
@@ -551,10 +392,10 @@ class add_post_type_instructions_settings {
 				if ( post_type_supports( $pt, 'post-formats' )) {
 					add_settings_field(
 						'postformats_check',
-						__( 'Post Format Metabox:', $this->plugin_slug ),
+						__( 'Post Format Metabox:', $slug ),
 						array( $this, 'check_callback' ),
 						$section,
-						$pt,
+						'metabox_' . $pt,
 						array( 
 							$section, 
 							get_option( $section ),
@@ -564,10 +405,10 @@ class add_post_type_instructions_settings {
 					);
 					add_settings_field(
 						'postformats',
-						__( '', $this->plugin_slug ),
+						__( '', $slug ),
 						array( $this, 'textarea_callback' ),
 						$section,
-						$pt,
+						'metabox_' . $pt,
 						array( 
 							$section, 
 							get_option( $section ),
@@ -580,12 +421,225 @@ class add_post_type_instructions_settings {
 
 			}
 
+
+			if ( post_type_supports( $pt, 'author' )) {
+				add_settings_field(
+					'author_check',
+					__( 'Author Metabox:', $slug ),
+					array( $this, 'check_callback' ),
+					$section,
+					'metabox_' . $pt,
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[author_check]',
+						'name' => 'author_check'
+					)
+				);
+				add_settings_field(
+					'author',
+					__( '', $slug ),
+					array( $this, 'textarea_callback' ),
+					$section,
+					'metabox_' . $pt,
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[author]',
+						'name' => 'author',
+						'parent' => 'author_check'
+					)
+				);
+			}
+
+			
+
+			if ( post_type_supports( $pt, 'trackbacks' )) {
+				add_settings_field(
+					'trackbacks_check',
+					__( 'Trackbacks Metabox:', $slug ),
+					array( $this, 'check_callback' ),
+					$section,
+					'metabox_' . $pt,
+					array( 
+					$section, 
+						get_option( $section ),
+						'field' => $section.'[trackbacks_check]',
+						'name' => 'trackbacks_check'
+					)
+				);
+				add_settings_field(
+					'trackbacks',
+					__( '', $slug ),
+					array( $this, 'textarea_callback' ),
+					$section,
+					'metabox_' . $pt,
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[trackbacks]',
+						'name' => 'trackbacks',
+						'parent' => 'trackbacks_check'
+					)
+				);
+			}
+
+			if ( post_type_supports( $pt, 'custom-fields' )) {
+				add_settings_field(
+					'customfields_check',
+					__( 'Custom Fields Metabox:', $slug ),
+					array( $this, 'check_callback' ),
+					$section,
+					'metabox_' . $pt,
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[customfields_check]',
+						'name' => 'customfields_check'
+					)
+				);
+				add_settings_field(
+					'customfields',
+					__( '', $slug),
+					array( $this, 'textarea_callback' ),
+					$section,
+					'metabox_' . $pt,
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[customfields]',
+						'name' => 'customfields',
+						'parent' => 'customfields_check'
+					)
+				);
+			}
+
+			if ( post_type_supports( $pt, 'comments' )) {
+				add_settings_field(
+					'comments_check',
+					__( 'Comments Metabox:', $slug ),
+					array( $this, 'check_callback' ),
+					$section,
+					'metabox_' . $pt,
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[comments_check]',
+						'name' => 'comments_check'
+					)
+				);
+				add_settings_field(
+					'comments',
+					__( '', $slug),
+					array( $this, 'textarea_callback' ),
+					$section,
+					'metabox_' . $pt,
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[comments]',
+						'name' => 'comments',
+						'parent' => 'comments_check'
+					)
+				);
+
+				add_settings_field(
+					'discussion_check',
+					__( 'Discussion Metabox:', $slug ),
+					array( $this, 'check_callback' ),
+					$section,
+					'metabox_' . $pt,
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[discussion_check]',
+						'name' => 'discussion_check'
+					)
+				);
+				add_settings_field(
+					'discussion',
+					__( '', $slug ),
+					array( $this, 'textarea_callback' ),
+					$section,
+					'metabox_' . $pt,
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[discussion]',
+						'name' => 'discussion',
+						'parent' => 'discussion_check'
+					)
+				);
+			}	
+
+			if ( post_type_supports( $pt, 'revisions' )) {
+				add_settings_field(
+					'revisions_check',
+					__( 'Revisions Metabox:', $slug ),
+					array( $this, 'check_callback' ),
+					$section,
+					'metabox_' . $pt,
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[revisions_check]',
+						'name' => 'revisions_check'
+					)
+				);
+				add_settings_field(
+					'revisions',
+					__( '', $slug ),
+					array( $this, 'textarea_callback' ),
+					$section,
+					'metabox_' . $pt,
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[revisions]',
+						'name' => 'revisions',
+						'parent' => 'revisions_check'
+					)
+				);
+			}
+
+			if ( post_type_supports( $pt, 'page-attributes' )) {
+				add_settings_field(
+					'pageattributes_check',
+					__( 'Page Attributes Metabox:', $slug ),
+					array( $this, 'check_callback' ),
+					$section,
+					'metabox_' . $pt,
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[pageattributes_check]',
+						'name' => 'pageattributes_check'
+					)
+				);
+				add_settings_field(
+					'pageattributes',
+					__( '', $slug ),
+					array( $this, 'textarea_callback' ),
+					$section,
+					'metabox_' . $pt,
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[pageattributes]',
+						'name' => 'pageattributes',
+						'parent' => 'pageattributes_check'
+					)
+				);
+			}
+
+			
+
 			add_settings_field(
 				'slug_check',
-				__( 'Slug Metabox:', $this->plugin_slug ),
+				__( 'Slug Metabox:', $slug ),
 				array( $this, 'check_callback' ),
 				$section,
-				$pt,
+				'metabox_' . $pt,
 				array( 
 					$section, 
 					get_option( $section ),
@@ -595,10 +649,10 @@ class add_post_type_instructions_settings {
 			);
 			add_settings_field(
 				'slug',
-				__( '', $this->plugin_slug ),
+				__( '', $slug ),
 				array( $this, 'textarea_callback' ),
 				$section,
-				$pt,
+				'metabox_' . $pt,
 				array( 
 					$section, 
 					get_option( $section ),
@@ -608,14 +662,6 @@ class add_post_type_instructions_settings {
 				)
 			);
 
-			add_settings_field(
-				'filler',
-				__( '', $this->plugin_slug ),
-				array( $this, 'filler' ),
-				$section,
-				$pt,
-				$args
-			);
 
 			register_setting(
 				$section,
@@ -623,6 +669,50 @@ class add_post_type_instructions_settings {
 			);
 		}
 	} // end admin_init
+
+
+
+
+
+// --------------------------------------------------------
+// Default Content Requirements Section
+
+// ENABLE FOR POST TYPE
+	public function enable_check_callback( $args ) {
+		$name = $args['name'];
+		$field = $args['field'];
+		$value  = isset( $args[1][''.$name.''] ) ? $args[1][''.$name.''] : '';
+
+		$html = '<div class="switch">';
+		$html .= '<input type="checkbox" id="' . $name . '" class="switch-checkbox" name="' . $field . '" value="1" onclick="check_pt_is_enabled()"' . checked( 1, $value, false ) . ' />';
+		$html .= '<label for="' . $name . '" class="switch-label">';
+		$html .= '<span class="switch-inner"></span><span class="switch-switch"></span>';
+		$html .= '</label>';
+		$html .= '</div>';
+		echo $html;
+
+		/**
+		 * hide settings when not enabled
+		 * uses $name and $parent values from array (set in API Settings)
+		 * uses WP jQuery library
+		 * @since 3.0
+		 */
+		?>
+		<script>
+			function check_pt_is_enabled() {
+				if (document.getElementById('<?php echo $name; ?>').checked){
+					jQuery('table.form-table').slideDown("slow");
+				} else {
+					jQuery('table.form-table').slideUp("slow");
+				}
+			}
+			window.onload = check_pt_is_enabled;
+		</script>
+		<?php
+	} // end 
+
+
+
 
 	public function check_callback( $args ) {
 		$name = $args['name'];
@@ -710,12 +800,6 @@ class add_post_type_instructions_settings {
 		} // end editor_callback
 
 
-		public function filler( $args ) {
-
-			echo '<div class="filler">';
-			echo '<div>';
-
-		} // end filler
 
 
 
