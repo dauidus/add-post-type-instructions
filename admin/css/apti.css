@@ -21,10 +21,11 @@ p.apti-text {
 	border-top: 1px solid #e5e5e5;
 	border-bottom: 1px solid #e5e5e5;
 	border-left: 4px solid #0074a2;
+	margin: 0 25px;
 	background: #fff;
 }
 #apti-above-title {
-	margin: 10px 0;
+	margin: 10px 25px 15px 25px;
 }
 
 #edit-slug-box {
