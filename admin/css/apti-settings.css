@@ -154,22 +154,7 @@
     white-space: pre-wrap;
     word-wrap: break-word;
 }
-.settings_page_apti textarea#top_input,
-.settings_page_apti textarea#slug_input,
-.settings_page_apti textarea#instruction_input,
-.settings_page_apti textarea#publish_input,
-.settings_page_apti textarea#author_input,
-.settings_page_apti textarea#thumbnail_input,
-.settings_page_apti textarea#excerpt_input,
-.settings_page_apti textarea#trackbacks_input,
-.settings_page_apti textarea#customfields_input,
-.settings_page_apti textarea#comments_input,
-.settings_page_apti textarea#discussion_input,
-.settings_page_apti textarea#revisions_input,
-.settings_page_apti textarea#pageattributes_input,
-.settings_page_apti textarea#categories_input,
-.settings_page_apti textarea#tags_input,
-.settings_page_apti textarea#postformats_input {
+.settings_page_apti textarea {
 	resize:none;
     overflow:hidden;
     height:100%;

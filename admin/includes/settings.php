@@ -27,6 +27,7 @@ class add_post_type_instructions_settings {
 		$plugin = add_post_type_instructions::get_instance();
 		$this->plugin_slug = $plugin->get_plugin_slug();
 		// Add settings page
+		add_action( 'contextual_help', array( $this, 'apti_help_tab' ) );
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
 		add_action( 'admin_print_styles', array( $this, 'is_settings_page' ) );
 	}
@@ -55,6 +56,37 @@ class add_post_type_instructions_settings {
 		wp_enqueue_style('apti-settings-style', plugins_url( '../css/apti-settings.css', __FILE__ ) );
 
 	} // end is_settings_page
+
+
+	/**
+	 *
+	 * Add help tab to plugin page
+	 * @since     3.0
+	 *
+	 * This function is registered with the 'admin_init' hook.
+	 */
+	public function apti_help_tab() {
+	    $plugin = add_post_type_instructions::get_instance();
+	    $slug = $this->plugin_slug;
+	    $screen = get_current_screen();
+	    // Add my_help_tab if current screen is My Admin Page
+	    if ( $screen->id === "settings_page_apti" ) {
+
+		    $screen->add_help_tab( array(
+		        'id'	=> 'apti_help_overview',
+		        'title'	=> __( 'Overview', $slug ),
+		        'content'	=> '<p>' . __( 'First thing.', $slug ) . '</p><p>' . __( 'Second.', $slug ) . '</p><p>' . __( 'Third thing.', $slug ) . '</p>',
+		    ) );
+
+		    $screen->add_help_tab( array(
+		        'id'	=> 'apti_help_specific',
+		        'title'	=> __( 'Demo Video', $slug ),
+		        'content'	=> '<p>' . __( 'More Content.', $slug ) . '</p><iframe width="355" height="200" src="https://www.youtube.com/embed/5mZovjRlkWs" frameborder="0" allowfullscreen></iframe>',
+		    ) );
+
+		}
+	}
+
 
 	/**
 	 * Registering the Sections, Fields, and Settings.
@@ -121,7 +153,7 @@ class add_post_type_instructions_settings {
 
 			add_settings_section(
 				$pt,
-				__( 'Initial Instructional Content', $slug ),
+				__( 'General Instructional Content', $slug ),
 				'',
 				$section
 			);
