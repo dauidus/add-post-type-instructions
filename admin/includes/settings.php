@@ -97,34 +97,12 @@ class add_post_type_instructions_settings {
 		$plugin = add_post_type_instructions::get_instance();
 		$slug = $this->plugin_slug;
 		$post_types = $plugin->supported_post_types();
-		$defaults = array(
-				// order defined by Parameters reference at http://codex.wordpress.org/Function_Reference/post_type_supports
-				'top' => '',
-				'instruction' => '',
-				'editor' => '',
-				'publish' => '',
-				'author' => '',
-				'thumbnail' => '',
-				'excerpt' => '',
-				'trackbacks' => '',
-				'custom-fields' => '',
-				'comments' => '',
-				'discussion' => '',
-				'revisions' => '',
-				'page-attributes' => '',
-				'categories' => '',
-				'tags' => '',
-				'post-formats' => '',
-				'slug' => '',
-			);
 
 		foreach ( $post_types as $pt ) {
 			$post_object = get_post_type_object( $pt );
 			$section = $this->plugin_slug . '_' . $pt;
 			$name = $post_object->labels->name;
-			if ( false == get_option( $section ) ) {
-				add_option( $section, apply_filters( $section . '_default_settings', $defaults ) );
-			}
+
 			$args = array( $section, get_option( $section ) );
 
 			// section
@@ -191,7 +169,7 @@ class add_post_type_instructions_settings {
 
 			add_settings_field(
 				'instruction_check',
-				__( 'Below Title Field:', $slug ),
+				__( 'Above WYSIWYG Editor:', $slug ),
 				array( $this, 'check_callback' ),
 				$section,
 				$pt,
@@ -218,50 +196,10 @@ class add_post_type_instructions_settings {
 			);
 
 
-			if ( post_type_supports( $pt, 'editor' )) {
-
-				// section
-				add_settings_section(
-					'wysiwyg_' . $pt,
-					__( 'Default Content', $slug ) .':',
-					'',
-					$section
-				);
-
-				add_settings_field(
-					'editor_check',
-					__( 'WYSIWYG Content:', $slug),
-					array( $this, 'check_callback' ),
-					$section,
-					'wysiwyg_' . $pt,
-					array( 
-						$section, 
-						get_option( $section ),
-						'field' => $section.'[editor_check]',
-						'name' => 'editor_check'
-					)
-				);
-				add_settings_field(
-					'editor',
-					__( '', $slug ),
-					array( $this, 'wysiwyg_callback' ),
-					$section,
-					'wysiwyg_' . $pt,
-					array( 
-						$section, 
-						get_option( $section ),
-						'field' => $section.'[editor]',
-						'name' => 'editor',
-						'parent' => 'editor_check'
-					)
-				);
-
-			}
-
 			// section
 			add_settings_section(
 				'metabox_' . $pt,
-				__( 'Metabox Instructional Content', $slug ) .':',
+				__( 'Other Instructional Content', $slug ) .':',
 				'',
 				$section
 			);
@@ -294,38 +232,6 @@ class add_post_type_instructions_settings {
 				)
 			);
 
-			if ( post_type_supports( $pt, 'excerpt' )) {
-				add_settings_field(
-					'excerpt_check',
-					__( 'Excerpt Metabox:', $slug ),
-					array( $this, 'check_callback' ),
-					$section,
-					'metabox_' . $pt,
-					array( 
-						$section, 
-						get_option( $section ),
-						'field' => $section.'[excerpt_check]',
-						'name' => 'excerpt_check'
-					)
-				);
-				add_settings_field(
-					'excerpt',
-					__( '', $slug ),
-					array( $this, 'textarea_callback' ),
-					$section,
-					'metabox_' . $pt,
-					array( 
-						$section, 
-						get_option( $section ),
-						'field' => $section.'[excerpt]',
-						'name' => 'excerpt',
-						'parent' => 'excerpt_check'
-					)
-				);
-			}
-
-		
-
 			if ( post_type_supports( $pt, 'thumbnail' )) {
 				add_settings_field(
 					'thumbnail_check',
@@ -352,6 +258,36 @@ class add_post_type_instructions_settings {
 						'field' => $section.'[thumbnail]',
 						'name' => 'thumbnail',
 						'parent' => 'thumbnail_check'
+					)
+				);
+			}
+
+			if ( post_type_supports( $pt, 'excerpt' )) {
+				add_settings_field(
+					'excerpt_check',
+					__( 'Excerpt Metabox:', $slug ),
+					array( $this, 'check_callback' ),
+					$section,
+					'metabox_' . $pt,
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[excerpt_check]',
+						'name' => 'excerpt_check'
+					)
+				);
+				add_settings_field(
+					'excerpt',
+					__( '', $slug ),
+					array( $this, 'textarea_callback' ),
+					$section,
+					'metabox_' . $pt,
+					array( 
+						$section, 
+						get_option( $section ),
+						'field' => $section.'[excerpt]',
+						'name' => 'excerpt',
+						'parent' => 'excerpt_check'
 					)
 				);
 			}
@@ -794,44 +730,6 @@ class add_post_type_instructions_settings {
 			</script>
 		<?php 
 		} // end top_callback
-
-
-
-
-
-
-		public function wysiwyg_callback( $args ) {
-			$name = $args['name'];
-			$field = $args['field'];
-			$value  = isset( $args[1][''.$name.''] ) ? $args[1][''.$name.''] : '';
-			$parent = $args['parent'];
-
-			$id = $name;
-			$settings = array( 
-				'textarea_name' => $field, 
-				'textarea_rows' => '10'
-			);
-			echo '<div class="' . $parent . '">';
-			wp_editor( $value, $id, $settings );
-			echo '<div>';
-			?>
-
-			<script>
-			  	function check_is_enabled() {
-					if (document.getElementById('<?php echo $parent; ?>').checked){
-						jQuery('.<?php echo $parent; ?>').slideDown("fast");
-					} else {
-						jQuery('.<?php echo $parent; ?>').slideUp("fast");
-					}
-				}
-				check_is_enabled();
-				jQuery( "#<?php echo $parent; ?>" ).on('change', check_is_enabled );
-			</script>
-
-			<?php
-		} // end editor_callback
-
-
 
 
 

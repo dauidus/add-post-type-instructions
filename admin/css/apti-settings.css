@@ -26,8 +26,29 @@
 	margin-bottom: 10px;
 }
 
+.settings_page_apti #apti-sidebar {
+	display: block;
+	width: 250px;
+	position: absolute;
+	right: 0px;
+	margin-top: 20px;
+	margin-right: 20px;
+	background: #fff;
+	border: 1px solid #e5e5e5;
+	padding: 0px 15px 10px 15px;
+	z-index: 999;
+}
+#apti-sidebar h3 {
+	margin: 0px -15px 30px -15px;
+	border: none;
+	border-bottom: 1px solid #e5e5e5;
+}
+.settings_page_apti #apti-sidebar span {
+	display: table;
+	padding: 5px 10px;
+}
 .settings_page_apti form {
-	width: calc(100% - 2px);
+	width: calc(100% - 300px);
 }
 
 .settings_page_apti .form-table tbody {
@@ -125,10 +146,7 @@
 .settings_page_apti textarea {
 	width: calc(100% - 20px); 
 	padding: 10px; 
-	margin:8px 0px 0 0;
-}
-.settings_page_apti .wp-editor-wrap {
-	margin: 8px 20px 8px 0;
+	margin:8px 0px 0 0px;
 }
 
 .settings_page_apti #top,
@@ -153,6 +171,7 @@
     height:auto;
     white-space: pre-wrap;
     word-wrap: break-word;
+    color: #fff;
 }
 .settings_page_apti textarea {
 	resize:none;
@@ -210,5 +229,62 @@
 }
 .settings_page_apti .switch-checkbox:checked + .switch-label .switch-switch {
     right: 0px; 
+}
+
+
+@media screen and (max-width: 1100px) {
+
+	.settings_page_apti textarea {
+		width: calc(100% + 150px); 
+		padding: 10px; 
+		margin:8px 0px 0 -170px;
+	}
+
+}
+
+@media screen and (max-width: 782px) {
+	.settings_page_apti #apti-sidebar {
+		display: none;
+	}
+	.settings_page_apti form {
+		width: 100%;
+	}
+	.settings_page_apti .form-table {
+		width: 100%;
+	}
+	.settings_page_apti th {
+		width: 100% !important;
+		display: block;
+		position: relative;
+	}
+	.settings_page_apti #toggle {
+		margin: -10px 0px 0px -26px;
+		font-size: 12px;
+		width: calc(100% - 34px);
+	}
+	.settings_page_apti tr {
+		display: block;
+	}
+	.settings_page_apti tr td {	
+		margin: 0px 0 0px 0;
+		display: inline-block;
+		width: 100%;
+	}
+	.settings_page_apti tr td:last-child {
+		margin-bottom: 0px !important;
+	}
+	.settings_page_apti th + td {
+		padding: 5px 10px 5px 25px;
+	}
+	.settings_page_apti th:empty + td {
+		padding: 5px 10px 5px 25px;
+	}
+
+
+	.settings_page_apti .form-table td textarea {
+		width: calc(100% - 50px);
+		padding: 10px; 
+		margin:8px 20px 0 0px;
+	}
 }
 

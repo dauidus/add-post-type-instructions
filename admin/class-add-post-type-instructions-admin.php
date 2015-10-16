@@ -81,7 +81,6 @@ class Add_Post_Type_Instructions_Admin {
 			add_action( 'admin_print_styles', array( $this, 'is_edit_page' ) );
 			add_action( 'edit_form_top', array( $this, 'add_content_above_title' ) );
 			add_action( 'edit_form_after_title', array( $this, 'add_content_above_editor' ) );
-			add_filter( 'default_content', array( $this, 'change_editor_content' ) );
 			add_action( 'admin_head', array( $this, 'change_publish_metabox_content' ) );
 			add_action( 'admin_head', array( $this, 'change_author_metabox_content' ) );
 			add_filter( 'admin_post_thumbnail_html', array( $this, 'change_thumbnail_metabox_content' ) );
@@ -240,30 +239,6 @@ class Add_Post_Type_Instructions_Admin {
 
 	} // end add_content_above
 
-	/**
-	 * Set the default value fot the content editor
-	 *
-	 * @since 1.0
-	 */
-	public function change_editor_content($the_content) {
-
-		$post_type = $this->get_post_type();
-		$options = get_option( $this->plugin_slug . '_' . $post_type );
-
-		if ( isset( $options['editor_check'] ) && ! empty( $options['editor_check'] ) ) {
-			if ( isset( $options['editor'] ) && ! empty( $options['editor'] ) ) {
-				//add our content
-				$template = $options['editor'];
-				if ( ! empty($the_content) ) {
-	        		return $the_content;
-	    		} else {
-	        		$the_content = $template;
-	        		return $the_content;
-	        	}
-			}
-		}
-
-	} // end change_editor_content
 
 	/**
 	 * Change publish metabox content
