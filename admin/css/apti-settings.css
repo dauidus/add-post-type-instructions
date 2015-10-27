@@ -18,6 +18,10 @@
 	border-bottom: 1px solid #e5e5e5;
 }
 
+.settings_page_apti h2.nav-tab-wrapper .nav-tab-general {
+	margin-left: 35px;
+}
+
 .settings_page_apti .hidden {
 	display: none;
 }
@@ -147,39 +151,30 @@
 	width: calc(100% - 20px); 
 	padding: 10px; 
 	margin:8px 0px 0 0px;
+	resize: none;
+    overflow: hidden;
+    height: 100%;
+	position: absolute;
+    top: 0;
+    left: 0;
 }
 
-.settings_page_apti #top,
-.settings_page_apti #slug,
-.settings_page_apti #instruction,
-.settings_page_apti #publish,
-.settings_page_apti #author,
-.settings_page_apti #thumbnail,
-.settings_page_apti #excerpt,
-.settings_page_apti #trackbacks,
-.settings_page_apti #customfields,
-.settings_page_apti #comments,
-.settings_page_apti #discussion,
-.settings_page_apti #revisions,
-.settings_page_apti #pageattributes,
-.settings_page_apti #categories,
-.settings_page_apti #tags,
-.settings_page_apti #postformats {
+.settings_page_apti .textarea {
     padding: 10px; 
-    margin:0px 0px 15px;
-    position:relative;
-    height:auto;
+    margin: 0px 0px 15px;
+    position: relative;
+    height: auto;
     white-space: pre-wrap;
     word-wrap: break-word;
     color: #fff;
+    padding-bottom: 20px;
 }
-.settings_page_apti textarea {
-	resize:none;
-    overflow:hidden;
-    height:100%;
-	position:absolute;
-    top:0;
-    left:0;
+
+
+.settings_page_apti img.apti-banner {
+	border-radius: 15px;
+	-webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,.1);
+		    box-shadow: 0 2px 2px 0 rgba(0,0,0,.1);
 }
 
 

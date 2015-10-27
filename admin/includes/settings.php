@@ -700,7 +700,7 @@ class add_post_type_instructions_settings {
 			$parent = $args['parent'];
 
 			$html = '<div class="' . $parent . '">';
-			$html .= '<div id="' . $name . '"><textarea id="' . $name . '_input" name="' .$field. '" type="textarea">' .$value. '</textarea></div>';
+			$html .= '<div id="' . $name . '" class="textarea"><textarea id="' . $name . '_input" name="' .$field. '" type="textarea">' .$value. '</textarea></div>';
 			$html .= '<div>';
 			echo $html; ?>
 

@@ -34,6 +34,7 @@
 		<?php foreach ( $post_types as $pt ) { ?>
 		<a href="?page=<?php echo $plugin->get_plugin_slug(); ?>&tab=<?php echo $pt; ?>" class="nav-tab <?php echo ( $pt == $active_tab ) ? 'nav-tab-active' : ''; ?>"><?php $post_type_object = get_post_type_object( $pt ); echo $post_type_object->labels->name; ?></a>
 		<?php } ?>
+		<a href="?page=<?php echo $plugin->get_plugin_slug(); ?>&tab=general" class="nav-tab nav-tab-general <?php echo ( 'general' == $active_tab ) ? 'nav-tab-active' : ''; ?>">General Settings</a>
 	</h2>
 
 	<div id="apti-sidebar">
@@ -73,12 +74,14 @@
 				<?php
 				$i = 0;
 				foreach ( $plugin_banners as $banner ) {
-					echo '<a target="_blank" href="' . esc_url( $banner['url'] ) . '"><img src="' . plugins_url( 'instructional-content/admin/images/' . $banner['img'] ) . '" alt="' . esc_attr( $banner['alt'] ) . '"/></a><br/><br/>';
+					echo '<a target="_blank" href="' . esc_url( $banner['url'] ) . '"><div style="width: 100%; height: 90px; background: #1E8CBE; border-radius: 8px;"></div>';
+					//<img src="' . plugins_url( 'set-default-content/admin/images/' . $banner['img'] ) . '" alt="' . esc_attr( $banner['alt'] ) . '"/>
+					echo '</a><br/>';
 					$i ++;
 				}
 
 				foreach ( $service_banners as $service_banner ) {
-					echo '<a target="_blank" href="' . esc_url( $service_banner['url'] ) . '"><img class="aptrc-banner" src="' . plugins_url( 'instructional-content/admin/images/' . $service_banner['img'] ) . '" alt="' . esc_attr( $service_banner['alt'] ) . '"/></a><br/><br/>';
+					echo '<a target="_blank" href="' . esc_url( $service_banner['url'] ) . '"><img class="apti-banner" src="' . plugins_url( 'instructional-content/admin/images/' . $service_banner['img'] ) . '" alt="' . esc_attr( $service_banner['alt'] ) . '"/></a><br/><br/>';
 				}
 				?>	
 
