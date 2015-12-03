@@ -211,11 +211,15 @@ class Add_Post_Type_Instructions_Admin {
 		$post_type = $this->get_post_type();
 		$options = get_option( $this->plugin_slug . '_' . $post_type );
 
-		if ( isset( $options['top_check'] ) && ! empty( $options['top_check'] ) ) {
-			if ( isset( $options['top'] ) && ! empty( $options['top'] ) ) { 
-				$top = $options['top'];
-				echo '<div id="apti-above-title">' . $top . '</div>';
+		if ( isset( $options['enable_check'] ) && ! empty( $options['enable_check'] ) ) {	
+
+			if ( isset( $options['top_check'] ) && ! empty( $options['top_check'] ) ) {
+				if ( isset( $options['top'] ) && ! empty( $options['top'] ) ) { 
+					$top = $options['top'];
+					echo '<div id="apti-above-title">' . $top . '</div>';
+				}
 			}
+
 		}
 
 	} // end add_content_above_title
@@ -230,11 +234,15 @@ class Add_Post_Type_Instructions_Admin {
 		$post_type = $this->get_post_type();
 		$options = get_option( $this->plugin_slug . '_' . $post_type );
 
-		if ( isset( $options['instruction_check'] ) && ! empty( $options['instruction_check'] ) ) {
-			if ( isset( $options['instruction'] ) && ! empty( $options['instruction'] ) ) {
-				$instruction = $options['instruction'];
-				echo '<br /><div id="apti-below-title">' . $instruction . '</div>';
+		if ( isset( $options['enable_check'] ) && ! empty( $options['enable_check'] ) ) {
+
+			if ( isset( $options['instruction_check'] ) && ! empty( $options['instruction_check'] ) ) {
+				if ( isset( $options['instruction'] ) && ! empty( $options['instruction'] ) ) {
+					$instruction = $options['instruction'];
+					echo '<br /><div id="apti-below-title">' . $instruction . '</div>';
+				}
 			}
+
 		}
 
 	} // end add_content_above
@@ -250,19 +258,23 @@ class Add_Post_Type_Instructions_Admin {
 		$post_type = $this->get_post_type();
 		$options = get_option( $this->plugin_slug . '_' . $post_type );
 
-		if ( isset( $options['publish_check'] ) && ! empty( $options['publish_check'] ) ) {
-			if ( isset( $options['publish'] ) && ! empty( $options['publish'] ) ) { 
-				$publish = '<p class="apti-text apti-publish">' . $options['publish'] . '</p>'; ?>
+		if ( isset( $options['enable_check'] ) && ! empty( $options['enable_check'] ) ) {
 
-				<script type="text/javascript">
-					jQuery(function($) {
-					    var text_to_insert = '<?php echo $publish; ?>';
+			if ( isset( $options['publish_check'] ) && ! empty( $options['publish_check'] ) ) {
+				if ( isset( $options['publish'] ) && ! empty( $options['publish'] ) ) { 
+					$publish = '<p class="apti-text apti-publish">' . $options['publish'] . '</p>'; ?>
 
-					    $('' + text_to_insert + '').insertBefore('#submitdiv .inside #minor-publishing-actions')
-					});
-				</script>
-			<?php 
+					<script type="text/javascript">
+						jQuery(function($) {
+						    var text_to_insert = '<?php echo $publish; ?>';
+
+						    $('' + text_to_insert + '').insertBefore('#submitdiv .inside #minor-publishing-actions')
+						});
+					</script>
+				<?php 
+				}
 			}
+
 		}
 
 	} // end change_publish_metabox_content
@@ -277,19 +289,23 @@ class Add_Post_Type_Instructions_Admin {
 		$post_type = $this->get_post_type();
 		$options = get_option( $this->plugin_slug . '_' . $post_type );
 
-		if ( isset( $options['author_check'] ) && ! empty( $options['author_check'] ) ) {
-			if ( isset( $options['author'] ) && ! empty( $options['author'] ) ) { 
-				$author = '<p class="apti-text apti-author">' . $options['author'] . '</p>'; ?>
+		if ( isset( $options['enable_check'] ) && ! empty( $options['enable_check'] ) ) {
 
-				<script type="text/javascript">
-					jQuery(function($) {
-					    var text_to_insert = '<?php echo $author; ?>';
+			if ( isset( $options['author_check'] ) && ! empty( $options['author_check'] ) ) {
+				if ( isset( $options['author'] ) && ! empty( $options['author'] ) ) { 
+					$author = '<p class="apti-text apti-author">' . $options['author'] . '</p>'; ?>
 
-					    $('' + text_to_insert + '').insertBefore('#authordiv .inside select')
-					});
-				</script>
-			<?php 
+					<script type="text/javascript">
+						jQuery(function($) {
+						    var text_to_insert = '<?php echo $author; ?>';
+
+						    $('' + text_to_insert + '').insertBefore('#authordiv .inside select')
+						});
+					</script>
+				<?php 
+				}
 			}
+
 		}
 
 	} // end change_author_metabox_content
@@ -304,11 +320,15 @@ class Add_Post_Type_Instructions_Admin {
 		$post_type = $this->get_post_type();
 		$options = get_option( $this->plugin_slug . '_' . $post_type );
 
-		if ( isset( $options['thumbnail_check'] ) && ! empty( $options['thumbnail_check'] ) ) {
-			if ( isset( $options['thumbnail'] ) && ! empty( $options['thumbnail'] ) ) {
-				$thumbnail = '<p class="apti-text apti-thumbnail">' . $options['thumbnail'] . '</p>';
-				$content = $thumbnail . $content;
+		if ( isset( $options['enable_check'] ) && ! empty( $options['enable_check'] ) ) {
+
+			if ( isset( $options['thumbnail_check'] ) && ! empty( $options['thumbnail_check'] ) ) {
+				if ( isset( $options['thumbnail'] ) && ! empty( $options['thumbnail'] ) ) {
+					$thumbnail = '<p class="apti-text apti-thumbnail">' . $options['thumbnail'] . '</p>';
+					$content = $thumbnail . $content;
+				}
 			}
+
 		}
 
 		return $content;
@@ -325,19 +345,23 @@ class Add_Post_Type_Instructions_Admin {
 		$post_type = $this->get_post_type();
 		$options = get_option( $this->plugin_slug . '_' . $post_type );
 
-		if ( isset( $options['excerpt_check'] ) && ! empty( $options['excerpt_check'] ) ) {
-			if ( isset( $options['excerpt'] ) && ! empty( $options['excerpt'] ) ) { 
-				$excerpt = '<p class="apti-text apti-excerpt">' . $options['excerpt'] . '</p>'; ?>
+		if ( isset( $options['enable_check'] ) && ! empty( $options['enable_check'] ) ) {
 
-				<script type="text/javascript">
-					jQuery(function($) {
-					    var text_to_insert = '<?php echo $excerpt; ?>';
+			if ( isset( $options['excerpt_check'] ) && ! empty( $options['excerpt_check'] ) ) {
+				if ( isset( $options['excerpt'] ) && ! empty( $options['excerpt'] ) ) { 
+					$excerpt = '<p class="apti-text apti-excerpt">' . $options['excerpt'] . '</p>'; ?>
 
-					    $('' + text_to_insert + '').insertBefore('#postexcerpt .inside label')
-					});
-				</script>
-			<?php 
+					<script type="text/javascript">
+						jQuery(function($) {
+						    var text_to_insert = '<?php echo $excerpt; ?>';
+
+						    $('' + text_to_insert + '').insertBefore('#postexcerpt .inside label')
+						});
+					</script>
+				<?php 
+				}
 			}
+
 		}
 
 	} // end change_excerpt_metabox_content
@@ -352,19 +376,23 @@ class Add_Post_Type_Instructions_Admin {
 		$post_type = $this->get_post_type();
 		$options = get_option( $this->plugin_slug . '_' . $post_type );
 
-		if ( isset( $options['trackbacks_check'] ) && ! empty( $options['trackbacks_check'] ) ) {
-			if ( isset( $options['trackbacks'] ) && ! empty( $options['trackbacks'] ) ) { 
-				$trackbacks = '<p class="apti-text apti-trackbacks">' . $options['trackbacks'] . '</p>'; ?>
+		if ( isset( $options['enable_check'] ) && ! empty( $options['enable_check'] ) ) {
 
-				<script type="text/javascript">
-					jQuery(function($) {
-					    var text_to_insert = '<?php echo $trackbacks; ?>';
+			if ( isset( $options['trackbacks_check'] ) && ! empty( $options['trackbacks_check'] ) ) {
+				if ( isset( $options['trackbacks'] ) && ! empty( $options['trackbacks'] ) ) { 
+					$trackbacks = '<p class="apti-text apti-trackbacks">' . $options['trackbacks'] . '</p>'; ?>
 
-					    $('' + text_to_insert + '').insertBefore('#trackbacksdiv .inside p:nth-of-type(1)')
-					});
-				</script>
-			<?php 
+					<script type="text/javascript">
+						jQuery(function($) {
+						    var text_to_insert = '<?php echo $trackbacks; ?>';
+
+						    $('' + text_to_insert + '').insertBefore('#trackbacksdiv .inside p:nth-of-type(1)')
+						});
+					</script>
+				<?php 
+				}
 			}
+
 		}
 
 	} // end change_trackbacks_metabox_content
@@ -379,19 +407,23 @@ class Add_Post_Type_Instructions_Admin {
 		$post_type = $this->get_post_type();
 		$options = get_option( $this->plugin_slug . '_' . $post_type );
 
-		if ( isset( $options['customfields_check'] ) && ! empty( $options['customfields_check'] ) ) {
-			if ( isset( $options['customfields'] ) && ! empty( $options['customfields'] ) ) { 
-				$customfields = '<p class="apti-text apti-customfields">' . $options['customfields'] . '</p>'; ?>
+		if ( isset( $options['enable_check'] ) && ! empty( $options['enable_check'] ) ) {
 
-				<script type="text/javascript">
-					jQuery(function($) {
-					    var text_to_insert = '<?php echo $customfields; ?>';
+			if ( isset( $options['customfields_check'] ) && ! empty( $options['customfields_check'] ) ) {
+				if ( isset( $options['customfields'] ) && ! empty( $options['customfields'] ) ) { 
+					$customfields = '<p class="apti-text apti-customfields">' . $options['customfields'] . '</p>'; ?>
 
-					    $('' + text_to_insert + '').insertBefore('#postcustom .inside #postcustomstuff')
-					});
-				</script>
-			<?php 
+					<script type="text/javascript">
+						jQuery(function($) {
+						    var text_to_insert = '<?php echo $customfields; ?>';
+
+						    $('' + text_to_insert + '').insertBefore('#postcustom .inside #postcustomstuff')
+						});
+					</script>
+				<?php 
+				}
 			}
+
 		}
 
 	} // end change_customfields_metabox_content
@@ -406,19 +438,23 @@ class Add_Post_Type_Instructions_Admin {
 		$post_type = $this->get_post_type();
 		$options = get_option( $this->plugin_slug . '_' . $post_type );
 
-		if ( isset( $options['comments_check'] ) && ! empty( $options['comments_check'] ) ) {
-			if ( isset( $options['comments'] ) && ! empty( $options['comments'] ) ) { 
-				$comments = '<p class="apti-text apti-comments">' . $options['comments'] . '</p>'; ?>
+		if ( isset( $options['enable_check'] ) && ! empty( $options['enable_check'] ) ) {
 
-				<script type="text/javascript">
-					jQuery(function($) {
-					    var text_to_insert = '<?php echo $comments; ?>';
+			if ( isset( $options['comments_check'] ) && ! empty( $options['comments_check'] ) ) {
+				if ( isset( $options['comments'] ) && ! empty( $options['comments'] ) ) { 
+					$comments = '<p class="apti-text apti-comments">' . $options['comments'] . '</p>'; ?>
 
-					    $('' + text_to_insert + '').insertBefore('#commentsdiv .inside p:nth-of-type(1)')
-					});
-				</script>
-			<?php 
+					<script type="text/javascript">
+						jQuery(function($) {
+						    var text_to_insert = '<?php echo $comments; ?>';
+
+						    $('' + text_to_insert + '').insertBefore('#commentsdiv .inside p:nth-of-type(1)')
+						});
+					</script>
+				<?php 
+				}
 			}
+
 		}
 
 	} // end change_comments_metabox_content	
@@ -433,19 +469,23 @@ class Add_Post_Type_Instructions_Admin {
 		$post_type = $this->get_post_type();
 		$options = get_option( $this->plugin_slug . '_' . $post_type );
 
-		if ( isset( $options['discussion_check'] ) && ! empty( $options['discussion_check'] ) ) {
-			if ( isset( $options['discussion'] ) && ! empty( $options['discussion'] ) ) { 
-				$discussion = '<p class="apti-text apti-discussion">' . $options['discussion'] . '</p>'; ?>
+		if ( isset( $options['enable_check'] ) && ! empty( $options['enable_check'] ) ) {
 
-				<script type="text/javascript">
-					jQuery(function($) {
-					    var text_to_insert = '<?php echo $discussion; ?>';
+			if ( isset( $options['discussion_check'] ) && ! empty( $options['discussion_check'] ) ) {
+				if ( isset( $options['discussion'] ) && ! empty( $options['discussion'] ) ) { 
+					$discussion = '<p class="apti-text apti-discussion">' . $options['discussion'] . '</p>'; ?>
 
-					    $('' + text_to_insert + '').insertBefore('#commentstatusdiv .inside p:nth-of-type(1)')
-					});
-				</script>
-			<?php 
+					<script type="text/javascript">
+						jQuery(function($) {
+						    var text_to_insert = '<?php echo $discussion; ?>';
+
+						    $('' + text_to_insert + '').insertBefore('#commentstatusdiv .inside p:nth-of-type(1)')
+						});
+					</script>
+				<?php 
+				}
 			}
+
 		}
 
 	} // end change_discussion_metabox_content	
@@ -460,19 +500,23 @@ class Add_Post_Type_Instructions_Admin {
 		$post_type = $this->get_post_type();
 		$options = get_option( $this->plugin_slug . '_' . $post_type );
 
-		if ( isset( $options['revisions_check'] ) && ! empty( $options['revisions_check'] ) ) {
-			if ( isset( $options['revisions'] ) && ! empty( $options['revisions'] ) ) { 
-				$revisions = '<p class="apti-text apti-revisions">' . $options['revisions'] . '</p>'; ?>
+		if ( isset( $options['enable_check'] ) && ! empty( $options['enable_check'] ) ) {
 
-				<script type="text/javascript">
-					jQuery(function($) {
-					    var text_to_insert = '<?php echo $revisions; ?>';
+			if ( isset( $options['revisions_check'] ) && ! empty( $options['revisions_check'] ) ) {
+				if ( isset( $options['revisions'] ) && ! empty( $options['revisions'] ) ) { 
+					$revisions = '<p class="apti-text apti-revisions">' . $options['revisions'] . '</p>'; ?>
 
-					    $('' + text_to_insert + '').insertBefore('#revisionsdiv .inside ul:nth-of-type(1)')
-					});
-				</script>
-			<?php 
+					<script type="text/javascript">
+						jQuery(function($) {
+						    var text_to_insert = '<?php echo $revisions; ?>';
+
+						    $('' + text_to_insert + '').insertBefore('#revisionsdiv .inside ul:nth-of-type(1)')
+						});
+					</script>
+				<?php 
+				}
 			}
+
 		}
 
 	} // end change_revisions_metabox_content
@@ -487,19 +531,23 @@ class Add_Post_Type_Instructions_Admin {
 		$post_type = $this->get_post_type();
 		$options = get_option( $this->plugin_slug . '_' . $post_type );
 
-		if ( isset( $options['pageattributes_check'] ) && ! empty( $options['pageattributes_check'] ) ) {
-			if ( isset( $options['pageattributes'] ) && ! empty( $options['pageattributes'] ) ) { 
-				$pageattributes = '<p class="apti-text apti-pageattributes">' . $options['pageattributes'] . '</p>'; ?>
+		if ( isset( $options['enable_check'] ) && ! empty( $options['enable_check'] ) ) {
 
-				<script type="text/javascript">
-					jQuery(function($) {
-					    var text_to_insert = '<?php echo $pageattributes; ?>';
+			if ( isset( $options['pageattributes_check'] ) && ! empty( $options['pageattributes_check'] ) ) {
+				if ( isset( $options['pageattributes'] ) && ! empty( $options['pageattributes'] ) ) { 
+					$pageattributes = '<p class="apti-text apti-pageattributes">' . $options['pageattributes'] . '</p>'; ?>
 
-					    $('' + text_to_insert + '').insertBefore('#pageparentdiv .inside p:nth-of-type(1)')
-					});
-				</script>
-				<?php 
+					<script type="text/javascript">
+						jQuery(function($) {
+						    var text_to_insert = '<?php echo $pageattributes; ?>';
+
+						    $('' + text_to_insert + '').insertBefore('#pageparentdiv .inside p:nth-of-type(1)')
+						});
+					</script>
+					<?php 
+				}
 			}
+
 		}
 
 	} // end change_pageattributes_metabox_content
@@ -514,19 +562,23 @@ class Add_Post_Type_Instructions_Admin {
 		$post_type = $this->get_post_type();
 		$options = get_option( $this->plugin_slug . '_' . $post_type );
 
-		if ( isset( $options['categories_check'] ) && ! empty( $options['categories_check'] ) ) {
-			if ( isset( $options['categories'] ) && ! empty( $options['categories'] ) ) { 
-				$categories = '<p class="apti-text apti-categories">' . $options['categories'] . '</p>'; ?>
+		if ( isset( $options['enable_check'] ) && ! empty( $options['enable_check'] ) ) {
 
-				<script type="text/javascript">
-					jQuery(function($) {
-					    var text_to_insert = '<?php echo $categories; ?>';
+			if ( isset( $options['categories_check'] ) && ! empty( $options['categories_check'] ) ) {
+				if ( isset( $options['categories'] ) && ! empty( $options['categories'] ) ) { 
+					$categories = '<p class="apti-text apti-categories">' . $options['categories'] . '</p>'; ?>
 
-					    $('' + text_to_insert + '').insertBefore('#taxonomy-category')
-					});
-				</script>
-				<?php 
+					<script type="text/javascript">
+						jQuery(function($) {
+						    var text_to_insert = '<?php echo $categories; ?>';
+
+						    $('' + text_to_insert + '').insertBefore('#taxonomy-category')
+						});
+					</script>
+					<?php 
+				}
 			}
+
 		}
 
 	} // end change_categories_metabox_content	
@@ -541,19 +593,23 @@ class Add_Post_Type_Instructions_Admin {
 		$post_type = $this->get_post_type();
 		$options = get_option( $this->plugin_slug . '_' . $post_type );
 
-		if ( isset( $options['tags_check'] ) && ! empty( $options['tags_check'] ) ) {
-			if ( isset( $options['tags'] ) && ! empty( $options['tags'] ) ) { 
-				$tags = '<p class="apti-text apti-tags">' . $options['tags'] . '</p>'; ?>
+		if ( isset( $options['enable_check'] ) && ! empty( $options['enable_check'] ) ) {
 
-				<script type="text/javascript">
-					jQuery(function($) {
-					    var text_to_insert = '<?php echo $tags; ?>';
+			if ( isset( $options['tags_check'] ) && ! empty( $options['tags_check'] ) ) {
+				if ( isset( $options['tags'] ) && ! empty( $options['tags'] ) ) { 
+					$tags = '<p class="apti-text apti-tags">' . $options['tags'] . '</p>'; ?>
 
-					    $('' + text_to_insert + '').insertBefore('#tagsdiv-post_tag .tagsdiv')
-					});
-				</script>
-				<?php 
+					<script type="text/javascript">
+						jQuery(function($) {
+						    var text_to_insert = '<?php echo $tags; ?>';
+
+						    $('' + text_to_insert + '').insertBefore('#tagsdiv-post_tag .tagsdiv')
+						});
+					</script>
+					<?php 
+				}
 			}
+
 		}
 
 	} // end change_categories_metabox_content	
@@ -568,19 +624,23 @@ class Add_Post_Type_Instructions_Admin {
 		$post_type = $this->get_post_type();
 		$options = get_option( $this->plugin_slug . '_' . $post_type );
 
-		if ( isset( $options['postformats_check'] ) && ! empty( $options['postformats_check'] ) ) {
-			if ( isset( $options['postformats'] ) && ! empty( $options['postformats'] ) ) { 
-				$postformats = '<p class="apti-text apti-postformats">' . $options['postformats'] . '</p>'; ?>
+		if ( isset( $options['enable_check'] ) && ! empty( $options['enable_check'] ) ) {
 
-				<script type="text/javascript">
-					jQuery(function($) {
-					    var text_to_insert = '<?php echo $postformats; ?>';
+			if ( isset( $options['postformats_check'] ) && ! empty( $options['postformats_check'] ) ) {
+				if ( isset( $options['postformats'] ) && ! empty( $options['postformats'] ) ) { 
+					$postformats = '<p class="apti-text apti-postformats">' . $options['postformats'] . '</p>'; ?>
 
-					    $('' + text_to_insert + '').insertBefore('#post-formats-select')
-					});
-				</script>
-			<?php 
+					<script type="text/javascript">
+						jQuery(function($) {
+						    var text_to_insert = '<?php echo $postformats; ?>';
+
+						    $('' + text_to_insert + '').insertBefore('#post-formats-select')
+						});
+					</script>
+				<?php 
+				}
 			}
+
 		}
 
 	} // end change_postformats_metabox_content
@@ -595,19 +655,23 @@ class Add_Post_Type_Instructions_Admin {
 		$post_type = $this->get_post_type();
 		$options = get_option( $this->plugin_slug . '_' . $post_type );
 
-		if ( isset( $options['slug_check'] ) && ! empty( $options['slug_check'] ) ) {
-			if ( isset( $options['slug'] ) && ! empty( $options['slug'] ) ) { 
-				$slug = '<p class="apti-text apti-slug">' . $options['slug'] . '</p>'; ?>
+		if ( isset( $options['enable_check'] ) && ! empty( $options['enable_check'] ) ) {
 
-				<script type="text/javascript">
-					jQuery(function($) {
-					    var text_to_insert = '<?php echo $slug; ?>';
+			if ( isset( $options['slug_check'] ) && ! empty( $options['slug_check'] ) ) {
+				if ( isset( $options['slug'] ) && ! empty( $options['slug'] ) ) { 
+					$slug = '<p class="apti-text apti-slug">' . $options['slug'] . '</p>'; ?>
 
-					    $('' + text_to_insert + '').insertBefore('#slugdiv .inside label')
-					});
-				</script>
-			<?php 
+					<script type="text/javascript">
+						jQuery(function($) {
+						    var text_to_insert = '<?php echo $slug; ?>';
+
+						    $('' + text_to_insert + '').insertBefore('#slugdiv .inside label')
+						});
+					</script>
+				<?php 
+				}
 			}
+
 		}
 
 	} // end change_slug_metabox_content	
