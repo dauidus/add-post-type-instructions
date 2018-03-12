@@ -3,13 +3,13 @@ Add Post Type Instructions
 
 == Tags ==
 
-instructions, instruction, directions, assistive, post types, help, wysiwyg, client, text, editor, settings
+instructions, instruction, instructional, directions, direction, directional, assist, post types, help, client, force, mandatory
 
 ** **
 
 == Tested up to: ==
 
-4.2-alpha
+4.9.4
 
 ** **
 
@@ -30,6 +30,8 @@ and within the following metaboxes:
 * page attributes
 * categories
 * tags
+* custom categories
+* custom tags
 * post format
 * discussion
 * comments
@@ -69,6 +71,11 @@ Simply delete this plugin to remove all data associated with it.  Deactivating t
 ** **
 
 == Changelog ==
+
+= 3.0 =
+* adds support for custom taxonomies
+* update visuals across plugin - modernize all the things
+* optimize code for even less overhead
 
 = 2.1 =
 * initial production release

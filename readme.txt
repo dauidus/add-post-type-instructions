@@ -97,6 +97,8 @@ Simply delete this plugin to remove all data associated with it.  Deactivating t
 
 = 3.0 =
 * adds support for custom taxonomies
+* update visuals across plugin - modernize all the things
+* optimize code for even less overhead
 
 = 2.1.2 =
 * only allows for post types with ‘public’ and ‘show ui’ set to true
