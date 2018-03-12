@@ -73,6 +73,7 @@ Simply delete this plugin to remove all data associated with it.  Deactivating t
 == Changelog ==
 
 = 3.0 =
+* v3.0 is a major update to Instructional Content that's been a long time coming - all users are strongly urged to update
 * adds support for custom taxonomies
 * update visuals across plugin - modernize all the things
 * optimize code for even less overhead
