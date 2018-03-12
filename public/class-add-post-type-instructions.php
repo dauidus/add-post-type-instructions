@@ -8,7 +8,7 @@
  * @author    Dave Winter (dave@dauid.us)
  * @license   GPL-2.0+
  * @link      http://dauid.us
- * @copyright 2014 dauid.us
+ * @copyright 2014-2018 dauid.us
  */
 
 class add_post_type_instructions {

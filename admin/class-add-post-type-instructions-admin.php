@@ -8,7 +8,7 @@
  * @author    Dave Winter (dave@dauid.us)
  * @license   GPL-2.0+
  * @link      http://dauid.us
- * @copyright 2014 dauid.us
+ * @copyright 2014-2018 dauid.us
  */
 
 /**
@@ -93,6 +93,8 @@ class Add_Post_Type_Instructions_Admin {
 			add_action( 'admin_head', array( $this, 'change_pageattributes_metabox_content' ) );
 			add_action( 'admin_head', array( $this, 'change_categories_metabox_content' ) );
 			add_action( 'admin_head', array( $this, 'change_tags_metabox_content' ) );
+            add_action( 'admin_head', array( $this, 'change_custom_categories_metabox_content' ) );
+            add_action( 'admin_head', array( $this, 'change_custom_tags_metabox_content' ) );
 			add_action( 'admin_head', array( $this, 'change_postformats_metabox_content' ) );
 			add_action( 'admin_head', array( $this, 'change_slug_metabox_content' ) );
 
@@ -613,6 +615,114 @@ class Add_Post_Type_Instructions_Admin {
 		}
 
 	} // end change_categories_metabox_content	
+    
+    /**
+	 * Change custom categories metabox content
+	 *
+	 * @since 3.0
+	 */
+	public function change_custom_categories_metabox_content() {
+
+		$post_type = $this->get_post_type();
+		$options = get_option( $this->plugin_slug . '_' . $post_type );
+        
+        $argums = array(
+			    'public'   => true,
+			    '_builtin' => false
+			); 
+        $outputs = 'names'; // or objects
+        $operators = 'and'; // 'and' or 'or'
+        $taxonomy_names = get_taxonomies( $argums, $outputs, $operators );
+        foreach ( $taxonomy_names as $tn ) {
+
+            $thingargums = array(
+              'name' => $tn
+            );
+            $thingoutputs = 'objects'; // or names
+            $things = get_taxonomies( $thingargums, $thingoutputs ); 
+
+            foreach ($things as $thing ) {
+                    
+                if ( is_object_in_taxonomy( $post_type, $tn ) ) {
+                    if ( is_taxonomy_hierarchical( $tn ) ) {
+
+                        if ( isset( $options['hierarchical_check_'.$tn.''] ) && ! empty( $options['hierarchical_check_'.$tn.''] ) ) {
+
+                            if ( isset( $options['hierarchical_'.$tn.''] ) && ! empty( $options['hierarchical_'.$tn.''] ) ) {
+
+                                $custom_cats = '<p class="apti-text apti-custom-categories">' . $options['hierarchical_'.$tn.''] . '</p>'; ?>
+
+                                <script type="text/javascript">
+                                    jQuery(function($) {
+                                        var text_to_insert = '<?php echo $custom_cats; ?>';
+                                        var tn = '<?php echo $tn; ?>';
+
+                                        $('' + text_to_insert + '').insertBefore('#taxonomy-<?php echo $tn ?>')
+                                    });
+                                </script>
+
+                            <?php }
+                        }
+                    }
+                }   
+                
+            }
+        }
+	} // end change_custom_categories_metabox_content
+    
+    /**
+	 * Change custom tags metabox content
+	 *
+	 * @since 3.0
+	 */
+	public function change_custom_tags_metabox_content() {
+
+		$post_type = $this->get_post_type();
+		$options = get_option( $this->plugin_slug . '_' . $post_type );
+        
+        $argums = array(
+			    'public'   => true,
+			    '_builtin' => false
+			); 
+        $outputs = 'names'; // or objects
+        $operators = 'and'; // 'and' or 'or'
+        $taxonomy_names = get_taxonomies( $argums, $outputs, $operators );
+        foreach ( $taxonomy_names as $tn ) {
+
+            $thingargums = array(
+              'name' => $tn
+            );
+            $thingoutputs = 'objects'; // or names
+            $things = get_taxonomies( $thingargums, $thingoutputs ); 
+
+            foreach ($things as $thing ) {
+                    
+                if ( is_object_in_taxonomy( $post_type, $tn ) ) {
+                    if ( !is_taxonomy_hierarchical( $tn ) ) {
+
+                        if ( isset( $options['flat_check_'.$tn.''] ) && ! empty( $options['flat_check_'.$tn.''] ) ) {
+
+                            if ( isset( $options['flat_'.$tn.''] ) && ! empty( $options['flat_'.$tn.''] ) ) {
+
+                                $custom_tags = '<p class="apti-text apti-custom-tags">' . $options['flat_'.$tn.''] . '</p>'; ?>
+
+                                <script type="text/javascript">
+                                    jQuery(function($) {
+                                        var text_to_insert = '<?php echo $custom_tags; ?>';
+                                        var tn = '<?php echo $tn; ?>';
+
+                                        $('' + text_to_insert + '').insertBefore('#<?php echo $tn ?>')
+                                    });
+                                </script>
+
+                            <?php }
+                        }
+                    }
+                }   
+                
+            }
+        }
+	} // end change_custom_categories_metabox_content
 
 	/**
 	 * Change postformats metabox content

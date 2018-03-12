@@ -131,7 +131,7 @@ class add_post_type_instructions_settings {
 
 			add_settings_section(
 				$pt,
-				__( 'General Instructional Content', $slug ),
+				__( 'General Instructional Content (appears at top of page)', $slug ) .':',
 				'',
 				$section
 			);
@@ -139,7 +139,7 @@ class add_post_type_instructions_settings {
 			if ( post_type_supports( $pt, 'title' )) {
 				add_settings_field(
 					'top_check',
-					__( 'Above Title Field:', $slug ),
+					__( 'Above Title Field', $slug ).':',
 					array( $this, 'check_callback' ),
 					$section,
 					$pt,
@@ -169,7 +169,7 @@ class add_post_type_instructions_settings {
 
 			add_settings_field(
 				'instruction_check',
-				__( 'Above WYSIWYG Editor:', $slug ),
+				__( 'Above WYSIWYG Editor', $slug ).':',
 				array( $this, 'check_callback' ),
 				$section,
 				$pt,
@@ -194,19 +194,183 @@ class add_post_type_instructions_settings {
 					'parent' => 'instruction_check'
 				)
 			);
+            
+            
+            if ( !($pt == 'page') ) {
+                
+                // section
+                add_settings_section(
+                    'taxes_' . $pt,
+                    __( 'Instructional Content for Taxonomies (appears in metaboxes)', $slug ) .':',
+                    '',
+                    $section
+                );
+				
+				if ( is_object_in_taxonomy( $pt, 'category' ) ) {
+					add_settings_field(
+						'categories_check',
+						__( 'Categories', $slug ).':',
+						array( $this, 'check_callback' ),
+						$section,
+						'taxes_' . $pt,
+						array( 
+							$section, 
+							get_option( $section ),
+							'field' => $section.'[categories_check]',
+							'name' => 'categories_check'
+						)
+					);
+					add_settings_field(
+						'categories',
+						__( '', $slug ),
+						array( $this, 'textarea_callback' ),
+						$section,
+						'taxes_' . $pt,
+						array( 
+							$section, 
+							get_option( $section ),
+							'field' => $section.'[categories]',
+							'name' => 'categories',
+							'parent' => 'categories_check'
+						)
+					);
+				}
+
+				if ( is_object_in_taxonomy( $pt, 'post_tag' ) ) {
+					add_settings_field(
+						'tags_check',
+						__( 'Tags', $slug).':',
+						array( $this, 'check_callback' ),
+						$section,
+						'taxes_' . $pt,
+						array( 
+							$section, 
+							get_option( $section ),
+							'field' => $section.'[tags_check]',
+							'name' => 'tags_check'
+						)
+					);
+					add_settings_field(
+						'tags',
+						__( '', $slug ),
+						array( $this, 'textarea_callback' ),
+						$section,
+						'taxes_' . $pt,
+						array( 
+							$section, 
+							get_option( $section ),
+							'field' => $section.'[tags]',
+							'name' => 'tags',
+							'parent' => 'tags_check'
+						)
+					);
+				}
+                
+                
+                /* CUSTOM TAXONOMIES
+                * get all custom taxonomies in a post type
+                * @since    3.0
+	            */
+                $argums = array(
+                    'public'   => true,
+                    '_builtin' => false
+                ); 
+                $outputs = 'names'; // or objects
+                $operators = 'and'; // 'and' or 'or'
+                $taxonomy_names = get_taxonomies( $argums, $outputs, $operators );
+                foreach ( $taxonomy_names as $tn ) {
+
+                    // get that taxonomy's objects (so we can output the label later for plural name)
+                    $thingargums = array(
+                      'name' => $tn
+                    );
+                    $thingoutputs = 'objects'; // or names
+                    $things = get_taxonomies( $thingargums, $thingoutputs ); 
+
+                    foreach ($things as $thing ) {
+
+                        if ( is_object_in_taxonomy( $pt, $tn ) ) {
+                            // categories are hierarchical
+                            if ( is_taxonomy_hierarchical( $tn ) ) {
+                                add_settings_field(
+                                    'hierarchical_check_'.$tn.'_'.$x,
+                                    $thing->label .' <span>(' . __('category', $slug ) .'):</span>',
+                                    array( $this, 'check_callback' ),
+                                    $section,
+                                    'taxes_' . $pt,
+                                    array( 
+                                        $section, 
+                                        get_option( $section ),
+                                        'field' => $section.'[hierarchical_check_'.$tn.']',
+									    'name' => 'hierarchical_check_'.$tn
+                                    )
+                                );
+                                add_settings_field(
+                                    'hierarchical_'.$tn,
+                                    __( '', $slug ),
+                                    array( $this, 'textarea_callback' ),
+                                    $section,
+                                    'taxes_' . $pt,
+                                    array( 
+                                        $section, 
+                                        get_option( $section ),
+                                        'field' => $section.'[hierarchical_'.$tn.']',
+                                        'name' => 'hierarchical_'.$tn,
+                                        'parent' => 'hierarchical_check_'.$tn
+                                    )
+                                );
+
+                            }
+                            
+
+                            // tags are flat
+                            else {
+                                add_settings_field(
+                                    'flat_check_'.$tn,
+                                    $thing->label .' <span>(' . __('tag', $slug ) .'):</span>',
+                                    array( $this, 'check_callback' ),
+                                    $section,
+                                    'taxes_' . $pt,
+                                    array( 
+                                        $section, 
+                                        get_option( $section ),
+                                        'field' => $section.'[flat_check_'.$tn.']',
+                                        'name' => 'flat_check_'.$tn
+                                    )
+                                );
+                                add_settings_field(
+                                    'flat_'.$tn,
+                                    __( '', $slug ),
+                                    array( $this, 'textarea_callback' ),
+                                    $section,
+                                    'taxes_' . $pt,
+                                    array( 
+                                        $section, 
+                                        get_option( $section ),
+                                        'field' => $section.'[flat_'.$tn.']',
+                                        'name' => 'flat_'.$tn,
+                                        'parent' => 'flat_check_'.$tn
+                                    )
+                                ); 
+
+                            }
+                        }
+                    }
+                }
+			}
 
 
 			// section
 			add_settings_section(
 				'metabox_' . $pt,
-				__( 'Other Instructional Content', $slug ) .':',
+				__( 'Specific Instructional Content (appears in metaboxes)', $slug ) .':',
 				'',
 				$section
 			);
 
 			add_settings_field(
 				'publish_check',
-				__( 'Publish Metabox:', $slug ),
+				__( 'Publish', $slug ).':',
 				array( $this, 'check_callback' ),
 				$section,
 				'metabox_' . $pt,
@@ -235,7 +399,7 @@ class add_post_type_instructions_settings {
 			if ( post_type_supports( $pt, 'thumbnail' )) {
 				add_settings_field(
 					'thumbnail_check',
-					__( 'Featured Image Metabox:', $slug ),
+					__( 'Featured Image', $slug ).':',
 					array( $this, 'check_callback' ),
 					$section,
 					'metabox_' . $pt,
@@ -265,7 +429,7 @@ class add_post_type_instructions_settings {
 			if ( post_type_supports( $pt, 'excerpt' )) {
 				add_settings_field(
 					'excerpt_check',
-					__( 'Excerpt Metabox:', $slug ),
+					__( 'Excerpt', $slug ).':',
 					array( $this, 'check_callback' ),
 					$section,
 					'metabox_' . $pt,
@@ -293,107 +457,41 @@ class add_post_type_instructions_settings {
 			}
 
 
-			if ( !($pt == 'page') ) {
-				
-				if ( is_object_in_taxonomy( $pt, 'category' ) ) {
-					add_settings_field(
-						'categories_check',
-						__( 'Categories Metabox:', $slug ),
-						array( $this, 'check_callback' ),
-						$section,
-						'metabox_' . $pt,
-						array( 
-							$section, 
-							get_option( $section ),
-							'field' => $section.'[categories_check]',
-							'name' => 'categories_check'
-						)
-					);
-					add_settings_field(
-						'categories',
-						__( '', $slug ),
-						array( $this, 'textarea_callback' ),
-						$section,
-						'metabox_' . $pt,
-						array( 
-							$section, 
-							get_option( $section ),
-							'field' => $section.'[categories]',
-							'name' => 'categories',
-							'parent' => 'categories_check'
-						)
-					);
-				}
-
-				if ( is_object_in_taxonomy( $pt, 'post_tag' ) ) {
-					add_settings_field(
-						'tags_check',
-						__( 'Tags Metabox:', $slug),
-						array( $this, 'check_callback' ),
-						$section,
-						'metabox_' . $pt,
-						array( 
-							$section, 
-							get_option( $section ),
-							'field' => $section.'[tags_check]',
-							'name' => 'tags_check'
-						)
-					);
-					add_settings_field(
-						'tags',
-						__( '', $slug ),
-						array( $this, 'textarea_callback' ),
-						$section,
-						'metabox_' . $pt,
-						array( 
-							$section, 
-							get_option( $section ),
-							'field' => $section.'[tags]',
-							'name' => 'tags',
-							'parent' => 'tags_check'
-						)
-					);
-				}
-
-				// custom taxonomies
-
-				if ( post_type_supports( $pt, 'post-formats' )) {
-					add_settings_field(
-						'postformats_check',
-						__( 'Post Format Metabox:', $slug ),
-						array( $this, 'check_callback' ),
-						$section,
-						'metabox_' . $pt,
-						array( 
-							$section, 
-							get_option( $section ),
-							'field' => $section.'[postformats_check]',
-							'name' => 'postformats_check'
-						)
-					);
-					add_settings_field(
-						'postformats',
-						__( '', $slug ),
-						array( $this, 'textarea_callback' ),
-						$section,
-						'metabox_' . $pt,
-						array( 
-							$section, 
-							get_option( $section ),
-							'field' => $section.'[postformats]',
-							'name' => 'postformats',
-							'parent' => 'postformats_check'
-						)
-					);
-				}
-
-			}
+			if ( post_type_supports( $pt, 'post-formats' )) {
+                add_settings_field(
+                    'postformats_check',
+                    __( 'Post Format', $slug ).':',
+                    array( $this, 'check_callback' ),
+                    $section,
+                    'metabox_' . $pt,
+                    array( 
+                        $section, 
+                        get_option( $section ),
+                        'field' => $section.'[postformats_check]',
+                        'name' => 'postformats_check'
+                    )
+                );
+                add_settings_field(
+                    'postformats',
+                    __( '', $slug ),
+                    array( $this, 'textarea_callback' ),
+                    $section,
+                    'metabox_' . $pt,
+                    array( 
+                        $section, 
+                        get_option( $section ),
+                        'field' => $section.'[postformats]',
+                        'name' => 'postformats',
+                        'parent' => 'postformats_check'
+                    )
+                );
+            }
 
 
 			if ( post_type_supports( $pt, 'author' )) {
 				add_settings_field(
 					'author_check',
-					__( 'Author Metabox:', $slug ),
+					__( 'Author', $slug ).':',
 					array( $this, 'check_callback' ),
 					$section,
 					'metabox_' . $pt,
@@ -425,7 +523,7 @@ class add_post_type_instructions_settings {
 			if ( post_type_supports( $pt, 'trackbacks' )) {
 				add_settings_field(
 					'trackbacks_check',
-					__( 'Trackbacks Metabox:', $slug ),
+					__( 'Trackbacks', $slug ).':',
 					array( $this, 'check_callback' ),
 					$section,
 					'metabox_' . $pt,
@@ -455,7 +553,7 @@ class add_post_type_instructions_settings {
 			if ( post_type_supports( $pt, 'custom-fields' )) {
 				add_settings_field(
 					'customfields_check',
-					__( 'Custom Fields Metabox:', $slug ),
+					__( 'Custom Fields', $slug ).':',
 					array( $this, 'check_callback' ),
 					$section,
 					'metabox_' . $pt,
@@ -485,7 +583,7 @@ class add_post_type_instructions_settings {
 			if ( post_type_supports( $pt, 'comments' )) {
 				add_settings_field(
 					'comments_check',
-					__( 'Comments Metabox:', $slug ),
+					__( 'Comments', $slug ).':',
 					array( $this, 'check_callback' ),
 					$section,
 					'metabox_' . $pt,
@@ -513,7 +611,7 @@ class add_post_type_instructions_settings {
 
 				add_settings_field(
 					'discussion_check',
-					__( 'Discussion Metabox:', $slug ),
+					__( 'Discussion', $slug ).':',
 					array( $this, 'check_callback' ),
 					$section,
 					'metabox_' . $pt,
@@ -543,7 +641,7 @@ class add_post_type_instructions_settings {
 			if ( post_type_supports( $pt, 'revisions' )) {
 				add_settings_field(
 					'revisions_check',
-					__( 'Revisions Metabox:', $slug ),
+					__( 'Revisions', $slug ).':',
 					array( $this, 'check_callback' ),
 					$section,
 					'metabox_' . $pt,
@@ -573,7 +671,7 @@ class add_post_type_instructions_settings {
 			if ( post_type_supports( $pt, 'page-attributes' )) {
 				add_settings_field(
 					'pageattributes_check',
-					__( 'Page Attributes Metabox:', $slug ),
+					__( 'Page Attributes', $slug ).':',
 					array( $this, 'check_callback' ),
 					$section,
 					'metabox_' . $pt,
@@ -604,7 +702,7 @@ class add_post_type_instructions_settings {
 
 			add_settings_field(
 				'slug_check',
-				__( 'Slug Metabox:', $slug ),
+				__( 'Slug', $slug ).':',
 				array( $this, 'check_callback' ),
 				$section,
 				'metabox_' . $pt,
@@ -670,8 +768,10 @@ class add_post_type_instructions_settings {
 			function check_pt_is_enabled() {
 				if (document.getElementById('<?php echo $name; ?>').checked){
 					jQuery('table.form-table').slideDown("slow");
+                    jQuery('form h2').slideDown("slow");
 				} else {
-					jQuery('table.form-table').slideUp("slow");
+					jQuery('table.form-table').slideUp("fast");
+                    jQuery('form h2').slideUp("fast");
 				}
 			}
 			window.onload = check_pt_is_enabled;
@@ -691,45 +791,46 @@ class add_post_type_instructions_settings {
 		$html .= '<label for="' . $name . '"> ' . __( 'enable', 'aptrc' ) . '</label>';
 		echo $html;
 
-	} // end top_check_callback
+	} // end check_callback
 
-		public function textarea_callback( $args ) {
-			$name = $args['name'];
-			$field = $args['field'];
-			$value  = isset( $args[1][''.$name.''] ) ? $args[1][''.$name.''] : '';
-			$parent = $args['parent'];
+    
+    public function textarea_callback( $args ) {
+        $name = $args['name'];
+        $field = $args['field'];
+        $value  = isset( $args[1][''.$name.''] ) ? $args[1][''.$name.''] : '';
+        $parent = $args['parent'];
 
-			$html = '<div class="' . $parent . '">';
-			$html .= '<div id="' . $name . '" class="textarea"><textarea id="' . $name . '_input" name="' .$field. '" type="textarea">' .$value. '</textarea></div>';
-			$html .= '<div>';
-			echo $html; ?>
+        $html = '<div class="' . $parent . '">';
+        $html .= '<div id="' . $name . '" class="textarea"><textarea id="' . $name . '_input" name="' .$field. '" type="textarea">' .$value. '</textarea></div>';
+        $html .= '<div>';
+        echo $html; ?>
 
-			<script>
-				(function() {
-			    	var doc = document,
-			        	txt = doc.getElementById('<?php echo $name; ?>'),
-			        	txtinput = doc.getElementById('<?php echo $name; ?>_input'),
-			        	txtnode = doc.createTextNode('');		    
-			    	txt.appendChild(txtnode);			    
-			    	function updateIt() {
-			       		txtnode.nodeValue = txtinput.value + '\n\n';
-			    	}			    
-			    	txtinput.onkeypress = txtinput.onkeyup = txtinput.onchange = updateIt;			    
-			    	updateIt();
-			  	})();
+        <script>
+            (function() {
+                var doc = document,
+                    txt = doc.getElementById('<?php echo $name; ?>'),
+                    txtinput = doc.getElementById('<?php echo $name; ?>_input'),
+                    txtnode = doc.createTextNode('');		    
+                txt.appendChild(txtnode);			    
+                function updateIt() {
+                    txtnode.nodeValue = txtinput.value + '\n\n';
+                }			    
+                txtinput.onkeypress = txtinput.onkeyup = txtinput.onchange = updateIt;			    
+                updateIt();
+            })();
 
-			  	function check_is_enabled() {
-					if (document.getElementById('<?php echo $parent; ?>').checked){
-						jQuery('.<?php echo $parent; ?>').slideDown("fast");
-					} else {
-						jQuery('.<?php echo $parent; ?>').slideUp("fast");
-					}
-				}
-				check_is_enabled();
-				jQuery( "#<?php echo $parent; ?>" ).on('change', check_is_enabled );
-			</script>
-		<?php 
-		} // end top_callback
+            function check_is_enabled() {
+                if (document.getElementById('<?php echo $parent; ?>').checked){
+                    jQuery('.<?php echo $parent; ?>').slideDown("fast");
+                } else {
+                    jQuery('.<?php echo $parent; ?>').slideUp("fast");
+                }
+            }
+            check_is_enabled();
+            jQuery( "#<?php echo $parent; ?>" ).on('change', check_is_enabled );
+        </script>
+    <?php 
+    } // end textarea_callback
 
 
 

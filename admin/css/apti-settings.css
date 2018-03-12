@@ -32,11 +32,11 @@
 
 .settings_page_apti #apti-sidebar {
 	display: block;
-	width: 250px;
+	width: 230px;
 	position: absolute;
 	right: 0px;
 	margin-top: 20px;
-	margin-right: 20px;
+	margin-right: 0px;
 	background: #fff;
 	border: 1px solid #e5e5e5;
 	padding: 0px 15px 10px 15px;
@@ -52,7 +52,7 @@
 	padding: 5px 10px;
 }
 .settings_page_apti form {
-	width: calc(100% - 300px);
+	width: calc(100% - 280px);
 }
 
 .settings_page_apti .form-table tbody {
@@ -76,6 +76,9 @@
 	width: 100%;
 }
 
+.settings_page_apti h2 {
+    margin-bottom: 0px;
+}
 .settings_page_apti h3 {
 	margin: 20px 0 0 0;
 	padding: 10px;

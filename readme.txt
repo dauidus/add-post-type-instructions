@@ -3,8 +3,8 @@ Contributors: dauidus
 Author URI: http://dauid.us
 Tags: instructions, instruction, directions, assistive, post types, help, wysiwyg, client, text, editor, settings
 Requires at least: 3.5
-Tested up to: 4.3
-Stable tag: 2.1.2
+Tested up to: 4.9.4
+Stable tag: 3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,7 +28,9 @@ and within the following metaboxes:
 * custom fields
 * page attributes
 * categories
+* custom categories
 * tags
+* custom tags
 * post format
 * discussion
 * comments
@@ -44,7 +46,7 @@ APTI works with multisite networks and allows users to define settings on a per-
 = Coming soon =
 * Translations - to submit a translation, please contact the author
 
-APTI will work with drag-n-drop builders such as Visual Composer, but the author cannot recommend its use with them.  This will be addressed in a future release.
+APTI will work with drag-n-drop builders such as Visual Composer, but the author cannot recommend its use with them.  Due to the proprietary nature of these page builders, this plugin will not officially support them.
 
 = Suggestions are welcome =
 * email the author at dave@dauid.us
@@ -66,7 +68,7 @@ Installation from zip:
 Installation from WordPress Plugin Directory:
 
 1. From wp-admin interface, go to Plugins -> Add New
-2. Search for "Post Type Instructions"
+2. Search for "Dave Winter" and choose this plugin
 3. Click Install Now under the plugin name
 4. Click Ok to install the plugin
 5. Click Activate Plugin once installed
@@ -76,7 +78,7 @@ Installation from WordPress Plugin Directory:
 
 = Who does this plugin benefit most? =
 
-I wrote this plugin to provide simple assistance for my clients as they publish content.  With just a quick look at any metabox, site managers (authors, editors...) can see a clear description of what will happen when they add content to that metabox.  I have used this to convey the ideal image size for featured images, explain what tags are, or even add default content to any post type.  I have also used this to add consice instructions immediately below the title field on any post type.  Hopefully, it will benefit both site admins and site managers.
+I wrote this plugin to provide simple assistance for my clients as they publish content.  With just a quick look at any metabox, site managers (authors, editors...) can see a clear description of what will happen when they add content to that metabox.  I have used this to convey the ideal image size for featured images, explain what tags are, or even add default content to any post type.  I have also used this to add consice instructions immediately below the title field on any post type that requires extra careful content editing.  Hopefully, it will benefit both site admins and site managers, as well as editors.
 
 = Does it support Multisite? =
 
@@ -92,6 +94,9 @@ Simply delete this plugin to remove all data associated with it.  Deactivating t
 2. Non-intrusive instructive text can be easily added to multiple locations for any post type.
 
 == Changelog ==
+
+= 3.0 =
+* adds support for custom taxonomies
 
 = 2.1.2 =
 * only allows for post types with ‘public’ and ‘show ui’ set to true

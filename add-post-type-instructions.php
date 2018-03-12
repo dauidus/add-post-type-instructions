@@ -7,16 +7,16 @@
  * @package   Add_Post_Type_Instructions
  * @author    Dave Winter
  * @license   GPL-2.0+
- * @link      http://dauid.us
- * @copyright 2014 dauid.us
+ * @link      https://dauid.us
+ * @copyright 2014-2018 dauid.us
  *
  * @wordpress-plugin
  * Plugin Name:       Instructional Content
- * Plugin URI:        http://dauid.us
- * Description:       Allows admins to easily set instructional context for pages, posts or custom post types.  Currently supports inserting context above the title field, above the WYSIWYG editor, within the WYSIWYG editor, and inside the following metaboxes: publish, author, featured image, excerpt, trackbacks, custom fields, comments, discussion, revisions, page attributes, categories, tags, slug and post format.  Only adds options for the metaboxes supported for each post type.  Works with multisite.
- * Version:           2.1.2
+ * Plugin URI:        https://dauid.us
+ * Description:       Allows admins to easily set instructional content for pages, posts or custom post types.  Insert content above the title field, above the WYSIWYG editor and inside the following metaboxes: publish, author, featured image, excerpt, trackbacks, custom fields, comments, discussion, revisions, page attributes, categories, custom categories, tags, custom tags, slug and post format.  Works with multisite.
+ * Version:           3.0
  * Author:            Dave Winter
- * Author URI:        http://dauid.us
+ * Author URI:        https://dauid.us
  * Text Domain: 	  add-post-type-instructions
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
