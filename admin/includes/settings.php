@@ -580,18 +580,18 @@ class add_post_type_instructions_settings {
 				);
 			}
 
-			if ( post_type_supports( $pt, 'comments' )) {
+			if ( post_type_supports( $pt, 'comment' )) {
 				add_settings_field(
 					'comments_check',
 					__( 'Comments', $slug ).':',
-					array( $this, 'check_callback' ),
+					array( $this, 'check_callbacks' ),
 					$section,
 					'metabox_' . $pt,
 					array( 
 						$section, 
 						get_option( $section ),
-						'field' => $section.'[comments_check]',
-						'name' => 'comments_check'
+						'field' => $section.'[comments_checks]',
+						'name' => 'comments_checking'
 					)
 				);
 				add_settings_field(
